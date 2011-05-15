@@ -75,7 +75,7 @@ public abstract class InterfazTest {
 
     @After
     public void tearDown() {
-        DBUtils.clear();
+        //DBUtils.clear();
         listado = null;
         compras = null;
     }
