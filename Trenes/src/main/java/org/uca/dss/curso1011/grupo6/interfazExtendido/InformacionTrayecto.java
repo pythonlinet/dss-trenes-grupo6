@@ -48,11 +48,12 @@ public class InformacionTrayecto {
      * @param horaLlegada
      */
     public InformacionTrayecto(String origen, String destino,
-                                LocalTime horaSalida, LocalTime horaLlegada) {
+                                LocalTime horaSalida, LocalTime horaLlegada, double precio) {
         this.origen = origen;
         this.destino = destino;
         this.horaSalida = horaSalida;
         this.horaLlegada = horaLlegada;
+        this.precio = precio;
     }
 
     /**
