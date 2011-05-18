@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazListados;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.uca.dss.trenes.basededatos.DBUtils;
@@ -32,7 +33,8 @@ public class Transbordo implements InterfazListados {
     public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
         List<Itinerario> itinerariosDisponibles = new ArrayList();
-
+        List<InformacionTrayecto> informacionTrayectos = new ArrayList();
+        
         Iterator i = viajes.getTrayectos().iterator();
 
         List<Reserva> reservasValidas;
@@ -51,15 +53,17 @@ public class Transbordo implements InterfazListados {
          {
            Trayecto trayecto = (Trayecto)i.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
-                   trayecto.getCiudadDestino().equals(destino))
+                   trayecto.getCiudadDestino().equals(destino) &&
+                   trayecto.getHorario().getSalida().equals(horaSalida) &&
+                   trayecto.getHorario().getSalida().equals(horaLlegada))                   
            {
-               reservasValidas = ObtenerReservas(trayecto,fecha);
+               reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
-
-                   LocalTime hora = trayecto.getHorario().getSalida();
-                   //horariosDisponibles.add(hora);
+                   InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,horaSalida,horaLlegada,trayecto.getTren().getPrecio());
+                   informacionTrayectos.add(itrayecto);
+                  //itinerariosDisponibles.add();
                }
            }
         }
