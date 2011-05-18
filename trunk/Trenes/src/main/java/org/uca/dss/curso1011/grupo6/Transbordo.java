@@ -22,32 +22,18 @@ import org.uca.dss.trenes.basededatos.DBUtils;
  */
 public class Transbordo implements InterfazListados {
 
-    private List<Trayecto> trayectos;
+    private Viajes viajes;
 
     public Transbordo ()
     {
 
     }
 
-    /**
-     * @return the trayectos
-     */
-    public List<Trayecto> getTrayectos() {
-        return trayectos;
-    }
-
-    /**
-     * @param trayectos the trayectos to set
-     */
-    public void setTrayectos(List<Trayecto> trayectos) {
-        this.trayectos = trayectos;
-    }
-
     public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
         List<Itinerario> itinerariosDisponibles = new ArrayList();
 
-        Iterator i = trayectos.iterator();
+        Iterator i = viajes.getTrayectos().iterator();
 
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
@@ -67,7 +53,7 @@ public class Transbordo implements InterfazListados {
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino))
            {
-               //reservasValidas = ObtenerReservas(trayecto,fecha);
+               reservasValidas = ObtenerReservas(trayecto,fecha);
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
@@ -85,6 +71,20 @@ public class Transbordo implements InterfazListados {
 
         List<Itinerario> itinerarios = null;
         return itinerarios;
+    }
+
+    /**
+     * @return the viajes
+     */
+    public Viajes getViajes() {
+        return viajes;
+    }
+
+    /**
+     * @param viajes the viajes to set
+     */
+    public void setViajes(Viajes viajes) {
+        this.viajes = viajes;
     }
 
    
