@@ -24,14 +24,6 @@ public class Transbordo implements InterfazListados {
 
     }
 
-    public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public List<Itinerario> getHorarios(String origen, String destino, LocalDate fechaSalida) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     /**
      * @return the trayectos
      */
@@ -46,4 +38,17 @@ public class Transbordo implements InterfazListados {
         this.trayectos = trayectos;
     }
 
+    public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
+
+        List<Itinerario> itinerarios = null;
+        return itinerarios;
+    }
+
+    public List<Itinerario> getHorarios(String origen, String destino, LocalDate fechaSalida) {
+
+        List<Itinerario> itinerarios = null;
+        return itinerarios;
+    }
+
+   
 }
