@@ -50,7 +50,7 @@ public class Transbordo implements InterfazListados {
             }
         }) ;
         
-         Trayecto trayecto = null;
+         Trayecto trayecto;
          while (i.hasNext())
          {
            trayecto = (Trayecto)i.next();
@@ -69,19 +69,48 @@ public class Transbordo implements InterfazListados {
                }
            }
         }
-        i = null;
-
-         i = viajes.getTrayectos().iterator();
+        trayecto = null;
+        i = null;        
+        i = viajes.getTrayectos().iterator();
 
          while(i.hasNext())
          {
              trayecto = (Trayecto)i.next();
-             Iterator j = viajes.getTrayectos().iterator();
+             
+             if(trayecto.getCiudadOrigen().equals(origen) &&
+                   !trayecto.getCiudadDestino().equals(destino) &&
+                   trayecto.getHorario().getSalida().compareTo(horaSalida) >= 0 &&
+                   trayecto.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
+            {                   
+                    reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
 
-             while(j.hasNext())
-             {
-                Trayecto trayectoj = (Trayecto)j.next();
-                
+               if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
+               {
+                    String destino1 = trayecto.getCiudadDestino();
+                    LocalTime llegada1 =  trayecto.getHorario().getLlegada();
+                    double precio1 = trayecto.getTren().getPrecio();
+                    
+                    Iterator j = viajes.getTrayectos().iterator();
+                    while(j.hasNext())
+                    {
+                        Trayecto trayectoj = (Trayecto)j.next();
+
+                        if(trayectoj.getCiudadOrigen().equals(destino1) &&
+                            !trayectoj.getCiudadDestino().equals(destino) &&
+                            trayectoj.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0 &&
+                            trayectoj.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
+                        {
+                            reservasValidas = viajes.ObtenerReservas(trayectoj,fechaSalida);
+
+                            if(trayectoj.getTren().getPlazas() - reservasValidas.size() > 0)
+                            {
+                                double precioTotal = precio1 + trayectoj.getTren().getPrecio();
+                                InformacionTrayecto jtrayecto = new  InformacionTrayecto(origen,destino,llegada1,trayectoj.getHorario().getLlegada(),precioTotal);
+                                informacionTrayectos.add(jtrayecto);
+                            }
+                        }
+                     }
+                }
              }
          }
 
