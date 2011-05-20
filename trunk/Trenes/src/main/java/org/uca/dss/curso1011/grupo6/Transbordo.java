@@ -114,7 +114,6 @@ public class Transbordo implements InterfazListados {
              }
          }
 
-
         return itinerariosDisponibles;
     }
 
