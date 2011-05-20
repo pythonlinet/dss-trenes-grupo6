@@ -83,28 +83,18 @@ public class Transbordo implements InterfazListados {
          }
         return informacionTrayectos;
     }
-    public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
-        List<Itinerario> itinerariosDisponibles = new ArrayList();
+    public List<InformacionTrayecto> BuscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada)
+    {
         List<InformacionTrayecto> informacionTrayectos = new ArrayList();
-        List<InformacionTrayecto> InformacionTrayectoTransbordos = new ArrayList();
+
         Iterator i = viajes.getTrayectos().iterator();
 
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
 
-        //ComprobarExcepcion(fecha,origen,destino); Importante!!!
-
-        ObjectContainer db = DBUtils.getDb();
-
-        List <Reserva> reservas = db.query(new Predicate <Reserva>() {
-            public boolean match ( Reserva reserva) {
-                return true;
-            }
-        }) ;
-        
-         Trayecto trayecto;
-         while (i.hasNext())
+        Trayecto trayecto;
+        while (i.hasNext())
          {
            trayecto = (Trayecto)i.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
@@ -117,13 +107,22 @@ public class Transbordo implements InterfazListados {
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
                    InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,horaSalida,horaLlegada,trayecto.getTren().getPrecio());
-                   informacionTrayectos.add(itrayecto);
-                   //itinerariosDisponibles.add();
+                   informacionTrayectos.add(itrayecto);                   
                }
            }
         }
+        return informacionTrayectos;
+    }
 
-        InformacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida,horaSalida,horaLlegada);
+    public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
+
+        List<Itinerario> itinerariosDisponibles = new ArrayList();
+        List<InformacionTrayecto> trayectosDirectos = new ArrayList();
+        List<InformacionTrayecto> informacionTrayectoTransbordos = new ArrayList();
+        Iterator i = viajes.getTrayectos().iterator();
+                          
+        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida,horaSalida,horaLlegada);
+        informacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida,horaSalida,horaLlegada);
 
         return itinerariosDisponibles;
     }
