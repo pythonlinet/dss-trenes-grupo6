@@ -49,13 +49,15 @@ public class Transbordo implements InterfazListados {
                 return true;
             }
         }) ;
+        
+         Trayecto trayecto = null;
          while (i.hasNext())
          {
-           Trayecto trayecto = (Trayecto)i.next();
+           trayecto = (Trayecto)i.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino) &&
-                   trayecto.getHorario().getSalida().equals(horaSalida) &&
-                   trayecto.getHorario().getSalida().equals(horaLlegada))                   
+                   trayecto.getHorario().getSalida().compareTo(horaSalida) >= 0 &&
+                   trayecto.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
            {
                reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
 
@@ -67,6 +69,22 @@ public class Transbordo implements InterfazListados {
                }
            }
         }
+        i = null;
+
+         i = viajes.getTrayectos().iterator();
+
+         while(i.hasNext())
+         {
+             trayecto = (Trayecto)i.next();
+             Iterator j = viajes.getTrayectos().iterator();
+
+             while(j.hasNext())
+             {
+                Trayecto trayectoj = (Trayecto)j.next();
+                
+             }
+         }
+
 
         return itinerariosDisponibles;
     }
