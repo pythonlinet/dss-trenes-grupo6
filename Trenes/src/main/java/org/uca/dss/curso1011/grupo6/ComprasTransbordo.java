@@ -20,6 +20,12 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  */
 public class ComprasTransbordo implements InterfazCompras{
 
+    private List<InformacionTrayecto> itrayectos;
+
+    public ComprasTransbordo()
+    {
+    }
+
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
 
@@ -28,6 +34,8 @@ public class ComprasTransbordo implements InterfazCompras{
          while (i.hasNext())
          {
              InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
+
+             ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);
 
              
              
