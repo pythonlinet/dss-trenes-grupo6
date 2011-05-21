@@ -78,7 +78,7 @@ public class Transbordo implements InterfazListados {
                                 InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
                                 InformacionTrayecto itrayecto2 = new InformacionTrayecto(trayectoj.getCiudadOrigen(),trayectoj.getCiudadDestino(),trayectoj.getHorario().getSalida(),trayectoj.getHorario().getLlegada(),trayectoj.getTren().getPrecio());
 
-                                Itinerario itinerario = new Itinerario() {};
+                                Itinerario itinerario = new ItinerarioImplementacionInterfaz();
                                 itinerario.add(itrayecto1);
                                 itinerario.add(itrayecto2);
                                 itinerarios.add(itinerario);
@@ -115,7 +115,7 @@ public class Transbordo implements InterfazListados {
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
                    InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,trayecto.getHorario().getSalida(),trayecto.getHorario().getLlegada(),trayecto.getTren().getPrecio());
-                   Itinerario itinerario = new Itinerario() {};
+                   Itinerario itinerario = new ItinerarioImplementacionInterfaz();
                    itinerario.add(itrayecto);
                    itinerarios.add(itinerario);
                }
@@ -127,9 +127,9 @@ public class Transbordo implements InterfazListados {
     public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
         List<Itinerario> itinerariosDisponibles = new ArrayList();
-        List<InformacionTrayecto> informacionTrayectos = new ArrayList();
-        List<InformacionTrayecto> trayectosDirectos = new ArrayList();
-        List<InformacionTrayecto> informacionTrayectoTransbordos = new ArrayList();        
+        List<Itinerario> informacionTrayectos = new ArrayList();
+        List<Itinerario> trayectosDirectos = new ArrayList();
+        List<Itinerario> informacionTrayectoTransbordos = new ArrayList();
                           
         trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
         informacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
@@ -138,12 +138,12 @@ public class Transbordo implements InterfazListados {
 
          while (i.hasNext())
          {
-             InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
+             Itinerario itinerarioi = (Itinerario)i.next();
 
-             if(itrayecto.getHoraSalida().compareTo(horaSalida) >= 0 &&
-                   itrayecto.getHoraLlegada().compareTo(horaLlegada) <= 0)
+             if(itinerarioi.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
+                   itinerarioi.get(1).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
-                    informacionTrayectos.add(itrayecto);
+                    informacionTrayectos.add(itinerarioi);
              }
          }
         
@@ -151,12 +151,12 @@ public class Transbordo implements InterfazListados {
 
          while (j.hasNext())
          {
-             InformacionTrayecto itrayecto = (InformacionTrayecto)j.next();
+             Itinerario itinerario = (Itinerario)j.next();
 
-             if(itrayecto.getHoraSalida().compareTo(horaSalida) >= 0 &&
-                   itrayecto.getHoraLlegada().compareTo(horaLlegada) <= 0)
+             if(itinerario.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
+                   itinerario.get(2).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
-                    informacionTrayectos.add(itrayecto);
+                    informacionTrayectos.add(itinerario);
              }
          }
 
@@ -166,8 +166,8 @@ public class Transbordo implements InterfazListados {
     public List<Itinerario> getHorarios(String origen, String destino, LocalDate fechaSalida) {
 
         List<Itinerario> itinerarios = null;     
-        List<InformacionTrayecto> trayectosDirectos = new ArrayList();
-        List<InformacionTrayecto> informacionTrayectos= new ArrayList();
+        List<Itinerario> trayectosDirectos = new ArrayList();
+        List<Itinerario> informacionTrayectos= new ArrayList();
 
         trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
         informacionTrayectos = BuscarInformacionTrayectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
@@ -175,8 +175,8 @@ public class Transbordo implements InterfazListados {
         Iterator i = trayectosDirectos.iterator();
         while (i.hasNext())
         {
-            InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
-            informacionTrayectos.add(itrayecto);
+            Itinerario itinerario = (Itinerario)i.next();
+            informacionTrayectos.add(itinerario);
         }        
 
         return itinerarios;
