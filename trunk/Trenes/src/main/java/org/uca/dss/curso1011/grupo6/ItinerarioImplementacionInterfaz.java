@@ -34,19 +34,19 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     }
 
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.size();
     }
 
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.isEmpty();
     }
 
     public boolean contains(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.contains((InformacionTrayecto)o);
     }
 
     public Iterator<InformacionTrayecto> iterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.iterator();
     }
 
     public Object[] toArray() {
