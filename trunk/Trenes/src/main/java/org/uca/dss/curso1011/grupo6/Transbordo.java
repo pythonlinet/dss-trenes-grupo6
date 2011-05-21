@@ -30,9 +30,9 @@ public class Transbordo implements InterfazListados {
 
     }
 
-    public List<InformacionTrayecto> BuscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
+    public List<Itinerario> BuscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
-        List<InformacionTrayecto> informacionTrayectos = new ArrayList();
+        List<Itinerario> itinerarios = new ArrayList();
 
         Iterator i = viajes.getTrayectos().iterator();
         
@@ -54,9 +54,10 @@ public class Transbordo implements InterfazListados {
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
+                    String origen1 = trayecto.getCiudadOrigen();
                     String destino1 = trayecto.getCiudadDestino();
-                    LocalTime llegada1 =  trayecto.getHorario().getLlegada();
                     LocalTime salida1 = trayecto.getHorario().getSalida();
+                    LocalTime llegada1 =  trayecto.getHorario().getLlegada();                    
                     double precio1 = trayecto.getTren().getPrecio();
 
                     Iterator j = viajes.getTrayectos().iterator();
@@ -73,21 +74,27 @@ public class Transbordo implements InterfazListados {
 
                             if(trayectoj.getTren().getPlazas() - reservasValidas.size() > 0)
                             {
-                                double precioTotal = precio1 + trayectoj.getTren().getPrecio();
-                                InformacionTrayecto jtrayecto = new  InformacionTrayecto(origen,destino,salida1,trayectoj.getHorario().getLlegada(),precioTotal);
-                                informacionTrayectos.add(jtrayecto);
+                                //double precioTotal = precio1 + trayectoj.getTren().getPrecio();
+                                InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
+                                InformacionTrayecto itrayecto2 = new InformacionTrayecto(trayectoj.getCiudadOrigen(),trayectoj.getCiudadDestino(),trayectoj.getHorario().getSalida(),trayectoj.getHorario().getLlegada(),trayectoj.getTren().getPrecio());
+
+                                Itinerario itinerario = new Itinerario() {};
+                                itinerario.add(itrayecto1);
+                                itinerario.add(itrayecto2);
+                                itinerarios.add(itinerario);
+                               
                             }
                         }
                      }
                 }
              }
          }
-        return informacionTrayectos;
+        return itinerarios;
     }
 
-    public List<InformacionTrayecto> BuscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
+    public List<Itinerario> BuscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
-        List<InformacionTrayecto> informacionTrayectos = new ArrayList();
+        List<Itinerario> itinerarios = new ArrayList();
 
         Iterator i = viajes.getTrayectos().iterator();
 
@@ -108,11 +115,13 @@ public class Transbordo implements InterfazListados {
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
                    InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,trayecto.getHorario().getSalida(),trayecto.getHorario().getLlegada(),trayecto.getTren().getPrecio());
-                   informacionTrayectos.add(itrayecto);                   
+                   Itinerario itinerario = new Itinerario() {};
+                   itinerario.add(itrayecto);
+                   itinerarios.add(itinerario);
                }
            }
         }
-        return informacionTrayectos;
+        return itinerarios;
     }
 
     public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
