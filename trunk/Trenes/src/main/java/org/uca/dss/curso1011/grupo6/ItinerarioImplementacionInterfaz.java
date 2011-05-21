@@ -102,27 +102,27 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     }
 
     public InformacionTrayecto remove(int index) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.remove(index);
     }
 
     public int indexOf(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.indexOf(o);
     }
 
     public int lastIndexOf(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.lastIndexOf(o);
     }
 
     public ListIterator<InformacionTrayecto> listIterator() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.listIterator();
     }
 
     public ListIterator<InformacionTrayecto> listIterator(int index) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.listIterator(index);
     }
 
     public List<InformacionTrayecto> subList(int fromIndex, int toIndex) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.subList(fromIndex, toIndex);
     }
 
 }
