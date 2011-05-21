@@ -18,7 +18,7 @@ public class ReservaTrayecto {
     private LocalDate fechaSalida;
     private InformacionTrayecto trayecto;
 
-    protected ReservaTrayecto(int numeroAsiento, double precio, String codigoReserva) {
+    protected ReservaTrayecto(InformacionTrayecto trayecto,LocalDate fechaSalida, int numeroAsiento, double precio, String codigoReserva) {
         this.numeroAsiento = numeroAsiento;
         this.precio = precio;
         this.codigoReserva = codigoReserva;
