@@ -35,9 +35,7 @@ public class ComprasTransbordo implements InterfazCompras{
          {
              InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
 
-             ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);
-
-             
+             ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
              
          }
 
@@ -54,6 +52,12 @@ public class ComprasTransbordo implements InterfazCompras{
 
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+
+    public int getPlazasDisponibles(Itinerario itinerario, LocalDate fecha)
+    {
+
     }
 
     /**
