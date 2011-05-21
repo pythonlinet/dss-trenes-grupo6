@@ -66,23 +66,23 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     }
 
     public boolean containsAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.containsAll(c);
     }
 
     public boolean addAll(Collection<? extends InformacionTrayecto> c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.addAll(c);
     }
 
     public boolean addAll(int index, Collection<? extends InformacionTrayecto> c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.addAll(index, c);
     }
 
     public boolean removeAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.removeAll(c);
     }
 
     public boolean retainAll(Collection<?> c) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.retainAll(c);
     }
 
     public void clear() {
