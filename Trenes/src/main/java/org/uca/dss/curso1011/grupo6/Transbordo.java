@@ -104,8 +104,6 @@ public class Transbordo implements InterfazListados {
            trayecto = (Trayecto)i.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino))
-                   //trayecto.getHorario().getSalida().compareTo(horaSalida) >= 0 &&
-                   //trayecto.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
            {
                reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
 
@@ -128,8 +126,8 @@ public class Transbordo implements InterfazListados {
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectoTransbordos = new ArrayList();
                           
-        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
-        informacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
+        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);
+        informacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida);
 
         Iterator i = trayectosDirectos.iterator();
 
@@ -166,8 +164,8 @@ public class Transbordo implements InterfazListados {
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectos= new ArrayList();
 
-        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
-        informacionTrayectos = BuscarInformacionTrayectos(origen,destino,fechaSalida);//,horaSalida,horaLlegada);
+        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);
+        informacionTrayectos = BuscarInformacionTrayectos(origen,destino,fechaSalida);
 
         Iterator i = trayectosDirectos.iterator();
         while (i.hasNext())
