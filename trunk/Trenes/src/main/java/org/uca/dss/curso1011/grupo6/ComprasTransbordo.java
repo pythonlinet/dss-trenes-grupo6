@@ -56,4 +56,18 @@ public class ComprasTransbordo implements InterfazCompras{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    /**
+     * @return the itrayectos
+     */
+    public List<InformacionTrayecto> getItrayectos() {
+        return itrayectos;
+    }
+
+    /**
+     * @param itrayectos the itrayectos to set
+     */
+    public void setItrayectos(List<InformacionTrayecto> itrayectos) {
+        this.itrayectos = itrayectos;
+    }
+
 }
