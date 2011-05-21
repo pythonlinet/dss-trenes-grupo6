@@ -86,19 +86,19 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     }
 
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        itrayectos.clear();
     }
 
     public InformacionTrayecto get(int index) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.get(index);
     }
 
     public InformacionTrayecto set(int index, InformacionTrayecto element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.set(index, element);
     }
 
     public void add(int index, InformacionTrayecto element) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        itrayectos.add(index, element);
     }
 
     public InformacionTrayecto remove(int index) {
