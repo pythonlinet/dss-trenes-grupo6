@@ -18,8 +18,19 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
  */
 public class ItinerarioImplementacionInterfaz implements Itinerario{
 
+    private List<InformacionTrayecto> itrayectos;
+
     public double getPrecio() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        double precio = 0;
+
+        Iterator i = itrayectos.iterator();
+
+         while (i.hasNext()){
+             InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
+             precio += itrayecto.getPrecio();
+         }
+
+        return precio;
     }
 
     public int size() {
