@@ -50,19 +50,19 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     }
 
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.toArray();
     }
 
     public <T> T[] toArray(T[] a) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.toArray(a);
     }
 
     public boolean add(InformacionTrayecto e) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.add(e);
     }
 
     public boolean remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return itrayectos.remove((InformacionTrayecto)o);
     }
 
     public boolean containsAll(Collection<?> c) {
