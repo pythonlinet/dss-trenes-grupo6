@@ -67,8 +67,8 @@ public class Compras implements InterfazCompras{
      * Metodo que se encarga de realizar la reserva con la fecha de salida, ciudad
      * y destino y la hora de salida
      * @param fecha salida de la reserva
-     * @param ciudadorigen del trayecto
-     * @param ciudaddestino del trayecto
+     * @param origen del trayecto
+     * @param destino del trayecto
      * @param hora salida
      * @return codigo de la reserva que se ha realizado
      */
@@ -110,15 +110,15 @@ public class Compras implements InterfazCompras{
 
     /**
      * Metodo que se encarga de cancelar una reserva recibiendo como parámetro 
-     * el codigo de la reserva
-     * @param CodigoReserva
+     * el codigo de la reserva. Este metodo no tiene que devolver nada
+     * @param codigoReserva para realizar la cancelacion
      */
-    private void cancelarReserva(String CodigoReserva)
+    private void cancelarReserva(String codigoReserva)
     {        
         boolean flag=false;
         ObjectContainer db = DBUtils.getDb();
 
-       if (CodigoReserva.isEmpty() ) {
+       if (codigoReserva.isEmpty() ) {
         throw new IllegalArgumentException("Codigo Reserva no especificada");
        }
 
@@ -134,7 +134,7 @@ public class Compras implements InterfazCompras{
       {
               Reserva reserva = (Reserva)i.next();
 
-              if(reserva.getCodigoReserva().equals(CodigoReserva))
+              if(reserva.getCodigoReserva().equals(codigoReserva))
               {
                         db.delete(reserva);
                         db.commit();
@@ -142,13 +142,17 @@ public class Compras implements InterfazCompras{
               }
       }
       if (!flag)
-            throw new RuntimeException("No existe la reserva "+CodigoReserva +" a cancelar.");
+            throw new RuntimeException("No existe la reserva "+codigoReserva +" a cancelar.");
 
 
     }
 
     /**
-     * 
+     * Metodo que se encarga de generar un codigo unico para una reserva
+     * usando la primera letra de la ciudad origen y de destino y los trenes.
+     * También usamos las horas y los minutos de la salida del trayecto.
+     * Además se usa el dia, mes, año, hora, minuto y segundo del momento en el 
+     * que se ha hecho la reserva
      * @param trayecto
      * @return codigo generado
      */
@@ -174,12 +178,14 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-     * 
-     * @param origen
-     * @param destino
-     * @param fecha
-     * @param hora
-     * @return precio del viaje
+     * Metodo que se encarga de obtener el precio de un trayecto. Los parametros
+     * que se le proporcionan son ciudad origen y destino, la fecha de salida y 
+     * la hora de salida.
+     * @param origen del trayecto
+     * @param destino del trayecto
+     * @param fecha de la reserva
+     * @param hora de salida del trayecto
+     * @return precio del trayecto
      */
     public double getPrecio(String origen, String destino, LocalDate fecha, LocalTime hora)
     {
@@ -197,11 +203,12 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-     * 
-     * @param origen
-     * @param destino
-     * @param fecha
-     * @param hora
+     * Metodo que se encarga de realizar una reserva para un trayecto. Los parametros
+     * que necesita son la ciudad de origen y de destino, la fecha de salida y la hora de salida.
+     * @param origen del trayecto
+     * @param destino del trayecto
+     * @param fecha de la reserva
+     * @param hora de salida del trayecto
      * @return codigo del asiento reservado
      */
     public String reservaAsiento(String origen, String destino, LocalDate fecha, LocalTime hora){
@@ -209,19 +216,22 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-     * 
-     * @param codigoReserva
+     * Metodo que se encarga de cancelar una reserva. Recibe como parametro el 
+     * codigo de la reserva
+     * @param codigoReserva de la que se quiere realizar la cancelacion
      */
     public void cancelaReserva(String codigoReserva) {
         this.cancelarReserva(codigoReserva);
     }
     
     /**
-     *
-     * @param origen
-     * @param destino
-     * @param fecha
-     * @param hora
+     * Metodo que se encarga de calcular los asientos libres para un trayecto.
+     * Los parametro que tiene son la ciudad de origen y de destino, la fecha de salida
+     * y la hora de salida.
+     * @param origen del trayecto
+     * @param destino del trayecto
+     * @param fecha que se quiere realizar la reserva
+     * @param hora de salida
      * @return numero de asientos reservados
      */
     public int asientosLibres(String origen, String destino, LocalDate fecha, LocalTime hora)
