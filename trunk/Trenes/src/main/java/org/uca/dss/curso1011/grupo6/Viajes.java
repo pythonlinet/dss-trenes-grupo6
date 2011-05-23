@@ -86,7 +86,7 @@ public class Viajes implements InterfazListados{
         }
 
         if(!encontrado)
-            throw new RuntimeException("No exist el trayectos en esa fecha");
+            throw new RuntimeException("No existen trayectos en esa fecha");
         
         return plazas;
     }    
