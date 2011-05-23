@@ -7,7 +7,7 @@ package org.uca.dss.curso1011.grupo6;
 import org.joda.time.LocalTime;
 
 /**
- *
+ * Clase que contiene la hora de salida y de llegada de los trayectos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín

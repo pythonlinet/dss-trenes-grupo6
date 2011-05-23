@@ -15,7 +15,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
 
 /**
- *
+ * Clase que se encarga de realizar las compras de los transbordos
  * @author Jose Luis
  */
 public class ComprasTransbordo implements InterfazCompras{

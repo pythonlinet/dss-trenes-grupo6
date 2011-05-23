@@ -16,7 +16,7 @@ import org.uca.dss.trenes.basededatos.DBUtils;
 import org.uca.dss.trenes.interfaz.InterfazListados;
 
 /**
- *
+ * Clase encargada de realizar los listados de los viajes
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
