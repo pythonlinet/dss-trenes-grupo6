@@ -83,14 +83,7 @@ public class Compras implements InterfazCompras{
 
         if(viajes.getPlazasDisponibles(trayecto,fecha)>0)
         {
-
-            ObjectContainer db = DBUtils.getDb();
-
-            List <Reserva> reservas = db.query(new Predicate <Reserva>() {
-            public boolean match ( Reserva reserva) {
-                return true;
-            }
-            }) ;
+            ObjectContainer db = DBUtils.getDb();           
 
             codigoReserva = this.generarCodigo(trayecto);
 

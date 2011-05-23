@@ -42,11 +42,11 @@ public class CargarDatos {
                     trenes.add(tren);
                 }
             } catch (IOException ex) {
-                throw new RuntimeException("Error lectura al cargar datos");
+                throw new RuntimeException(ex.getMessage());
             }
 
         } catch (FileNotFoundException ex) {
-             throw new RuntimeException("Fichero trenes no encontrado");
+             throw new RuntimeException(ex.getMessage());
         }
 
         return trenes;        
@@ -92,10 +92,10 @@ public class CargarDatos {
                     }
                 }
             } catch (IOException ex) {
-                throw new RuntimeException("Error lectura al cargar datos");
+                throw new RuntimeException(ex.getMessage());
             }
         } catch (FileNotFoundException ex) {
-             throw new RuntimeException("Fichero trayecto no encontrado");
+             throw new RuntimeException(ex.getMessage());
         }
          return trayectos;
     }
