@@ -26,12 +26,13 @@ public class CargarDatos {
     List<Trayecto> trayectos;
 
     /**
-     * 
-     * @param fichero
+     * Metodo que se encarga de cargar los datos de un fichero de los trenes.
+     * El parametro de entrada es un strign que contiene el nombre del fichero.
+     * @param fichero, nombre del fichero que se va a cargar
      * @return lista de trenes cargados
      * @throws IOException
      */
-    public List<Tren> CargarDatosTrenes(String fichero){
+    public List<Tren> cargarDatosTrenes(String fichero){
         trenes = new ArrayList();
         try {            
             CSVReader reader = new CSVReader(new FileReader(fichero));
@@ -53,13 +54,14 @@ public class CargarDatos {
     }
 
     /**
-     * 
+     * Metodo que se encarga de cargar los datos de un fichero de los trayectos.
+     * El parametro de entrada es un strign que contiene el nombre del fichero.
      * @param fichero
      * @param trenes
      * @return lista de trayectos cargados
      * @throws IOException
      */
-    public List<Trayecto> CargarDatosTrayectos(String fichero,List<Tren> trenes){
+    public List<Trayecto> cargarDatosTrayectos(String fichero,List<Tren> trenes){
          trayectos = new ArrayList();
 
         try {
