@@ -29,7 +29,7 @@ public class Compras implements InterfazCompras{
     public Compras(){}
 
     /**
-     * 
+     * Metodo que se encarga de introducir un viaje
      * @param viajes
      */
     public void setViajes(Viajes viajes){
@@ -37,19 +37,20 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-    *
-    * @param fecha
-    * @param CiudadOrigen
-    * @param CiudadDestino
-    * @param hora
+    * Funcion que se encarga de comprobar las excepciones de fecha, ciudad origen
+    * y destino y la hora
+    * @param fecha de salida de la reserva
+    * @param ciudadOrigen del trayecto
+    * @param ciudadDestino del trayecto
+    * @param hora de salida del trayecto
     */
-    private void comprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino, LocalTime hora)
+    private void comprobarExcepcion(LocalDate fecha,String ciudadOrigen, String ciudadDestino, LocalTime hora)
     {
-        if ( CiudadOrigen.isEmpty() ) {
+        if ( ciudadOrigen.isEmpty() ) {
         throw new IllegalArgumentException("Ciudad Origen no especificada");
         }
 
-        if ( CiudadDestino.isEmpty() ) {
+        if ( ciudadDestino.isEmpty() ) {
         throw new IllegalArgumentException("Ciudad Destino no especificada");
         }
 
@@ -63,12 +64,13 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-     * 
-     * @param fecha
-     * @param origen
-     * @param destino
-     * @param hora
-     * @return
+     * Metodo que se encarga de realizar la reserva con la fecha de salida, ciudad
+     * y destino y la hora de salida
+     * @param fecha salida de la reserva
+     * @param ciudadorigen del trayecto
+     * @param ciudaddestino del trayecto
+     * @param hora salida
+     * @return codigo de la reserva que se ha realizado
      */
      private String realizarReserva(LocalDate fecha, String origen, String destino, LocalTime hora)
      {
@@ -107,7 +109,8 @@ public class Compras implements InterfazCompras{
 
 
     /**
-     * 
+     * Metodo que se encarga de cancelar una reserva recibiendo como parámetro 
+     * el codigo de la reserva
      * @param CodigoReserva
      */
     private void cancelarReserva(String CodigoReserva)
