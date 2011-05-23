@@ -61,8 +61,8 @@ public abstract class InterfazTest {
         DBUtils.initDataBase("reservastests.dat");
         CargarDatos cd = new CargarDatos();
 
-        List<Tren> trenes = cd.CargarDatosTrenes("./src/main/resources/trenes.csv");
-        List<Trayecto> trayectos = cd.CargarDatosTrayectos("./src/main/resources/trayectos.csv",trenes);
+        List<Tren> trenes = cd.cargarDatosTrenes("./src/main/resources/trenes.csv");
+        List<Trayecto> trayectos = cd.cargarDatosTrayectos("./src/main/resources/trayectos.csv",trenes);
         
         Viajes viajes = new Viajes(trayectos);
         Compras listCompras = new Compras();
