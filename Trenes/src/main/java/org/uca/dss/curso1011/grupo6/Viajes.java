@@ -38,7 +38,7 @@ public class Viajes implements InterfazListados{
  * @param CiudadOrigen
  * @param CiudadDestino
  */
-   public void ComprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
+   private void ComprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
     {
         if ( CiudadOrigen.isEmpty() ) {
         throw new IllegalArgumentException("Ciudad Origen no especificada");
