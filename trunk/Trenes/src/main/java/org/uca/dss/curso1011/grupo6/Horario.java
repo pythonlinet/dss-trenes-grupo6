@@ -17,9 +17,10 @@ public class Horario {
     private LocalTime llegada;
 
     /**
-     * 
-     * @param Salida
-     * @param Llegada
+     * Constructor de la clase Horario. Lo construye a partir de los parametros
+     * de salida y llegada
+     * @param salida, horario de salida
+     * @param llegada, horario de llegada
      */
     public Horario(LocalTime salida, LocalTime llegada){
         this.salida = salida;
@@ -27,29 +28,32 @@ public class Horario {
     }
 
     /**
-     * 
-     * @return hora salida
+     * Metodo para obtener la hora de salida de un horario
+     * @return salida, horario de salida
      */
     public LocalTime getSalida() {
         return salida;
     }
 
     /**
-     * @param Salida the Salida to set
+     * Metodo para introducir el parametro salida
+     * @param salida, horario de salida
      */
     public void setSalida(LocalTime salida) {
         this.salida = salida;
     }
 
     /**
-     * @return hora llegada
+     * Metodo para obtener el horario de llegada
+     * @return llegada, horario de llegada
      */
     public LocalTime getLlegada() {
         return llegada;
     }
 
     /**
-     * @param Llegada the Llegada to set
+     * Metodo para insertar la hora de llegada
+     * @param llegada, horario de llegada
      */
     public void setLlegada(LocalTime llegada) {
         this.llegada = llegada;
