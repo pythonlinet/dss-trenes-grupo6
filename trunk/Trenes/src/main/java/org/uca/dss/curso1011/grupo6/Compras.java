@@ -187,7 +187,7 @@ public class Compras implements InterfazCompras{
         comprobarExcepcion(fecha,origen,destino,hora);
         Trayecto trayecto = viajes.BuscarTrayecto(origen, destino, hora);
 
-        return trayecto.CalcularPrecio(trayecto.getTren());
+        return trayecto.calcularPrecio(trayecto.getTren());
 
          } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
