@@ -43,7 +43,7 @@ public class Compras implements InterfazCompras{
     * @param CiudadDestino
     * @param hora
     */
-    public void ComprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino, LocalTime hora)
+    private void comprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino, LocalTime hora)
     {
         if ( CiudadOrigen.isEmpty() ) {
         throw new IllegalArgumentException("Ciudad Origen no especificada");
@@ -70,14 +70,14 @@ public class Compras implements InterfazCompras{
      * @param hora
      * @return
      */
-     public String RealizarReserva(LocalDate fecha, String origen, String destino, LocalTime hora)
+     private String realizarReserva(LocalDate fecha, String origen, String destino, LocalTime hora)
      {
         Trayecto trayecto;
         String codigoReserva="";
 
         trayecto = viajes.BuscarTrayecto(origen,destino,hora);
 
-        ComprobarExcepcion(fecha,origen,destino,hora);
+        comprobarExcepcion(fecha,origen,destino,hora);
 
         if(viajes.getPlazasDisponibles(trayecto,fecha)>0)
         {
@@ -90,7 +90,7 @@ public class Compras implements InterfazCompras{
             }
             }) ;
 
-            codigoReserva = this.GenerarCodigo(trayecto);
+            codigoReserva = this.generarCodigo(trayecto);
 
             Reserva reserva = new Reserva(fecha, codigoReserva);
             reserva.setTrayecto(trayecto);
@@ -110,7 +110,7 @@ public class Compras implements InterfazCompras{
      * 
      * @param CodigoReserva
      */
-    public void CancelarReserva(String CodigoReserva)
+    private void cancelarReserva(String CodigoReserva)
     {        
         boolean flag=false;
         ObjectContainer db = DBUtils.getDb();
@@ -149,7 +149,7 @@ public class Compras implements InterfazCompras{
      * @param trayecto
      * @return codigo generado
      */
-    public String GenerarCodigo(Trayecto trayecto)
+    private String generarCodigo(Trayecto trayecto)
     {
          String cod="";
 
@@ -182,7 +182,7 @@ public class Compras implements InterfazCompras{
     {
         try{
 
-        ComprobarExcepcion(fecha,origen,destino,hora);
+        comprobarExcepcion(fecha,origen,destino,hora);
         Trayecto trayecto = viajes.BuscarTrayecto(origen, destino, hora);
 
         return trayecto.CalcularPrecio(trayecto.getTren());
@@ -202,7 +202,7 @@ public class Compras implements InterfazCompras{
      * @return codigo del asiento reservado
      */
     public String reservaAsiento(String origen, String destino, LocalDate fecha, LocalTime hora){
-        return RealizarReserva(fecha,origen,destino,hora);
+        return realizarReserva(fecha,origen,destino,hora);
     }
 
     /**
@@ -210,7 +210,7 @@ public class Compras implements InterfazCompras{
      * @param codigoReserva
      */
     public void cancelaReserva(String codigoReserva) {
-        this.CancelarReserva(codigoReserva);
+        this.cancelarReserva(codigoReserva);
     }
     
     /**
