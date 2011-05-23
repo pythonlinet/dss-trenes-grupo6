@@ -25,24 +25,36 @@ public class Reserva {
     }
 
     /**
-     * @return the CodigoReserva
+     * Metodo para obtener el codigo reserva de la reserva
+     * @return codigoReserva de una reserva
      */
     public String getCodigoReserva() {
         return codigoReserva;
     }
 
     /**
-     *
-     * @return
+     * Metodo que se utiliza para obtener la fecha para la que se ha realizado la
+     * reserva
+     * @return fecha para la que se ha realizado la reserva
      */
     public LocalDate getFecha() {
         return fecha;
     }
-
+    
+    /**
+     * Metodo que se utiliza para insertar el trayecto en la reserva. El parametro
+     * que necesitamos es el trayecto que queremos guardar en la reserva
+     * @param trayecto del que se realiza la reserva
+     */
     void setTrayecto(Trayecto trayecto) {
         this.trayecto = trayecto;
     }
-
+    
+    /**
+     * Metodo que se utiliza para consultar el trayecto del que se ha realizado 
+     * la reserva
+     * @return trayecto, trayecto del que se ha realizado la reserva
+     */
     Object getTrayecto() {
         return trayecto;
     }    
