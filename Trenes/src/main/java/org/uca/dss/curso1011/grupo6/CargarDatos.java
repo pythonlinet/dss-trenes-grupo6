@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import org.joda.time.LocalTime;
 
 /**
- *
+ * Clase que se encarga de cargar los datos de los trenes y de los trayectos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín

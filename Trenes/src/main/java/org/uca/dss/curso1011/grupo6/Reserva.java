@@ -8,7 +8,7 @@ package org.uca.dss.curso1011.grupo6;
 import org.joda.time.LocalDate;
 
 /**
- *
+ * Clase que tiene la estructura para crear la reserva de un trayecto
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín

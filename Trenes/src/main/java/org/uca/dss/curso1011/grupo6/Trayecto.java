@@ -6,7 +6,7 @@
 package org.uca.dss.curso1011.grupo6;
 
 /**
- *
+ * Clase que contiene los trayectos disponibles que se pueden realizar
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín

@@ -15,7 +15,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazListados;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
- *
+ * Clase que se encarga de realizar los listados de los transbordos disponibles
  * @author Jose Luis
  */
 public class Transbordo implements InterfazListados {

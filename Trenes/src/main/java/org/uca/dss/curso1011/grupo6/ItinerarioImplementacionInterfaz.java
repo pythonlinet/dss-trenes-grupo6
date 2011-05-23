@@ -13,7 +13,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
- *
+ * Clase para implementar el interfaz itinerario
  * @author Jose Luis
  */
 public class ItinerarioImplementacionInterfaz implements Itinerario{

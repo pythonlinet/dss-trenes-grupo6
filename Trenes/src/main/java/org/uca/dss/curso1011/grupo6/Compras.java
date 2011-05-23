@@ -17,7 +17,7 @@ import org.uca.dss.trenes.interfaz.InterfazCompras;
 
 
 /**
- *
+ * Clase que gestiona las reservas realizadas por lo clientes
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
