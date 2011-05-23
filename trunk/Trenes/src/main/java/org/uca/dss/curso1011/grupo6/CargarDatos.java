@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.joda.time.LocalTime;
 
 /**
@@ -33,18 +31,22 @@ public class CargarDatos {
      * @return lista de trenes cargados
      * @throws IOException
      */
-    public List<Tren> CargarDatosTrenes(String fichero) throws IOException{
+    public List<Tren> CargarDatosTrenes(String fichero){
         trenes = new ArrayList();
         try {            
             CSVReader reader = new CSVReader(new FileReader(fichero));
             String [ ] nextLine = null ;
-            while (( nextLine = reader.readNext()) != null ) {
-                Tren tren = new Tren(nextLine[0],Integer.parseInt(nextLine[1]),Float.parseFloat(nextLine[2]));
-                trenes.add(tren);
+            try {
+                while ((nextLine = reader.readNext()) != null) {
+                    Tren tren = new Tren(nextLine[0].trim(), Integer.parseInt(nextLine[1].trim()), Float.parseFloat(nextLine[2].trim()));
+                    trenes.add(tren);
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException("Error lectura al cargar datos");
             }
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CargarDatos.class.getName()).log(Level.SEVERE, null, ex);
+             throw new RuntimeException("Fichero trenes no encontrado");
         }
 
         return trenes;        
@@ -57,49 +59,43 @@ public class CargarDatos {
      * @return lista de trayectos cargados
      * @throws IOException
      */
-    public List<Trayecto> CargarDatosTrayectos(String fichero,List<Tren> trenes) throws IOException{
+    public List<Trayecto> CargarDatosTrayectos(String fichero,List<Tren> trenes){
          trayectos = new ArrayList();
 
         try {
             CSVReader reader = new CSVReader(new FileReader(fichero));
             String [ ] nextLine = null ;
-            while (( nextLine = reader.readNext()) != null ) {                
-                int arg = 4;                
-                
-                while(arg + 1 < nextLine.length)
-                {
-                    Trayecto trayecto = new Trayecto (nextLine[1],nextLine[2],Integer.parseInt(nextLine[3]));
-
-                    String nomTren = nextLine[0];                    
-                    Iterator itrenes = trenes.iterator(); 
-                    Tren tren = null;
-                    while(itrenes.hasNext())
-                    {
-                        tren = (Tren)itrenes.next();
-
-                        if(tren.getNombre().equals(nomTren))                            
-                            trayecto.setTren(tren);                                                    
+            try {
+                while ((nextLine = reader.readNext()) != null) {
+                    int arg = 4;
+                    while (arg + 1 < nextLine.length) {
+                        Trayecto trayecto = new Trayecto(nextLine[1].trim(), nextLine[2].trim(), Integer.parseInt(nextLine[3].trim()));
+                        String nomTren = nextLine[0].trim();
+                        Iterator itrenes = trenes.iterator();
+                        Tren tren = null;
+                        while (itrenes.hasNext()) {
+                            tren = (Tren) itrenes.next();
+                            if (tren.getNombre().equals(nomTren)) {
+                                trayecto.setTren(tren);
+                            }
+                        }
+                        itrenes = null;
+                        String[] CampoHora = nextLine[arg].trim().split(":");
+                        String[] CampoHora2 = nextLine[arg + 1].trim().split(":");
+                        int h = Integer.parseInt(CampoHora[0]);
+                        int m = Integer.parseInt(CampoHora[1]);
+                        int h2 = Integer.parseInt(CampoHora2[0]);
+                        int m2 = Integer.parseInt(CampoHora2[1]);
+                        trayecto.setHorario(new Horario(new LocalTime(h, m), new LocalTime(h2, m2)));
+                        trayectos.add(trayecto);
+                        arg = arg + 2;
                     }
-                    itrenes = null;                   
-                                        
-                    String[] CampoHora = nextLine[arg].split (":");
-                    String[] CampoHora2 = nextLine[arg+1].split (":");
-
-                    int h = Integer.parseInt(CampoHora[0]);
-                    int m =Integer.parseInt(CampoHora[1]);
-
-                    int h2 = Integer.parseInt(CampoHora2[0]);
-                    int m2 =Integer.parseInt(CampoHora2[1]);
-
-                    trayecto.setHorario(new Horario(new LocalTime(h,m),new LocalTime(h2,m2)));
-
-                    trayectos.add(trayecto);
-                    
-                    arg = arg + 2;
-                }                
+                }
+            } catch (IOException ex) {
+                throw new RuntimeException("Error lectura al cargar datos");
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(CargarDatos.class.getName()).log(Level.SEVERE, null, ex);
+             throw new RuntimeException("Fichero trayecto no encontrado");
         }
          return trayectos;
     }
