@@ -35,8 +35,8 @@ public class ComprasTransbordo implements InterfazCompras{
          {
              InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
 
-             ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
-             
+             //ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
+             //Terminar falta por completar
          }
 
          return reservasTrayecto;
@@ -57,7 +57,8 @@ public class ComprasTransbordo implements InterfazCompras{
 
     public int getPlazasDisponibles(Itinerario itinerario, LocalDate fecha)
     {
-
+        //No está terminado
+        return 1;
     }
 
     /**
