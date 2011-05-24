@@ -22,6 +22,8 @@ public class ReservaTrayecto {
         this.numeroAsiento = numeroAsiento;
         this.precio = precio;
         this.codigoReserva = codigoReserva;
+        this.trayecto=trayecto;
+        this.fechaSalida=fechaSalida;
     }
 
     /**

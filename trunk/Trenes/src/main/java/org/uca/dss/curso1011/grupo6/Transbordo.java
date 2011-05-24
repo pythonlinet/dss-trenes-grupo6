@@ -27,27 +27,27 @@ public class Transbordo implements InterfazListados {
 
     }
 
-    public List<Itinerario> BuscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
+    public List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
 
-        Iterator i = viajes.getTrayectos().iterator();
+        Iterator iter = viajes.getTrayectos().iterator();
         
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
 
         Trayecto trayecto;
         
-        while(i.hasNext())
+        while(iter.hasNext())
         {
-             trayecto = (Trayecto)i.next();
+             trayecto = (Trayecto)iter.next();
 
              if(trayecto.getCiudadOrigen().equals(origen) &&
                    !trayecto.getCiudadDestino().equals(destino))
                    //trayecto.getHorario().getSalida().compareTo(horaSalida) >= 0 &&
                    //trayecto.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
             {
-                    reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
+                    reservasValidas = viajes.obtenerReservas(trayecto,fechaSalida);
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
@@ -67,7 +67,7 @@ public class Transbordo implements InterfazListados {
                             trayectoj.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0)
                             //trayectoj.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
                         {
-                            reservasValidas = viajes.ObtenerReservas(trayectoj,fechaSalida);
+                            reservasValidas = viajes.obtenerReservas(trayectoj,fechaSalida);
 
                             if(trayectoj.getTren().getPlazas() - reservasValidas.size() > 0)
                             {
@@ -89,23 +89,23 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
-    public List<Itinerario> BuscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
+    public List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
 
-        Iterator i = viajes.getTrayectos().iterator();
+        Iterator iter = viajes.getTrayectos().iterator();
 
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
 
         Trayecto trayecto;
-        while (i.hasNext())
+        while (iter.hasNext())
          {
-           trayecto = (Trayecto)i.next();
+           trayecto = (Trayecto)iter.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino))
            {
-               reservasValidas = viajes.ObtenerReservas(trayecto,fechaSalida);
+               reservasValidas = viajes.obtenerReservas(trayecto,fechaSalida);
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {
@@ -122,36 +122,36 @@ public class Transbordo implements InterfazListados {
     public List<Itinerario> getHorariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
         List<Itinerario> itinerariosDisponibles = new ArrayList();
-        List<Itinerario> informacionTrayectos = new ArrayList();
+        List<Itinerario> infoTrayectos = new ArrayList();
         List<Itinerario> trayectosDirectos = new ArrayList();
-        List<Itinerario> informacionTrayectoTransbordos = new ArrayList();
+        List<Itinerario> infoTrayectoTransbordos = new ArrayList();
                           
-        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);
-        informacionTrayectoTransbordos = BuscarInformacionTrayectos(origen,destino,fechaSalida);
+        trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
+        infoTrayectoTransbordos = buscarInformacionTrayectos(origen,destino,fechaSalida);
 
-        Iterator i = trayectosDirectos.iterator();
+        Iterator iter = trayectosDirectos.iterator();
 
-         while (i.hasNext())
+         while (iter.hasNext())
          {
-             Itinerario itinerarioi = (Itinerario)i.next();
+             Itinerario itinerarioi = (Itinerario)iter.next();
 
              if(itinerarioi.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
                    itinerarioi.get(1).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
-                    informacionTrayectos.add(itinerarioi);
+                    infoTrayectos.add(itinerarioi);
              }
          }
         
-        Iterator j = informacionTrayectoTransbordos.iterator();
+        Iterator iterj = infoTrayectoTransbordos.iterator();
 
-         while (j.hasNext())
+         while (iterj.hasNext())
          {
-             Itinerario itinerario = (Itinerario)j.next();
+             Itinerario itinerario = (Itinerario)iterj.next();
 
              if(itinerario.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
                    itinerario.get(2).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
-                    informacionTrayectos.add(itinerario);
+                    infoTrayectos.add(itinerario);
              }
          }
 
@@ -164,13 +164,13 @@ public class Transbordo implements InterfazListados {
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectos= new ArrayList();
 
-        trayectosDirectos = BuscarTrayectosDirectos(origen,destino,fechaSalida);
-        informacionTrayectos = BuscarInformacionTrayectos(origen,destino,fechaSalida);
+        trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
+        informacionTrayectos = buscarInformacionTrayectos(origen,destino,fechaSalida);
 
-        Iterator i = trayectosDirectos.iterator();
-        while (i.hasNext())
+        Iterator iter = trayectosDirectos.iterator();
+        while (iter.hasNext())
         {
-            Itinerario itinerario = (Itinerario)i.next();
+            Itinerario itinerario = (Itinerario)iter.next();
             informacionTrayectos.add(itinerario);
         }        
 

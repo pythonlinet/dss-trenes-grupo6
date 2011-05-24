@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.uca.dss.trenes.basededatos.DBUtils;
+import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 import org.uca.dss.trenes.interfaz.InterfazCompras;
 
 
@@ -77,25 +77,27 @@ public class Compras implements InterfazCompras{
         Trayecto trayecto;
         String codigoReserva="";
 
-        trayecto = viajes.BuscarTrayecto(origen,destino,hora);
+        trayecto = viajes.buscarTrayecto(origen,destino,hora);
 
         comprobarExcepcion(fecha,origen,destino,hora);
 
         if(viajes.getPlazasDisponibles(trayecto,fecha)>0)
         {
-            ObjectContainer db = DBUtils.getDb();           
+            ObjectContainer databases = DBUtils.getDb();           
 
             codigoReserva = this.generarCodigo(trayecto);
 
             Reserva reserva = new Reserva(fecha, codigoReserva);
             reserva.setTrayecto(trayecto);
             
-            db.store(reserva);
-            db.commit();
+            databases.store(reserva);
+            databases.commit();
         }
         else
+        {
             throw new RuntimeException("No hay plazas disponibles");
-
+        }
+        
         return codigoReserva;
 
     }
@@ -109,34 +111,35 @@ public class Compras implements InterfazCompras{
     private void cancelarReserva(String codigoReserva)
     {        
         boolean flag=false;
-        ObjectContainer db = DBUtils.getDb();
+        ObjectContainer databases = DBUtils.getDb();
 
        if (codigoReserva.isEmpty() ) {
         throw new IllegalArgumentException("Codigo Reserva no especificada");
        }
 
-       List <Reserva> reservas = db.query(new Predicate <Reserva>() {
+       List <Reserva> reservas = databases.query(new Predicate <Reserva>() {
        public boolean match ( Reserva reserva) {
        return true;
          }
        }) ;
-       Iterator i = reservas.iterator();
+       Iterator iter = reservas.iterator();
         
 
-      while (i.hasNext() && flag==false)
+      while (iter.hasNext() && flag==false)
       {
-              Reserva reserva = (Reserva)i.next();
+              Reserva reserva = (Reserva)iter.next();
 
               if(reserva.getCodigoReserva().equals(codigoReserva))
               {
-                        db.delete(reserva);
-                        db.commit();
+                        databases.delete(reserva);
+                        databases.commit();
                         flag = true;
               }
       }
       if (!flag)
+      {
             throw new RuntimeException("No existe la reserva "+codigoReserva +" a cancelar.");
-
+      }
 
     }
 
@@ -153,18 +156,18 @@ public class Compras implements InterfazCompras{
     {
          String cod="";
 
-         Calendar c = Calendar.getInstance();
+         Calendar cal = Calendar.getInstance();
 
          cod=trayecto.getCiudadOrigen().substring(0,1)
                  +trayecto.getCiudadDestino().substring(0,1)
                  +trayecto.getTren().getNombre().substring(0,1)
                  +trayecto.getHorario().getSalida().getHourOfDay()
                  +trayecto.getHorario().getSalida().getMinuteOfHour()
-                 +Integer.toString(c.get(Calendar.DATE))
-                 +Integer.toString(c.get(Calendar.MONTH)+1)
-                 +Integer.toString(c.get(Calendar.HOUR_OF_DAY))
-                 +Integer.toString(c.get(Calendar.MINUTE))
-                 +Integer.toString(c.get(Calendar.SECOND));
+                 +Integer.toString(cal.get(Calendar.DATE))
+                 +Integer.toString(cal.get(Calendar.MONTH)+1)
+                 +Integer.toString(cal.get(Calendar.HOUR_OF_DAY))
+                 +Integer.toString(cal.get(Calendar.MINUTE))
+                 +Integer.toString(cal.get(Calendar.SECOND));
 
          return cod;
 
@@ -185,7 +188,7 @@ public class Compras implements InterfazCompras{
         try{
 
         comprobarExcepcion(fecha,origen,destino,hora);
-        Trayecto trayecto = viajes.BuscarTrayecto(origen, destino, hora);
+        Trayecto trayecto = viajes.buscarTrayecto(origen, destino, hora);
 
         return trayecto.calcularPrecio(trayecto.getTren());
 
@@ -229,7 +232,7 @@ public class Compras implements InterfazCompras{
      */
     public int asientosLibres(String origen, String destino, LocalDate fecha, LocalTime hora)
     {
-        Trayecto trayecto = viajes.BuscarTrayecto(origen, destino, hora); 
+        Trayecto trayecto = viajes.buscarTrayecto(origen, destino, hora); 
         return viajes.getPlazasDisponibles(trayecto, fecha);                      
     }
 }

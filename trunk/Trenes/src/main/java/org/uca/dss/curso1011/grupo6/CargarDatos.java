@@ -84,11 +84,11 @@ public class CargarDatos {
                         itrenes = null;
                         String[] CampoHora = nextLine[arg].trim().split(":");
                         String[] CampoHora2 = nextLine[arg + 1].trim().split(":");
-                        int h = Integer.parseInt(CampoHora[0]);
-                        int m = Integer.parseInt(CampoHora[1]);
-                        int h2 = Integer.parseInt(CampoHora2[0]);
-                        int m2 = Integer.parseInt(CampoHora2[1]);
-                        trayecto.setHorario(new Horario(new LocalTime(h, m), new LocalTime(h2, m2)));
+                        int hora = Integer.parseInt(CampoHora[0]);
+                        int minuto = Integer.parseInt(CampoHora[1]);
+                        int hora2 = Integer.parseInt(CampoHora2[0]);
+                        int minuto2 = Integer.parseInt(CampoHora2[1]);
+                        trayecto.setHorario(new Horario(new LocalTime(hora, minuto), new LocalTime(hora2, minuto2)));
                         trayectos.add(trayecto);
                         arg = arg + 2;
                     }
