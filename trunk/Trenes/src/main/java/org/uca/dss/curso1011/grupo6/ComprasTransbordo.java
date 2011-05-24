@@ -34,7 +34,6 @@ public class ComprasTransbordo implements InterfazCompras{
          while (i.hasNext())
          {
              InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
-
              //ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
              //Terminar falta por completar
          }

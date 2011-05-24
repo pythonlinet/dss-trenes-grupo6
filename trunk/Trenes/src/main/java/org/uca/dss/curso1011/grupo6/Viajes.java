@@ -62,15 +62,7 @@ public class Viajes implements InterfazListados{
         boolean encontrado = false;
         
         List<Reserva> reservasValidas;
-        reservasValidas = new ArrayList();
-      
-        ObjectContainer db = DBUtils.getDb();
-
-        List <Reserva> reservas = db.query(new Predicate <Reserva>() {
-            public boolean match ( Reserva reserva) {
-                return true;
-            }
-        }) ;
+        reservasValidas = new ArrayList();     
 
          while (i.hasNext() && encontrado != true)
          {
@@ -134,8 +126,7 @@ public class Viajes implements InterfazListados{
             {
                 reservasValidas.add(reserva);
             }
-        }            
-        
+        }                    
             return reservasValidas;
     }
     
