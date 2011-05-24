@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.uca.dss.trenes.basededatos.DBUtils;
+import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 import org.uca.dss.trenes.interfaz.InterfazListados;
 
 /**
@@ -38,7 +38,7 @@ public class Viajes implements InterfazListados{
  * @param CiudadOrigen
  * @param CiudadDestino
  */
-   private void ComprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
+   private void comprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
     {
         if ( CiudadOrigen.isEmpty() ) {
         throw new IllegalArgumentException("Ciudad Origen no especificada");
@@ -57,28 +57,30 @@ public class Viajes implements InterfazListados{
      * @return the PlazasDisponibles
      */
     public int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
-        Iterator i = trayectos.iterator();
+        Iterator iter = trayectos.iterator();
         int plazas = 0;
         boolean encontrado = false;
         
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();     
 
-         while (i.hasNext() && encontrado != true)
+         while (iter.hasNext() && encontrado != true)
          {
-            Trayecto trayecto = (Trayecto)i.next();
+            Trayecto trayecto = (Trayecto)iter.next();
             if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
                     trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
                     trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
                     {
                         encontrado = true;
-                        reservasValidas = ObtenerReservas(trayecto,fecha);
+                        reservasValidas = obtenerReservas(trayecto,fecha);
                         plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
                     }
         }
 
         if(!encontrado)
+        {
             throw new RuntimeException("No existen trayectos en esa fecha");
+        }
         
         return plazas;
     }    
@@ -97,7 +99,7 @@ public class Viajes implements InterfazListados{
  * @param fecha
  * @return Lista de reservas del trayecto en la fecha indicada
  */
-    public List<Reserva> ObtenerReservas(Trayecto trayectoArg, LocalDate fecha){
+    public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
         
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
@@ -106,21 +108,21 @@ public class Viajes implements InterfazListados{
         String destino = trayectoArg.getCiudadDestino();
         LocalTime hora = trayectoArg.getHorario().getSalida();
 
-        Trayecto trayectoComprueba = BuscarTrayecto(origen, destino, hora);
+        Trayecto trayectoComprueba = buscarTrayecto(origen, destino, hora);
 
-        ObjectContainer db = DBUtils.getDb();
+        ObjectContainer databases = DBUtils.getDb();
 
-        List <Reserva> reservas = db.query(new Predicate <Reserva>() {
+        List <Reserva> reservas = databases.query(new Predicate <Reserva>() {
             public boolean match ( Reserva reserva) {
                 return true;
             }
         }) ;
         
 
-        Iterator j = reservas.iterator();
-        while (j.hasNext())
+        Iterator iterj = reservas.iterator();
+        while (iterj.hasNext())
         {
-            Reserva reserva = (Reserva)j.next();
+            Reserva reserva = (Reserva)iterj.next();
             
             if(reserva.getFecha().equals(fecha) && reserva.getTrayecto().equals(trayectoComprueba))
             {
@@ -137,15 +139,15 @@ public class Viajes implements InterfazListados{
  * @param hora
  * @return trayecto que coincida con los paramátros
  */
-    public Trayecto BuscarTrayecto (String origen, String destino, LocalTime hora)
+    public Trayecto buscarTrayecto (String origen, String destino, LocalTime hora)
     {
-        Iterator i = trayectos.iterator();
+        Iterator iter = trayectos.iterator();
         Trayecto trayecto,trayectoen=null ;
         boolean encontrado = false;
 
-        while (i.hasNext() && encontrado != true)
+        while (iter.hasNext() && encontrado != true)
         {
-            trayecto = (Trayecto)i.next();
+            trayecto = (Trayecto)iter.next();
             if(trayecto.getCiudadOrigen().equals(origen) &&
                     trayecto.getCiudadDestino().equals(destino) &&
                     trayecto.getHorario().getSalida().equals(hora))
@@ -156,8 +158,10 @@ public class Viajes implements InterfazListados{
         }
 
         if(!encontrado)
+        {
             throw new RuntimeException("No existe el trayecto");
-
+        }
+            
         return trayectoen;
     }
 
@@ -170,7 +174,7 @@ public class Viajes implements InterfazListados{
      */
     public List<LocalTime> getHorarios(String origen, String destino, LocalDate fecha) {
 
-        Iterator i = trayectos.iterator();
+        Iterator iter = trayectos.iterator();
 
         List<LocalTime> horariosDisponibles;
         horariosDisponibles = new ArrayList();
@@ -178,17 +182,17 @@ public class Viajes implements InterfazListados{
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
 
-        ComprobarExcepcion(fecha,origen,destino);
+        comprobarExcepcion(fecha,origen,destino);
 
-        ObjectContainer db = DBUtils.getDb();
+        ObjectContainer database = DBUtils.getDb();
 
-         while (i.hasNext())
+         while (iter.hasNext())
          {
-           Trayecto trayecto = (Trayecto)i.next();
+           Trayecto trayecto = (Trayecto)iter.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino))
            {
-               reservasValidas = ObtenerReservas(trayecto,fecha);                     
+               reservasValidas = obtenerReservas(trayecto,fecha);                     
 
                if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                {

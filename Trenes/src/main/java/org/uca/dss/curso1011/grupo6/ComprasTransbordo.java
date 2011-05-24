@@ -29,11 +29,11 @@ public class ComprasTransbordo implements InterfazCompras{
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
 
-         Iterator i = itinerario.iterator();
+         Iterator iter = itinerario.iterator();
 
-         while (i.hasNext())
+         while (iter.hasNext())
          {
-             InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
+             InformacionTrayecto itrayecto = (InformacionTrayecto)iter.next();
              //ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
              //Terminar falta por completar
          }

@@ -23,10 +23,10 @@ public class ItinerarioImplementacionInterfaz implements Itinerario{
     public double getPrecio() {
         double precio = 0;
 
-        Iterator i = itrayectos.iterator();
+        Iterator iter = itrayectos.iterator();
 
-         while (i.hasNext()){
-             InformacionTrayecto itrayecto = (InformacionTrayecto)i.next();
+         while (iter.hasNext()){
+             InformacionTrayecto itrayecto = (InformacionTrayecto)iter.next();
              precio += itrayecto.getPrecio();
          }
 

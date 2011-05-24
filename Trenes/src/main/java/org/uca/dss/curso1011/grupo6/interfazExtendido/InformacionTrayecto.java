@@ -16,7 +16,6 @@
  */
 package org.uca.dss.curso1011.grupo6.interfazExtendido;
 
-import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 /**
