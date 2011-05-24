@@ -182,11 +182,6 @@ public class Viajes implements InterfazListados{
 
         ObjectContainer db = DBUtils.getDb();
 
-        List <Reserva> reservas = db.query(new Predicate <Reserva>() {
-            public boolean match ( Reserva reserva) {
-                return true;
-            }
-        }) ;
          while (i.hasNext())
          {
            Trayecto trayecto = (Trayecto)i.next();
