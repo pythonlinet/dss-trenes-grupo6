@@ -182,9 +182,7 @@ public class Viajes implements InterfazListados{
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
 
-        comprobarExcepcion(fecha,origen,destino);
-
-        ObjectContainer database = DBUtils.getDb();
+        comprobarExcepcion(fecha,origen,destino);        
 
          while (iter.hasNext())
          {
