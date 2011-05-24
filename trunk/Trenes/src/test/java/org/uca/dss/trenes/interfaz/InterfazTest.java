@@ -18,7 +18,7 @@ import org.uca.dss.curso1011.grupo6.Compras;
 import org.uca.dss.curso1011.grupo6.Trayecto;
 import org.uca.dss.curso1011.grupo6.Tren;
 import org.uca.dss.curso1011.grupo6.Viajes;
-import org.uca.dss.trenes.basededatos.DBUtils;
+import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 
 /**
  *
