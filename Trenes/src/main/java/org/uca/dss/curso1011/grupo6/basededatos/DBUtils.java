@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.uca.dss.trenes.basededatos;
+package org.uca.dss.curso1011.grupo6.basededatos;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
