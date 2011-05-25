@@ -185,32 +185,32 @@ public class ComprasTransbordo implements InterfazCompras{
         boolean flag=false;
         ObjectContainer database = DBUtils.getDb();
 
-       if (reserva. codigoReserva.isEmpty() ) {
+       if (reserva.getCodigoReserva().isEmpty() ) {
         throw new IllegalArgumentException("Codigo Reserva no especificada");
        }
 
-       List <Reserva> reservas = database.query(new Predicate <Reserva>() {
-       public boolean match ( Reserva reserva) {
+       List <ReservaTrayecto> reservasTrayecto = database.query(new Predicate <ReservaTrayecto>() {
+       public boolean match ( ReservaTrayecto reservaTrayecto) {
        return true;
          }
        }) ;
-       Iterator<Reserva> iReservas = reservas.iterator();
+       Iterator<ReservaTrayecto> iReservas = reservasTrayecto.iterator();
 
 
       while (iReservas.hasNext() && flag==false)
       {
-              Reserva reserva = iReservas.next();
+              ReservaTrayecto reservaTrayecto = iReservas.next();
 
-              if(reserva.getCodigoReserva().equals(codigoReserva))
+              if(reservaTrayecto.getCodigoReserva().equals(reserva.getCodigoReserva()))
               {
-                        database.delete(reserva);
+                        database.delete(reservaTrayecto);
                         database.commit();
                         flag = true;
               }
       }
       if (!flag)
       {
-            throw new RuntimeException("No existe la reserva "+codigoReserva +" a cancelar.");
+            throw new RuntimeException("No existe la reserva "+ reserva.getCodigoReserva() +" a cancelar.");
       }
     }
 
