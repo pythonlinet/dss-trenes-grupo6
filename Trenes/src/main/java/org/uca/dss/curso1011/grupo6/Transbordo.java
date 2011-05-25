@@ -187,5 +187,13 @@ public class Transbordo implements InterfazListados {
         this.viajes = viajes;
     }
 
+    public List<Itinerario> getItinerariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
    
 }
