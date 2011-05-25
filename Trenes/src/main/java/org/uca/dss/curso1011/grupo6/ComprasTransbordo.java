@@ -111,8 +111,6 @@ public class ComprasTransbordo implements InterfazCompras{
              {
                 throw new RuntimeException("No hay plazas disponibles");
              }
-
-             //Terminar falta por completar
          }
 
          return reservasTrayecto;
