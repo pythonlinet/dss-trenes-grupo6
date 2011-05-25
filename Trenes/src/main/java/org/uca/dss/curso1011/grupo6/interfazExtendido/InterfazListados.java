@@ -15,7 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.uca.dss.curso1011.grupo6.interfazExtendido;
+package org.uca.dss.trenes.interfazExtendido;
 
 import java.util.List;
 import org.joda.time.LocalDate;
@@ -43,7 +43,7 @@ public interface InterfazListados {
      * @param horaLlegada indica la hora máxima de llegada
      * @return un array con los itinerarios posibles
      */
-    public List<Itinerario> getHorariosEntre(String origen, String destino,
+    public List<Itinerario> getItinerariosEntre(String origen, String destino,
             LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada);
     /**
      * Permite obtener la disponibilidad de un viaje, mostrando para dicho
@@ -61,6 +61,7 @@ public interface InterfazListados {
      * @param horaLlegada indica la hora máxima de llegada
      * @return un array con los itinerarios posibles
      */
-    public List<Itinerario> getHorarios(String origen, String destino,
+    public List<Itinerario> getItinerarios(String origen, String destino,
             LocalDate fechaSalida);
 }
+
