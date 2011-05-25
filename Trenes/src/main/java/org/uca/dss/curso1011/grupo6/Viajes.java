@@ -57,16 +57,16 @@ public class Viajes implements InterfazListados{
      * @return the PlazasDisponibles
      */
     public int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
-        Iterator iter = trayectos.iterator();
+        Iterator<Trayecto> iTrayectos = trayectos.iterator();
         int plazas = 0;
         boolean encontrado = false;
         
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();     
 
-         while (iter.hasNext() && encontrado != true)
+         while (iTrayectos.hasNext() && encontrado != true)
          {
-            Trayecto trayecto = (Trayecto)iter.next();
+            Trayecto trayecto = iTrayectos.next();
             if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
                     trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
                     trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
@@ -118,10 +118,10 @@ public class Viajes implements InterfazListados{
         }) ;
         
 
-        Iterator iterj = reservas.iterator();
-        while (iterj.hasNext())
+        Iterator<Reserva> iReservas = reservas.iterator();
+        while (iReservas.hasNext())
         {
-            Reserva reserva = (Reserva)iterj.next();
+            Reserva reserva = iReservas.next();
             
             if(reserva.getFecha().equals(fecha) && reserva.getTrayecto().equals(trayectoComprueba))
             {
@@ -140,19 +140,19 @@ public class Viajes implements InterfazListados{
  */
     public Trayecto buscarTrayecto (String origen, String destino, LocalTime hora)
     {
-        Iterator iter = trayectos.iterator();
-        Trayecto trayecto,trayectoen=null ;
+        Iterator<Trayecto> iTrayectos = trayectos.iterator();
+        Trayecto trayecto,trayectoEncontrado=null ;
         boolean encontrado = false;
 
-        while (iter.hasNext() && encontrado != true)
+        while (iTrayectos.hasNext() && encontrado != true)
         {
-            trayecto = (Trayecto)iter.next();
+            trayecto = iTrayectos.next();
             if(trayecto.getCiudadOrigen().equals(origen) &&
                     trayecto.getCiudadDestino().equals(destino) &&
                     trayecto.getHorario().getSalida().equals(hora))
                     {
                         encontrado = true;
-                        trayectoen = trayecto;
+                        trayectoEncontrado = trayecto;
                     }
         }
 
@@ -161,7 +161,7 @@ public class Viajes implements InterfazListados{
             throw new RuntimeException("No existe el trayecto");
         }
             
-        return trayectoen;
+        return trayectoEncontrado;
     }
 
     /**
@@ -173,7 +173,7 @@ public class Viajes implements InterfazListados{
      */
     public List<LocalTime> getHorarios(String origen, String destino, LocalDate fecha) {
 
-        Iterator iter = trayectos.iterator();
+        Iterator<Trayecto> iTrayectos = trayectos.iterator();
 
         List<LocalTime> horariosDisponibles;
         horariosDisponibles = new ArrayList();
@@ -183,9 +183,9 @@ public class Viajes implements InterfazListados{
 
         comprobarExcepcion(fecha,origen,destino);        
 
-         while (iter.hasNext())
+         while (iTrayectos.hasNext())
          {
-           Trayecto trayecto = (Trayecto)iter.next();
+           Trayecto trayecto = iTrayectos.next();
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino))
            {
