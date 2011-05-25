@@ -83,15 +83,15 @@ public class Compras implements InterfazCompras{
 
         if(viajes.getPlazasDisponibles(trayecto,fecha)>0)
         {
-            ObjectContainer databases = DBUtils.getDb();           
+            ObjectContainer database = DBUtils.getDb();           
 
             codigoReserva = this.generarCodigo(trayecto);
 
             Reserva reserva = new Reserva(fecha, codigoReserva);
             reserva.setTrayecto(trayecto);
             
-            databases.store(reserva);
-            databases.commit();
+            database.store(reserva);
+            database.commit();
         }
         else
         {
@@ -111,28 +111,28 @@ public class Compras implements InterfazCompras{
     private void cancelarReserva(String codigoReserva)
     {        
         boolean flag=false;
-        ObjectContainer databases = DBUtils.getDb();
+        ObjectContainer database = DBUtils.getDb();
 
        if (codigoReserva.isEmpty() ) {
         throw new IllegalArgumentException("Codigo Reserva no especificada");
        }
 
-       List <Reserva> reservas = databases.query(new Predicate <Reserva>() {
+       List <Reserva> reservas = database.query(new Predicate <Reserva>() {
        public boolean match ( Reserva reserva) {
        return true;
          }
        }) ;
-       Iterator iter = reservas.iterator();
+       Iterator<Reserva> iReservas = reservas.iterator();
         
 
-      while (iter.hasNext() && flag==false)
+      while (iReservas.hasNext() && flag==false)
       {
-              Reserva reserva = (Reserva)iter.next();
+              Reserva reserva = iReservas.next();
 
               if(reserva.getCodigoReserva().equals(codigoReserva))
               {
-                        databases.delete(reserva);
-                        databases.commit();
+                        database.delete(reserva);
+                        database.commit();
                         flag = true;
               }
       }
