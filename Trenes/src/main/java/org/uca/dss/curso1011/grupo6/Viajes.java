@@ -52,7 +52,7 @@ public class Viajes implements InterfazListados{
         throw new IllegalArgumentException("Fecha no especificada");
         }
     }
-   
+
     /**
      * @return the PlazasDisponibles
      */
@@ -76,7 +76,6 @@ public class Viajes implements InterfazListados{
                         plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
                     }
         }
-
         if(!encontrado)
         {
             throw new RuntimeException("No existen trayectos en esa fecha");
