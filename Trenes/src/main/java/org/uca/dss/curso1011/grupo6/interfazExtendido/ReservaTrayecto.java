@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.uca.dss.curso1011.grupo6.interfazExtendido;
+package org.uca.dss.trenes.interfazExtendido;
 
 import org.joda.time.LocalDate;
 
@@ -14,16 +14,23 @@ import org.joda.time.LocalDate;
 public class ReservaTrayecto {
     private int numeroAsiento;
     private String codigoReserva;
-    private double precio;
     private LocalDate fechaSalida;
     private InformacionTrayecto trayecto;
 
-    protected ReservaTrayecto(InformacionTrayecto trayecto,LocalDate fechaSalida, int numeroAsiento, double precio, String codigoReserva) {
+/**
+ * Constructor de la información de una reserva
+ * @param recorrido a reservar
+ * @param fechaSalida fecha de la reserva
+ * @param numeroAsiento asiento reservado
+ * @param codigoReserva código de reserva
+ */
+    public ReservaTrayecto(InformacionTrayecto recorrido,
+            LocalDate fechaSalida,
+            int numeroAsiento, String codigoReserva) {
+        this.trayecto = recorrido;
+        this.fechaSalida = fechaSalida;
         this.numeroAsiento = numeroAsiento;
-        this.precio = precio;
         this.codigoReserva = codigoReserva;
-        this.trayecto=trayecto;
-        this.fechaSalida=fechaSalida;
     }
 
     /**
@@ -44,7 +51,7 @@ public class ReservaTrayecto {
      * @return the precio
      */
     public double getPrecio() {
-        return precio;
+        return this.trayecto.getPrecio();
     }
     /**
      * @return the fechaSalida
@@ -60,3 +67,4 @@ public class ReservaTrayecto {
         return trayecto;
     }
 }
+
