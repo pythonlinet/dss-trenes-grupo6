@@ -216,6 +216,14 @@ public class ComprasTransbordo implements InterfazCompras{
 
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
         
+        Iterator<ReservaTrayecto> iReservas=reservas.iterator();
+        
+        while(iReservas.hasNext())
+        {
+            ReservaTrayecto reservaBorrar = iReservas.next();
+            cancelaReserva(reservaBorrar);
+        }
+
     }
 
 
