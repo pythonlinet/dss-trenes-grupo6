@@ -5,11 +5,14 @@
 
 package org.uca.dss.curso1011.grupo6;
 
+import com.db4o.ObjectContainer;
+import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazCompras;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
@@ -28,7 +31,40 @@ public class ComprasTransbordo implements InterfazCompras{
     {
     }
 
-    
+
+     public List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
+
+        List<ReservaTrayecto> reservasValidas;
+        reservasValidas = new ArrayList();
+
+//        String origen = itrayectoArg.getOrigen();
+//        String destino = itrayectoArg.getDestino();
+//        LocalTime hora = itrayectoArg.getHoraSalida();
+
+        //Trayecto trayectoComprueba = buscarTrayecto(origen, destino, hora);
+
+        ObjectContainer databases = DBUtils.getDb();
+
+        List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+            public boolean match ( ReservaTrayecto reserva) {
+                return true;
+            }
+        }) ;
+
+
+        Iterator<ReservaTrayecto> iReservas = reservas.iterator();
+        while (iReservas.hasNext())
+        {
+            ReservaTrayecto reserva = iReservas.next();
+
+            if(reserva.getFechaSalida().equals(fecha) && reserva.getTrayecto().equals(itrayectoArg))
+            {
+                reservasValidas .add(reserva);
+            }
+        }
+            return reservasValidas;
+    }
+
      public int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
         Iterator iter = itrayectos.iterator();
         int plazas = 0;
@@ -94,12 +130,6 @@ public class ComprasTransbordo implements InterfazCompras{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-
-    public int getPlazasDisponibles(Itinerario itinerario, LocalDate fecha)
-    {
-        //No está terminado
-        return 1;
-    }
 
     /**
      * @return the itrayectos
