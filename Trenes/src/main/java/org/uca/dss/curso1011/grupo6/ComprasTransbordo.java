@@ -37,12 +37,6 @@ public class ComprasTransbordo implements InterfazCompras{
         List<ReservaTrayecto> reservasValidas;
         reservasValidas = new ArrayList();
 
-//        String origen = itrayectoArg.getOrigen();
-//        String destino = itrayectoArg.getDestino();
-//        LocalTime hora = itrayectoArg.getHoraSalida();
-
-        //Trayecto trayectoComprueba = buscarTrayecto(origen, destino, hora);
-
         ObjectContainer databases = DBUtils.getDb();
 
         List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
@@ -107,6 +101,12 @@ public class ComprasTransbordo implements InterfazCompras{
              if(getPlazasDisponibles(iTrayecto,fecha)>0)
              {
                 ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), generarCodigo(iTrayecto));
+
+                ObjectContainer database = DBUtils.getDb();
+
+                database.store(reserva);
+                database.commit();
+
              }else
              {
                 throw new RuntimeException("No hay plazas disponibles");
@@ -177,8 +177,8 @@ public class ComprasTransbordo implements InterfazCompras{
     }
 
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
-        //Falta por completar
-        return 1;
+        //Falta por completar. Preguntar a Dani
+        return -1;
     }
 
     public void cancelaReserva(ReservaTrayecto reserva) {
