@@ -15,11 +15,10 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.uca.dss.curso1011.grupo6.interfazExtendido;
+package org.uca.dss.trenes.interfazExtendido;
 
 import java.util.List;
 import org.joda.time.LocalDate;
-//import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
 
 /**
  * Este interface permite realizar y cancelar las reservas
@@ -66,3 +65,4 @@ public interface InterfazCompras {
      */
     public void cancelaReserva(List<ReservaTrayecto> reservas);
 }
+
