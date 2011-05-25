@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package org.uca.dss.curso1011.grupo6.interfazExtendido;
+package org.uca.dss.trenes.interfazExtendido;
 
 import java.util.List;
 
@@ -14,3 +14,4 @@ import java.util.List;
 public interface Itinerario extends List<InformacionTrayecto> {
     public double getPrecio();
 }
+
