@@ -8,6 +8,7 @@ package org.uca.dss.curso1011.grupo6;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
@@ -102,11 +103,11 @@ public class ComprasTransbordo implements InterfazCompras{
 
          while (iItinerario.hasNext())
          {
-             InformacionTrayecto itrayecto = iItinerario.next();
+             InformacionTrayecto iTrayecto = iItinerario.next();
 
-             if(getPlazasDisponibles(itrayecto,fecha)>0)
+             if(getPlazasDisponibles(iTrayecto,fecha)>0)
              {
-                ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);
+                ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), iTrayecto.getPrecio(), generarCodigo(iTrayecto));
              }else
              {
                 throw new RuntimeException("No hay plazas disponibles");
@@ -118,16 +119,76 @@ public class ComprasTransbordo implements InterfazCompras{
          return reservasTrayecto;
     }
 
+     /**
+     * Metodo que se encarga de generar un codigo unico para una reserva
+     * usando la primera letra de la ciudad origen y de destino y los trenes.
+     * También usamos las horas y los minutos de la salida del trayecto.
+     * Además se usa el dia, mes, año, hora, minuto y segundo del momento en el
+     * que se ha hecho la reserva
+     * @param trayecto
+     * @return codigo generado
+     */
+    private String generarCodigo(InformacionTrayecto infoTrayecto)
+    {
+         String cod="";
+
+         Calendar cal = Calendar.getInstance();
+
+         cod=infoTrayecto.getOrigen().substring(0,1)
+                 +infoTrayecto.getDestino().substring(0,1)
+                 +infoTrayecto.getHoraSalida().getHourOfDay()
+                 +infoTrayecto.getHoraSalida().getMinuteOfHour()
+                 +Integer.toString(cal.get(Calendar.DATE))
+                 +Integer.toString(cal.get(Calendar.MONTH)+1)
+                 +Integer.toString(cal.get(Calendar.HOUR_OF_DAY))
+                 +Integer.toString(cal.get(Calendar.MINUTE))
+                 +Integer.toString(cal.get(Calendar.SECOND));
+
+         return cod;
+
+    }
+
+    private int generarAsiento(InformacionTrayecto infoTrayecto)
+    {
+        int numAsiento=-1;
+        boolean flag=true;
+
+        Trayecto trayecto = transbordo.getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
+
+        int plazas = trayecto.getTren().getPlazas();
+
+        ObjectContainer databases = DBUtils.getDb();
+        while(flag)
+        {
+            numAsiento = (int) Math.random()*plazas+1;
+
+            final int comprobacionAsiento=numAsiento;
+
+            List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+            public boolean match ( ReservaTrayecto reserva) {
+                return reserva.getNumeroAsiento()==comprobacionAsiento;
+            }
+            }) ;
+            
+            if(reservas.isEmpty())
+            {
+                flag=false;
+            }
+        }
+
+        return numAsiento;
+    }
+
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     public void cancelaReserva(ReservaTrayecto reserva) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
 
