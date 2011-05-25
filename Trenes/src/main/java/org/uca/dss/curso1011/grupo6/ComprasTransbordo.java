@@ -32,7 +32,7 @@ public class ComprasTransbordo implements InterfazCompras{
     }
 
 
-     public List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
+     private List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
 
         List<ReservaTrayecto> reservasValidas;
         reservasValidas = new ArrayList();
@@ -59,7 +59,7 @@ public class ComprasTransbordo implements InterfazCompras{
             return reservasValidas;
     }
 
-     public int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
+     private int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
         Iterator iter = itrayectos.iterator();
         int plazas = 0;
         boolean encontrado = false;

@@ -27,7 +27,7 @@ public class Transbordo implements InterfazListados {
 
     }
 
-    public List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
+    private List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
 
@@ -85,7 +85,7 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
-    public List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
+    private List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
 
