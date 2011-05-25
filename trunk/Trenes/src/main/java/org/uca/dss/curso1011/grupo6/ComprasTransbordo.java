@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazCompras;
@@ -107,7 +106,7 @@ public class ComprasTransbordo implements InterfazCompras{
 
              if(getPlazasDisponibles(iTrayecto,fecha)>0)
              {
-                ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), iTrayecto.getPrecio(), generarCodigo(iTrayecto));
+                ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), generarCodigo(iTrayecto));
              }else
              {
                 throw new RuntimeException("No hay plazas disponibles");
@@ -180,7 +179,8 @@ public class ComprasTransbordo implements InterfazCompras{
     }
 
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
-        
+        //Falta por completar
+        return 1;
     }
 
     public void cancelaReserva(ReservaTrayecto reserva) {
