@@ -14,9 +14,8 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.uca.dss.trenes.interfazExtendido;
+package org.uca.dss.curso1011.grupo6.interfazExtendido;
 
-import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
 /**
