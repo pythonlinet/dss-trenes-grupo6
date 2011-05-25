@@ -64,7 +64,7 @@ public class Compras implements InterfazCompras{
     }
 
     /**
-     * Metodo que se encarga de realizar la reserva con la fecha de salida, ciudad
+     * Metodo que se encarga de realizar la reserva con la fecha de salida, ciudad origen
      * y destino y la hora de salida
      * @param fecha salida de la reserva
      * @param origen del trayecto
@@ -160,7 +160,6 @@ public class Compras implements InterfazCompras{
 
          cod=trayecto.getCiudadOrigen().substring(0,1)
                  +trayecto.getCiudadDestino().substring(0,1)
-                 +trayecto.getTren().getNombre().substring(0,1)
                  +trayecto.getHorario().getSalida().getHourOfDay()
                  +trayecto.getHorario().getSalida().getMinuteOfHour()
                  +Integer.toString(cal.get(Calendar.DATE))

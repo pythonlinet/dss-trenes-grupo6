@@ -44,8 +44,6 @@ public class Transbordo implements InterfazListados {
 
              if(trayecto.getCiudadOrigen().equals(origen) &&
                    !trayecto.getCiudadDestino().equals(destino))
-                   //trayecto.getHorario().getSalida().compareTo(horaSalida) >= 0 &&
-                   //trayecto.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
             {
                     reservasValidas = viajes.obtenerReservas(trayecto,fechaSalida);
 
@@ -65,13 +63,11 @@ public class Transbordo implements InterfazListados {
                         if(trayectoj.getCiudadOrigen().equals(destino1) &&
                             !trayectoj.getCiudadDestino().equals(destino) &&
                             trayectoj.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0)
-                            //trayectoj.getHorario().getLlegada().compareTo(horaLlegada) <= 0)
                         {
                             reservasValidas = viajes.obtenerReservas(trayectoj,fechaSalida);
 
                             if(trayectoj.getTren().getPlazas() - reservasValidas.size() > 0)
                             {
-                                //double precioTotal = precio1 + trayectoj.getTren().getPrecio();
                                 InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
                                 InformacionTrayecto itrayecto2 = new InformacionTrayecto(trayectoj.getCiudadOrigen(),trayectoj.getCiudadDestino(),trayectoj.getHorario().getSalida(),trayectoj.getHorario().getLlegada(),trayectoj.getTren().getPrecio());
 
