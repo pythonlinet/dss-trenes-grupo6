@@ -97,6 +97,7 @@ public class Viajes implements InterfazListados{
  * @param trayectoArg
  * @param fecha
  * @return Lista de reservas del trayecto en la fecha indicada
+ * Preguntar a Dani el viernes. Importante NO OLVIDAR!!!!!
  */
     public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
         
