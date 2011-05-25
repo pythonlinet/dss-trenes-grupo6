@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazCompras;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
@@ -21,9 +22,41 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
 public class ComprasTransbordo implements InterfazCompras{
 
     private List<InformacionTrayecto> itrayectos;
+    private Transbordo transbordo;
 
     public ComprasTransbordo()
     {
+    }
+
+    
+     public int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
+        Iterator iter = itrayectos.iterator();
+        int plazas = 0;
+        boolean encontrado = false;
+
+        List<ReservaTrayecto> reservasValidas;
+        reservasValidas = new ArrayList();
+
+         while (iter.hasNext() && encontrado != true)
+         {
+            InformacionTrayecto itrayecto = (InformacionTrayecto)iter.next();
+            if(itrayecto.getOrigen().equals(itrayectoArg.getOrigen()) &&
+                    itrayecto.getDestino().equals(itrayectoArg.getDestino()) &&
+                    itrayecto.getHoraSalida().equals(itrayectoArg.getHoraSalida()))
+                    {
+                        encontrado = true;
+                        reservasValidas = obtenerReservasTrayecto(itrayecto,fecha);
+                        Trayecto trayecto = transbordo.getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
+
+                        plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
+                    }
+        }
+        if(!encontrado)
+        {
+            throw new RuntimeException("No existen trayectos en esa fecha");
+        }
+
+        return plazas;
     }
 
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
@@ -34,7 +67,15 @@ public class ComprasTransbordo implements InterfazCompras{
          while (iItinerario.hasNext())
          {
              InformacionTrayecto itrayecto = iItinerario.next();
-             //ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);             
+
+             if(getPlazasDisponibles(itrayecto,fecha)>0)
+             {
+                ReservaTrayecto reserva = new ReservaTrayecto(itrayecto,fecha, numeroAsiento, itrayecto.getPrecio(), codigoReserva);
+             }else
+             {
+                throw new RuntimeException("No hay plazas disponibles");
+             }
+
              //Terminar falta por completar
          }
 
@@ -72,6 +113,20 @@ public class ComprasTransbordo implements InterfazCompras{
      */
     public void setItrayectos(List<InformacionTrayecto> itrayectos) {
         this.itrayectos = itrayectos;
+    }
+
+    /**
+     * @return the transbordo
+     */
+    public Transbordo getTransbordo() {
+        return transbordo;
+    }
+
+    /**
+     * @param transbordo the transbordo to set
+     */
+    public void setTransbordo(Transbordo transbordo) {
+        this.transbordo = transbordo;
     }
 
 }
