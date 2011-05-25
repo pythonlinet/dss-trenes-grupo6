@@ -15,7 +15,7 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.uca.dss.trenes.interfazExtendido;
+package org.uca.dss.curso1011.grupo6.interfazExtendido;
 
 import java.util.List;
 import org.joda.time.LocalDate;

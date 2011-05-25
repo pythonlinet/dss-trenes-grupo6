@@ -182,7 +182,36 @@ public class ComprasTransbordo implements InterfazCompras{
     }
 
     public void cancelaReserva(ReservaTrayecto reserva) {
-        
+        boolean flag=false;
+        ObjectContainer database = DBUtils.getDb();
+
+       if (reserva. codigoReserva.isEmpty() ) {
+        throw new IllegalArgumentException("Codigo Reserva no especificada");
+       }
+
+       List <Reserva> reservas = database.query(new Predicate <Reserva>() {
+       public boolean match ( Reserva reserva) {
+       return true;
+         }
+       }) ;
+       Iterator<Reserva> iReservas = reservas.iterator();
+
+
+      while (iReservas.hasNext() && flag==false)
+      {
+              Reserva reserva = iReservas.next();
+
+              if(reserva.getCodigoReserva().equals(codigoReserva))
+              {
+                        database.delete(reserva);
+                        database.commit();
+                        flag = true;
+              }
+      }
+      if (!flag)
+      {
+            throw new RuntimeException("No existe la reserva "+codigoReserva +" a cancelar.");
+      }
     }
 
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
