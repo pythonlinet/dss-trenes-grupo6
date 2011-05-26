@@ -66,7 +66,7 @@ public abstract class InterfazExtendidoTest {
         CargarDatos cd = new CargarDatos();
 
         List<Tren> trenes = cd.cargarDatosTrenes("./src/main/resources/trenes.csv");
-        List<Trayecto> trayectos = cd.cargarDatosTrayectos("./src/main/resources/trayectos.csv",trenes);
+        List<Trayecto> trayectos = cd.cargarDatosTrayectos("./src/main/resources/trayectosextendido.csv",trenes);
         
         Viajes viajes = new Viajes(trayectos);
         Compras listCompras = new Compras();
