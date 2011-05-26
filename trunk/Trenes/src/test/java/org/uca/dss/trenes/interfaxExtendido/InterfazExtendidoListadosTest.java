@@ -30,14 +30,13 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadoSinReservasPorDias() {
-        int days = 10;
-        List<Itinerario> horasRef = listado.getItinerarios(origen, destino, new LocalDate());
+        List<Itinerario> itinerariosRef = listado.getItinerarios(origen, destino, new LocalDate());
 
         for (int day = 1; day <= 10; day++) {
-            List<Itinerario> horasAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
-            List<Itinerario> horasDespues = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
-            assertEquals(horasAntes, horasRef);
-            assertEquals(horasRef, horasDespues);
+            List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
+            List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
+            assertEquals(itineAntes, itinerariosRef);
+            assertEquals(itinerariosRef, itineDespues);
         }
     }
 
@@ -46,12 +45,12 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadosSinReservas() {
-        //Set<LocalTime> horas = new HashSet<LocalTime>(listado.getHorarios(origen, destino, new LocalDate()));
-        Set<LocalTime> horasACompobar = new HashSet<LocalTime>(getHorasPosibles());
-        //assertSame(horas.size(), horasACompobar.size());
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, new LocalDate());
+        Set<Itinerario> itineACompobar = new HashSet<Itinerario>(getItinerariosPosibles());
+        assertSame(itinerarios.size(), itineACompobar.size());
 
         // Compruebo que ese horario ha desaparecido
-        //assertEquals("No coinciden los horarios", horasACompobar, horas);
+        assertEquals("No coinciden los horarios", itineACompobar, itinerarios);
     }
 
     /**
