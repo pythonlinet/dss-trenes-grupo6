@@ -27,7 +27,7 @@ public class CargarDatos {
 
     /**
      * Metodo que se encarga de cargar los datos de un fichero de los trenes.
-     * El parametro de entrada es un strign que contiene el nombre del fichero.
+     * El parametro de entrada es un string que contiene el nombre del fichero.
      * @param fichero, nombre del fichero que se va a cargar
      * @return lista de trenes cargados
      * @throws IOException
