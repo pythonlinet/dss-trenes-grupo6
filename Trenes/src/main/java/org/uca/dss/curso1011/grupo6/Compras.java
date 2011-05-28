@@ -7,6 +7,7 @@ package org.uca.dss.curso1011.grupo6;
 
 import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -81,7 +82,7 @@ public class Compras implements InterfazCompras{
 
         comprobarExcepcion(fecha,origen,destino,hora);
 
-        if(viajes.getPlazasDisponibles(trayecto,fecha)>0)
+        if(getPlazasDisponibles(trayecto,fecha)>0)
         {
             ObjectContainer database = DBUtils.getDb();           
 
@@ -171,6 +172,45 @@ public class Compras implements InterfazCompras{
          return cod;
 
     }
+    
+    /**
+     * Metodo que se utiliza para calcular el numero de plazas disponibles que
+     * existe de un trayecto a una fecha indicada.
+     * Los parámetros de entrada de la función son el trayecto del que se quiere
+     * realizar la comprobación y la fecha a la cual se quiere realizar la
+     * comprobación
+     * @param trayectoArg
+     * @param fecha
+     * @return 
+     * @return PlazasDisponibles que hay del trayecto a la fecha indicada
+     */
+    public int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
+        Iterator<Trayecto> iTrayectos = viajes.getTrayectos().iterator();
+        int plazas = 0;
+        boolean encontrado = false;
+        
+        List<Reserva> reservasValidas;
+        reservasValidas = new ArrayList();     
+
+         while (iTrayectos.hasNext() && encontrado != true)
+         {
+            Trayecto trayecto = iTrayectos.next();
+            if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
+                    trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
+                    trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
+                    {
+                        encontrado = true;
+                        reservasValidas = viajes.obtenerReservas(trayecto,fecha);
+                        plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
+                    }
+        }
+        if(!encontrado)
+        {
+            throw new RuntimeException("No existen trayectos en esa fecha");
+        }
+        
+        return plazas;
+    }
 
     /**
      * Metodo que se encarga de obtener el precio de un trayecto. Los parametros
@@ -232,6 +272,6 @@ public class Compras implements InterfazCompras{
     public int asientosLibres(String origen, String destino, LocalDate fecha, LocalTime hora)
     {
         Trayecto trayecto = viajes.buscarTrayecto(origen, destino, hora); 
-        return viajes.getPlazasDisponibles(trayecto, fecha);                      
+        return getPlazasDisponibles(trayecto, fecha);                      
     }
 }

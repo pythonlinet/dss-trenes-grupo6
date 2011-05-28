@@ -54,38 +54,6 @@ public class Viajes implements InterfazListados{
     }
 
     /**
-     * @return the PlazasDisponibles
-     */
-    public int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
-        Iterator<Trayecto> iTrayectos = trayectos.iterator();
-        int plazas = 0;
-        boolean encontrado = false;
-        
-        List<Reserva> reservasValidas;
-        reservasValidas = new ArrayList();     
-
-         while (iTrayectos.hasNext() && encontrado != true)
-         {
-            Trayecto trayecto = iTrayectos.next();
-            if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
-                    trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
-                    trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
-                    {
-                        encontrado = true;
-                        reservasValidas = obtenerReservas(trayecto,fecha);
-                        plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
-                    }
-        }
-        if(!encontrado)
-        {
-            throw new RuntimeException("No existen trayectos en esa fecha");
-        }
-        
-        return plazas;
-    }    
-
-
-    /**
      * @return the trayectos
      */
     public List<Trayecto> getTrayectos() {
