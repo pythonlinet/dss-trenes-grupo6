@@ -184,7 +184,7 @@ public class Compras implements InterfazCompras{
      * @return 
      * @return PlazasDisponibles que hay del trayecto a la fecha indicada
      */
-    public int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
+    private int getPlazasDisponibles(Trayecto trayectoArg,LocalDate fecha) {
         Iterator<Trayecto> iTrayectos = viajes.getTrayectos().iterator();
         int plazas = 0;
         boolean encontrado = false;
