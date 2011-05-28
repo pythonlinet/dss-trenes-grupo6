@@ -25,19 +25,21 @@ public class Viajes implements InterfazListados{
     private List<Trayecto> trayectos;
     
     /**
-     *
+     * Constructos de la clase Viajes con el parámetro trayectos
      * @param trayectos
      */
     public Viajes(List<Trayecto> trayectos){
         this.trayectos = trayectos;
         trayectos = new ArrayList();
     }
-/**
- * 
- * @param fecha
- * @param CiudadOrigen
- * @param CiudadDestino
- */
+    /**
+    * Funcion que se encarga de comprobar las excepciones de fecha, ciudad origen
+    * y destino y la hora
+    * @param fecha de salida de la reserva
+    * @param ciudadOrigen del trayecto
+    * @param ciudadDestino del trayecto
+    * @param hora de salida del trayecto
+    */
    private void comprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
     {
         if ( CiudadOrigen.isEmpty() ) {
@@ -54,7 +56,8 @@ public class Viajes implements InterfazListados{
     }
 
     /**
-     * @return the trayectos
+     * Método que se utiliza para obtener los trayectos de un viajes.
+     * @return trayectos del viaje
      */
     public List<Trayecto> getTrayectos() {
         return trayectos;

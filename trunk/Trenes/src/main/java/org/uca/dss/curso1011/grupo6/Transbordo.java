@@ -22,11 +22,21 @@ public class Transbordo implements InterfazListados {
 
     private Viajes viajes;
 
+    /**
+     * 
+     */
     public Transbordo ()
     {
 
     }
 
+    /**
+     * 
+     * @param origen
+     * @param destino
+     * @param fechaSalida
+     * @return 
+     */
     private List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
@@ -85,6 +95,13 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
+    /**
+     * 
+     * @param origen
+     * @param destino
+     * @param fechaSalida
+     * @return 
+     */
     private List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
         List<Itinerario> itinerarios = new ArrayList();
@@ -115,6 +132,15 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
+    /**
+     * 
+     * @param origen
+     * @param destino
+     * @param fechaSalida
+     * @param horaSalida
+     * @param horaLlegada
+     * @return 
+     */
     public List<Itinerario> getItinerariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
         List<Itinerario> itinerariosDisponibles = new ArrayList();
@@ -154,6 +180,13 @@ public class Transbordo implements InterfazListados {
         return itinerariosDisponibles;
     }
 
+    /**
+     * 
+     * @param origen
+     * @param destino
+     * @param fechaSalida
+     * @return 
+     */
     public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
 
         List<Itinerario> itinerarios = null;     
