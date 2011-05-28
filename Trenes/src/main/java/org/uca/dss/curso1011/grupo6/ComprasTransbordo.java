@@ -31,7 +31,12 @@ public class ComprasTransbordo implements InterfazCompras{
     {
     }
 
-
+     /**
+     * 
+     * @param itrayectoArg
+     * @param fecha
+     * @return 
+     */
      private List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
 
         List<ReservaTrayecto> reservasValidas;
@@ -58,7 +63,13 @@ public class ComprasTransbordo implements InterfazCompras{
         }
             return reservasValidas;
     }
-
+     
+     /**
+      * 
+      * @param itrayectoArg
+      * @param fecha
+      * @return 
+      */
      private int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
         Iterator iter = itrayectos.iterator();
         int plazas = 0;
@@ -88,7 +99,13 @@ public class ComprasTransbordo implements InterfazCompras{
 
         return plazas;
     }
-
+    
+    /**
+      * 
+      * @param itinerario
+      * @param fecha
+      * @return 
+      */
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
 
@@ -144,7 +161,12 @@ public class ComprasTransbordo implements InterfazCompras{
          return cod;
 
     }
-
+    
+    /**
+     * 
+     * @param infoTrayecto
+     * @return 
+     */
     private int generarAsiento(InformacionTrayecto infoTrayecto)
     {
         int numAsiento=-1;
@@ -175,12 +197,22 @@ public class ComprasTransbordo implements InterfazCompras{
 
         return numAsiento;
     }
-
+    
+    /**
+     * 
+     * @param fecha
+     * @param itinerario
+     * @return 
+     */
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
         //Falta por completar. Preguntar a Dani
         return -1;
     }
 
+    /**
+     * 
+     * @param reserva 
+     */
     public void cancelaReserva(ReservaTrayecto reserva) {
         boolean flag=false;
         ObjectContainer database = DBUtils.getDb();
@@ -214,6 +246,10 @@ public class ComprasTransbordo implements InterfazCompras{
       }
     }
 
+    /**
+     * 
+     * @param reservas 
+     */
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
         
         Iterator<ReservaTrayecto> iReservas=reservas.iterator();

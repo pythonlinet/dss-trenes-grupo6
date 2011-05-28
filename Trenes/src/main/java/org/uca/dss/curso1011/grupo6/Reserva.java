@@ -19,6 +19,12 @@ public class Reserva {
     private Trayecto trayecto;
     private LocalDate fecha;
     
+    /**
+     * Constructor de la clase reserva con los parametros para fecha y codigo
+     * reserva
+     * @param fecha de la reserva
+     * @param CodigoReserva de la reserva
+     */
     public Reserva(LocalDate fecha, String CodigoReserva){
         this.fecha = fecha;
         this.codigoReserva = CodigoReserva;
