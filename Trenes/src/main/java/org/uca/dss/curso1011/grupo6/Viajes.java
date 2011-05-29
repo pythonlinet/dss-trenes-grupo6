@@ -46,7 +46,7 @@ public class Viajes{
  * @return Lista de reservas del trayecto en la fecha indicada
  * Preguntar a Dani el viernes. Importante NO OLVIDAR!!!!!
  */
-    public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
+/*    public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
         
         List<Reserva> reservasValidas;
         reservasValidas = new ArrayList();
@@ -78,7 +78,7 @@ public class Viajes{
         }                    
             return reservasValidas;
     }
-    
+*/
 /**
  *
  * @param origen
