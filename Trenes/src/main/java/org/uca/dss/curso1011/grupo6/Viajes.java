@@ -13,7 +13,6 @@ import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
-import org.uca.dss.trenes.interfaz.InterfazListados;
 
 /**
  * Clase encargada de realizar los listados de los viajes
@@ -21,7 +20,7 @@ import org.uca.dss.trenes.interfaz.InterfazListados;
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
  */
-public class Viajes implements InterfazListados{
+public class Viajes{
     private List<Trayecto> trayectos;
     
     /**
@@ -32,32 +31,9 @@ public class Viajes implements InterfazListados{
         this.trayectos = trayectos;
         trayectos = new ArrayList();
     }
+    
     /**
-    * Funcion que se encarga de comprobar las excepciones de fecha, ciudad origen
-    * y destino y la hora
-    * @param fecha de salida de la reserva
-    * @param ciudadOrigen del trayecto
-    * @param ciudadDestino del trayecto
-    * @param hora de salida del trayecto
-    */
-   private void comprobarExcepcion(LocalDate fecha,String CiudadOrigen, String CiudadDestino)
-    {
-        if ( CiudadOrigen.isEmpty() ) {
-        throw new IllegalArgumentException("Ciudad Origen no especificada");
-        }
-
-        if ( CiudadDestino.isEmpty() ) {
-        throw new IllegalArgumentException("Ciudad Destino no especificada");
-        }
-
-        if ( fecha.toString().isEmpty() ) {
-        throw new IllegalArgumentException("Fecha no especificada");
-        }
-    }
-
-    /**
-     * Método que se utiliza para obtener los trayectos de un viajes.
-     * @return trayectos del viaje
+     * @return the trayectos
      */
     public List<Trayecto> getTrayectos() {
         return trayectos;
@@ -134,43 +110,5 @@ public class Viajes implements InterfazListados{
         }
             
         return trayectoEncontrado;
-    }
-
-    /**
-     * 
-     * @param origen
-     * @param destino
-     * @param fecha
-     * @return horarios disponibles
-     */
-    public List<LocalTime> getHorarios(String origen, String destino, LocalDate fecha) {
-
-        Iterator<Trayecto> iTrayectos = trayectos.iterator();
-
-        List<LocalTime> horariosDisponibles;
-        horariosDisponibles = new ArrayList();
-
-        List<Reserva> reservasValidas;
-        reservasValidas = new ArrayList();
-
-        comprobarExcepcion(fecha,origen,destino);        
-
-         while (iTrayectos.hasNext())
-         {
-           Trayecto trayecto = iTrayectos.next();
-           if(trayecto.getCiudadOrigen().equals(origen) &&
-                   trayecto.getCiudadDestino().equals(destino))
-           {
-               reservasValidas = obtenerReservas(trayecto,fecha);                     
-
-               if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
-               {
-
-                   LocalTime hora = trayecto.getHorario().getSalida();
-                   horariosDisponibles.add(hora);
-               }
-           }
-        }
-        return horariosDisponibles;
     }
 }
