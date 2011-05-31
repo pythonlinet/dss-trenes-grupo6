@@ -172,7 +172,41 @@ public class Compras implements InterfazCompras{
          return cod;
 
     }
-    
+
+        public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
+
+        List<Reserva> reservasValidas;
+        reservasValidas = new ArrayList();
+
+        String origen = trayectoArg.getCiudadOrigen();
+        String destino = trayectoArg.getCiudadDestino();
+        LocalTime hora = trayectoArg.getHorario().getSalida();
+
+        Trayecto trayectoComprueba = viajes.buscarTrayecto(origen, destino, hora);
+
+        ObjectContainer databases = DBUtils.getDb();
+
+        List <Reserva> reservas = databases.query(new Predicate <Reserva>() {
+            public boolean match ( Reserva reserva) {
+                return true;
+            }
+        }) ;
+
+
+        Iterator<Reserva> iReservas = reservas.iterator();
+        while (iReservas.hasNext())
+        {
+            Reserva reserva = iReservas.next();
+
+            if(reserva.getFecha().equals(fecha) && reserva.getTrayecto().equals(trayectoComprueba))
+            {
+                reservasValidas.add(reserva);
+            }
+        }
+            return reservasValidas;
+    }
+
+
     /**
      * Metodo que se utiliza para calcular el numero de plazas disponibles que
      * existe de un trayecto a una fecha indicada.
@@ -200,7 +234,7 @@ public class Compras implements InterfazCompras{
                     trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
                     {
                         encontrado = true;
-                        reservasValidas = viajes.obtenerReservas(trayecto,fecha);
+                        reservasValidas = obtenerReservas(trayecto,fecha);
                         plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
                     }
         }

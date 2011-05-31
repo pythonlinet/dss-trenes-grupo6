@@ -87,7 +87,7 @@ public class ComprasTransbordo implements InterfazCompras{
                     {
                         encontrado = true;
                         reservasValidas = obtenerReservasTrayecto(itrayecto,fecha);
-                        Trayecto trayecto = transbordo.getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
+                        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
 
                         plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
                     }
@@ -172,7 +172,7 @@ public class ComprasTransbordo implements InterfazCompras{
         int numAsiento=-1;
         boolean flag=true;
 
-        Trayecto trayecto = transbordo.getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
+        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
 
         int plazas = trayecto.getTren().getPlazas();
 

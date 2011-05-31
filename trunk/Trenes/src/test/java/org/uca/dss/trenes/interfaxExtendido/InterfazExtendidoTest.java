@@ -17,6 +17,7 @@ import org.uca.dss.curso1011.grupo6.CargarDatos;
 import org.uca.dss.curso1011.grupo6.Compras;
 import org.uca.dss.curso1011.grupo6.ComprasTransbordo;
 import org.uca.dss.curso1011.grupo6.ItinerarioImplementacionInterfaz;
+import org.uca.dss.curso1011.grupo6.Listado;
 import org.uca.dss.curso1011.grupo6.Transbordo;
 import org.uca.dss.curso1011.grupo6.Trayecto;
 import org.uca.dss.curso1011.grupo6.Tren;
@@ -109,12 +110,16 @@ public abstract class InterfazExtendidoTest {
         List<Trayecto> trayectos = cd.cargarDatosTrayectos("./src/main/resources/trayectosextendido.csv",trenes);
         
         Viajes viajes = new Viajes(trayectos);
-        Compras listCompras = new Compras();
-
+        Listado listadoInt = new Listado();
+        Compras listCompras = new Compras();        
+        
         listCompras.setViajes(viajes);
-
+        
+        listadoInt.setViajes(viajes);
+        listadoInt.setCompras(listCompras);
+        
         Transbordo transbordo = new Transbordo();
-        transbordo.setViajes(viajes);
+        transbordo.setListado(listadoInt);
 
         ComprasTransbordo comprasTransbordo = new ComprasTransbordo();
         comprasTransbordo.setTransbordo(transbordo);
@@ -129,5 +134,4 @@ public abstract class InterfazExtendidoTest {
         listado = null;
         compras = null;
     }
-
 }
