@@ -15,6 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.uca.dss.curso1011.grupo6.CargarDatos;
 import org.uca.dss.curso1011.grupo6.Compras;
+import org.uca.dss.curso1011.grupo6.Listado;
 import org.uca.dss.curso1011.grupo6.Trayecto;
 import org.uca.dss.curso1011.grupo6.Tren;
 import org.uca.dss.curso1011.grupo6.Viajes;
@@ -69,7 +70,12 @@ public abstract class InterfazTest {
 
         listCompras.setViajes(viajes);
 
-        listado = viajes;
+         Listado listadoInt = new Listado();
+
+         listadoInt.setViajes(viajes);
+         listadoInt.setCompras(listCompras);
+        
+        listado = listadoInt;
         compras = listCompras;
     }
 
