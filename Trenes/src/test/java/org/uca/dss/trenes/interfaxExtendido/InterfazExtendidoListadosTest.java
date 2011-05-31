@@ -9,6 +9,8 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
+import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
+import java.util.Iterator;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.joda.time.LocalTime;
 import java.util.List;
@@ -30,8 +32,29 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadoSinReservasPorDias() {
+        System.out.println("Antes: ");
         List<Itinerario> itinerariosRef = listado.getItinerarios(origen, destino, new LocalDate());
+        System.out.println("Despues: ");
+/******/
+        Iterator<Itinerario> itinerarios = itinerariosRef.iterator();
 
+         while (itinerarios.hasNext())
+         {
+             Itinerario itinerario = itinerarios.next();
+
+             Iterator<InformacionTrayecto> infoTrayectos = itinerario.iterator();
+
+             while (infoTrayectos.hasNext())
+             {
+                 InformacionTrayecto infoTrayecto = infoTrayectos.next();
+
+                 System.out.println("Origen: "+infoTrayecto.getOrigen());
+                 System.out.println("Destino: "+infoTrayecto.getDestino());
+                 System.out.println("HoraSalida: "+infoTrayecto.getHoraSalida());
+             }
+             
+         }
+/******/
         for (int day = 1; day <= 10; day++) {
             List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
             List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));

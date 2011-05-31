@@ -177,13 +177,16 @@ public class Transbordo implements InterfazListados {
      */
     public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
 
+        /***/
+        System.out.println("trayectosDirectos: ");
+/***/
         List<Itinerario> itinerarios = null;     
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectos= new ArrayList();
-
+        
         trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
         informacionTrayectos = buscarInformacionTrayectos(origen,destino,fechaSalida);
-
+        
         Iterator iter = trayectosDirectos.iterator();
         while (iter.hasNext())
         {
