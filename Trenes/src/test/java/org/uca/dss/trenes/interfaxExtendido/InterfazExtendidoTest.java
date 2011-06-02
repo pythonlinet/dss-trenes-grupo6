@@ -6,6 +6,7 @@
 package org.uca.dss.trenes.interfaxExtendido;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -47,19 +48,14 @@ public abstract class InterfazExtendidoTest {
         destino = "madrid";
         hoy = new LocalDate();
     }
-
+/*
     public List<Itinerario> getItinerariosPosibles()
     {
         List<Itinerario> itineComprobar = new LinkedList<Itinerario>();
         InformacionTrayecto infoTrayecto = new InformacionTrayecto(origen,destino,new LocalTime("9:15"),new LocalTime("13:15"),30);
         Itinerario itinerarioDirecto = new ItinerarioImplementacionInterfaz();
         itinerarioDirecto.add(infoTrayecto);
-        itineComprobar.add(itinerarioDirecto);
-
-        /**
-         * pequeno,cadiz,sevilla,1,9:00,11:00,13:00,15:00
-            ave,sevilla,madrid,1,11:30,15:30,11:05,15:05,17:30,21:30
-         */
+        itineComprobar.add(itinerarioDirecto);        
 
         InformacionTrayecto infoTrayecto1 = new InformacionTrayecto(origen,"sevilla",new LocalTime("9:00"),new LocalTime("11:00"),10);
         InformacionTrayecto infoTrayecto2 = new InformacionTrayecto("sevilla",destino,new LocalTime("11:30"),new LocalTime("15:30"),30);
@@ -82,9 +78,32 @@ public abstract class InterfazExtendidoTest {
         itineComprobar.add(itineTransbordo3);
 
 
+
+        System.out.println("TRAYECTOS POSIBLES");
+
+        Iterator<Itinerario> i = itineComprobar.iterator();
+
+         while (i.hasNext())
+         {
+             Itinerario itinerario = i.next();
+
+             Iterator<InformacionTrayecto> infoTrayectos = itinerario.iterator();
+
+             while (infoTrayectos.hasNext())
+             {
+                 InformacionTrayecto infoTrayectoB = infoTrayectos.next();
+
+                 System.out.println("Origen: "+infoTrayectoB.getOrigen());
+                 System.out.println("Destino: "+infoTrayectoB.getDestino());
+                 System.out.println("HoraSalida: "+infoTrayectoB.getHoraSalida());
+             }
+         }
+
+        System.out.println("FIN__________________------------------_____________");
+
         return itineComprobar;
     }
-
+*/
     public List<LocalTime> getHorasPosibles() {
         List<LocalTime> horasComprobar = new LinkedList<LocalTime>();
         horasComprobar.add(new LocalTime("9:00"));
@@ -108,7 +127,7 @@ public abstract class InterfazExtendidoTest {
 
         List<Tren> trenes = cd.cargarDatosTrenes("./src/main/resources/trenes.csv");
         List<Trayecto> trayectos = cd.cargarDatosTrayectos("./src/main/resources/trayectosextendido.csv",trenes);
-        
+
         Viajes viajes = new Viajes(trayectos);
         Listado listadoInt = new Listado();
         Compras listCompras = new Compras();        
@@ -122,10 +141,10 @@ public abstract class InterfazExtendidoTest {
         transbordo.setListado(listadoInt);
 
         ComprasTransbordo comprasTransbordo = new ComprasTransbordo();
-        comprasTransbordo.setTransbordo(transbordo);
-
+        comprasTransbordo.setTransbordo(transbordo);        
+        
         listado = transbordo;
-        compras = comprasTransbordo;
+        compras = comprasTransbordo;        
     }
 
     @After

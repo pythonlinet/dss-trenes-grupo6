@@ -39,7 +39,7 @@ public class Transbordo implements InterfazListados {
      */
     private List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
-        List<Itinerario> itinerarios = new ArrayList();
+        List<Itinerario> itinerarios = new ArrayList<Itinerario>();
 
         Iterator<Trayecto> iTrayectos = getListado().getViajes().getTrayectos().iterator();
 
@@ -51,10 +51,14 @@ public class Transbordo implements InterfazListados {
 
              if(trayecto.getCiudadOrigen().equals(origen) &&
                    !trayecto.getCiudadDestino().equals(destino) &&
-                   getListado().getCompras().asientosLibres(origen, destino, fechaSalida,trayecto.getHorario().getSalida()) > 0)
+                   getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida()) > 0)
             {
+/*                 System.out.println("***BUSCAR ORIGEN***");
+                 System.out.println("origen: "+trayecto.getCiudadOrigen());
+                 System.out.println("destino: "+trayecto.getCiudadDestino());
+                 System.out.println("Asientos: "+getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida()));
                     //reservasValidas = listado.getCompras().obtenerReservas(trayecto,fechaSalida);
-
+*/
               // if(trayecto.getTren().getPlazas() - reservasValidas.size() > 0)
                                 
                     String origen1 = trayecto.getCiudadOrigen();
@@ -65,23 +69,30 @@ public class Transbordo implements InterfazListados {
 
                     Iterator<Trayecto> jTrayectos = getListado().getViajes().getTrayectos().iterator();
                     while(jTrayectos.hasNext())
-                    {
+                    {                        
                         Trayecto trayectoj = jTrayectos.next();
 
                         if(trayectoj.getCiudadOrigen().equals(destino1) &&
-                            !trayectoj.getCiudadDestino().equals(destino) &&
+                            trayectoj.getCiudadDestino().equals(destino) &&
                             trayectoj.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0 &&
-                            getListado().getCompras().asientosLibres(origen, destino, fechaSalida,trayecto.getHorario().getSalida()) > 0)
+                            getListado().getCompras().asientosLibres(trayectoj.getCiudadOrigen(), trayectoj.getCiudadDestino(), fechaSalida,trayectoj.getHorario().getSalida()) > 0)
                         {
+/*                            System.out.println("***BUSCAR DESTINO***");
+                            System.out.println("origen: "+trayectoj.getCiudadOrigen());
+                            System.out.println("destino: "+trayectoj.getCiudadDestino());
+                            System.out.println("Asientos: "+getListado().getCompras().asientosLibres(trayectoj.getCiudadOrigen(), trayectoj.getCiudadDestino(), fechaSalida,trayectoj.getHorario().getSalida()));
+  */
                             //reservasValidas = viajes.obtenerReservas(trayectoj,fechaSalida);                                                        
                                 InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
                                 InformacionTrayecto itrayecto2 = new InformacionTrayecto(trayectoj.getCiudadOrigen(),trayectoj.getCiudadDestino(),trayectoj.getHorario().getSalida(),trayectoj.getHorario().getLlegada(),trayectoj.getTren().getPrecio());
 
-                                Itinerario itinerario = new ItinerarioImplementacionInterfaz();
-                                itinerario.add(itrayecto1);
+                                List<InformacionTrayecto> itinerario = new ArrayList<InformacionTrayecto>();
+                                itinerario.add(itrayecto1);                                
                                 itinerario.add(itrayecto2);
-                                itinerarios.add(itinerario);
-                               
+                                
+                                itinerarios.add(new ItinerarioImplementacionInterfaz(itinerario));
+//                                System.out.println("pasa***************");
+                                
                             }
                         }                     
                 }
@@ -98,24 +109,38 @@ public class Transbordo implements InterfazListados {
      */
     private List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
-        List<Itinerario> itinerarios = new ArrayList();
+        List<Itinerario> itinerarios = new ArrayList<Itinerario>();
 
         Iterator<Trayecto> iTrayectos = getListado().getViajes().getTrayectos().iterator();
-
+//        Iterator<LocalTime> ihoras = getListado().getHorarios(origen, destino, fechaSalida).iterator(); // horas disponibles
+        
         Trayecto trayecto;
         while (iTrayectos.hasNext())
-         {
+         {                        
            trayecto = iTrayectos.next();
-           if(trayecto.getCiudadOrigen().equals(origen) &&
+            
+//            List<LocalTime> horas = getListado().getHorarios(origen, destino, fechaSalida);
+//             System.out.println("HorasDisponibles: "+horas.size());
+//            LocalTime hora;
+//            while(ihoras.hasNext())
+//            {
+//                hora = ihoras.next();
+
+//                System.out.println("Origen " +trayecto.getCiudadOrigen()+" " +origen);
+//                System.out.println("Destino " +trayecto.getCiudadDestino()+" " +destino);
+//                System.out.println("plazas" + getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida()));
+                
+                if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino) &&
-                   getListado().getCompras().asientosLibres(origen, destino, fechaSalida,trayecto.getHorario().getSalida()) > 0)
-            {
-                                     
+                   getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida())>0)
+                {
+//                    System.out.println("*********************Cumpleeee y entraaaa");
                    InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,trayecto.getHorario().getSalida(),trayecto.getHorario().getLlegada(),trayecto.getTren().getPrecio());
-                   Itinerario itinerario = new ItinerarioImplementacionInterfaz();
+                   List<InformacionTrayecto> itinerario = new ArrayList<InformacionTrayecto>();
                    itinerario.add(itrayecto);
-                   itinerarios.add(itinerario);
-            }
+                   itinerarios.add(new ItinerarioImplementacionInterfaz(itinerario));
+                }
+//            }
         }
         return itinerarios;
     }
@@ -178,15 +203,21 @@ public class Transbordo implements InterfazListados {
     public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
 
         /***/
-        System.out.println("trayectosDirectos: ");
+/*        System.out.println("trayectosDirectos: ");
+        System.out.println("ORIGEN: "+origen);
+        System.out.println("DESTINO: "+destino);
+ *
+ */
 /***/
         List<Itinerario> itinerarios = null;     
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectos= new ArrayList();
         
         trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
+//        System.out.println("PASA************************"+ trayectosDirectos.size());
         informacionTrayectos = buscarInformacionTrayectos(origen,destino,fechaSalida);
-        
+//        System.out.println("PASA-2-************************"+ informacionTrayectos.size());
+
         Iterator iter = trayectosDirectos.iterator();
         while (iter.hasNext())
         {
