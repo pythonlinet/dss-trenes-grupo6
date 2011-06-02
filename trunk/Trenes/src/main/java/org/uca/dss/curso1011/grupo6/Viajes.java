@@ -5,14 +5,10 @@
 
 package org.uca.dss.curso1011.grupo6;
 
-import com.db4o.ObjectContainer;
-import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 
 /**
  * Clase encargada de realizar los listados de los viajes

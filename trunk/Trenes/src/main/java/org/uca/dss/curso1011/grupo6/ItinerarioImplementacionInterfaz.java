@@ -5,6 +5,7 @@
 
 package org.uca.dss.curso1011.grupo6;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -16,10 +17,14 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
  * Clase para implementar el interfaz itinerario
  * @author Jose Luis
  */
-public class ItinerarioImplementacionInterfaz implements Itinerario{
+public class ItinerarioImplementacionInterfaz extends ArrayList<InformacionTrayecto> implements Itinerario{
 
     private List<InformacionTrayecto> itrayectos;
 
+    ItinerarioImplementacionInterfaz(List<InformacionTrayecto> itinerario)
+    {
+        super(itinerario);
+    }
     /**
      * 
      * @return 
