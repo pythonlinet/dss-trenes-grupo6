@@ -15,19 +15,27 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
  * Clase para implementar el interfaz itinerario
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos R�os Legup�n
  */
 public class ItinerarioImplementacionInterfaz extends ArrayList<InformacionTrayecto> implements Itinerario{
 
     private List<InformacionTrayecto> itrayectos;
 
+    
+     /**Constructor de la clase ItinerarioImplementacionInterfaz
+     * @return precio
+     */
+    
     public ItinerarioImplementacionInterfaz(List<InformacionTrayecto> itinerario)
     {
         super(itinerario);
     }
-    /**
-     * 
-     * @return 
+    
+    /**Metodo que devuelve el precio de un itinerario mediante la suma
+     * de los precios de los trayectos que componen el itinerario
+     * @return precio
      */
     public double getPrecio() {
         double precio = 0;
