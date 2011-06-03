@@ -202,56 +202,36 @@ public class Transbordo implements InterfazListados {
      */
     public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
 
-        /***/
-/*        System.out.println("trayectosDirectos: ");
-        System.out.println("ORIGEN: "+origen);
-        System.out.println("DESTINO: "+destino);
- *
- */
-/***/
-        List<Itinerario> itinerarios = null;     
-        List<Itinerario> trayectosDirectos = new ArrayList();
-        List<Itinerario> informacionTrayectos= new ArrayList();
-        List<Itinerario> trayectosTotales = new ArrayList();
-        
-        trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
-//        System.out.println("PASA************************"+ trayectosDirectos.size());
-        informacionTrayectos = buscarInformacionTrayectos(origen,destino,fechaSalida);
-//        System.out.println("PASA-2-************************"+ informacionTrayectos.size());
+        List<Itinerario> itinerarios = buscarTrayectosDirectos(origen,destino,fechaSalida);
+        itinerarios.addAll(buscarInformacionTrayectos(origen,destino,fechaSalida));
 
-        Iterator iterDirectos = trayectosDirectos.iterator();
-        while (iterDirectos.hasNext())
-        {
-            Itinerario itinerario = (Itinerario)iterDirectos.next();
-            trayectosTotales.add(itinerario);
-        }
+        Iterator <Itinerario> iter = itinerarios.iterator();
 
-        Iterator iterTransbordo = informacionTrayectos.iterator();
-        while (iterTransbordo.hasNext())
+        while(iter.hasNext())
         {
-            Itinerario itinerario = (Itinerario)iterTransbordo.next();
-            trayectosTotales.add(itinerario);
-        }
+            Itinerario info = iter.next();
+            Iterator <InformacionTrayecto> infoTra = info.iterator();
 
-        Iterator iter2 = trayectosTotales.iterator();
-        while (iter2.hasNext())
-        {
-            Itinerario itinerario = (Itinerario)iter2.next();
-            informacionTrayectos.add(itinerario);
-            System.out.println("Itinerario: ");
-            Iterator <InformacionTrayecto> i =  itinerario.iterator();
-            while (i.hasNext())
+            System.out.println("Itinerario----------------------------");
+
+            while (infoTra.hasNext())
             {
-                InformacionTrayecto j = i.next();
-                System.out.println("TrayectosDisponibles: ");
-                System.out.println("ORIGEN: "+j.getOrigen());
-                System.out.println("DESTINO: "+j.getDestino());
-                System.out.println("Hora Salida:"+j.getHoraSalida());
-                System.out.println("Hora Llegada:"+j.getHoraLlegada());
-            }
-        }
+                InformacionTrayecto trayecto = infoTra.next();
 
-        return trayectosTotales;
+                System.out.println("Trayecto--------------");
+                System.out.println("Origen"+trayecto.getOrigen());
+                System.out.println("Destino"+trayecto.getDestino());
+                System.out.println("Llegada"+trayecto.getHoraLlegada());
+                System.out.println("Salida"+trayecto.getHoraSalida());
+                System.out.println("Precio"+trayecto.getPrecio());
+                System.out.println("=============================");
+            }
+
+            System.out.println("+++++++++++++++++++++++++++++++++++");
+
+        }
+        
+        return itinerarios;
     }
 
     /**
