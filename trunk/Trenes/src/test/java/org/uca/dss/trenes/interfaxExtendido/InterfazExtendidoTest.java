@@ -79,7 +79,7 @@ public abstract class InterfazExtendidoTest {
         itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo3));
 
 
-
+/*
         System.out.println("TRAYECTOS POSIBLES");
 
         Iterator<Itinerario> i = itineComprobar.iterator();
@@ -101,7 +101,7 @@ public abstract class InterfazExtendidoTest {
          }
 
         System.out.println("FIN__________________------------------_____________");
-
+*/
         return itineComprobar;
     }
 

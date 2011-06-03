@@ -71,9 +71,9 @@ public class Listado implements InterfazListados{
            if(trayecto.getCiudadOrigen().equals(origen) &&
                    trayecto.getCiudadDestino().equals(destino) &&
                    (compras.asientosLibres(origen, destino, fecha, trayecto.getHorario().getSalida()))> 0)
-           {              
+           {
                    LocalTime hora = trayecto.getHorario().getSalida();
-                   horariosDisponibles.add(hora);              
+                   horariosDisponibles.add(hora);
            }
         }
         return horariosDisponibles;
@@ -107,4 +107,3 @@ public class Listado implements InterfazListados{
         this.compras = compras;
     }
 }
-
