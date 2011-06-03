@@ -21,7 +21,7 @@ public class ItinerarioImplementacionInterfaz extends ArrayList<InformacionTraye
 
     private List<InformacionTrayecto> itrayectos;
 
-    ItinerarioImplementacionInterfaz(List<InformacionTrayecto> itinerario)
+    public ItinerarioImplementacionInterfaz(List<InformacionTrayecto> itinerario)
     {
         super(itinerario);
     }

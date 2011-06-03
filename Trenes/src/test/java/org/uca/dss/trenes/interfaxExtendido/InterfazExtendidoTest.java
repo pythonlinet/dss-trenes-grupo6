@@ -52,32 +52,31 @@ public abstract class InterfazExtendidoTest {
 
     public List<Itinerario> getItinerariosPosibles()
     {
-        List<Itinerario> itineComprobar = new LinkedList<Itinerario>();
+        List<Itinerario> itineComprobar = new ArrayList<Itinerario>();
         InformacionTrayecto infoTrayecto = new InformacionTrayecto(origen,destino,new LocalTime("9:15"),new LocalTime("13:15"),30);
         List<InformacionTrayecto> itinerarioDirecto = new ArrayList<InformacionTrayecto>();
         itinerarioDirecto.add(infoTrayecto);
         itineComprobar.add(new ItinerarioImplementacionInterfaz(itinerarioDirecto));
-        itineComprobar.add(itinerarioDirecto);
 
         InformacionTrayecto infoTrayecto1 = new InformacionTrayecto(origen,"sevilla",new LocalTime("9:00"),new LocalTime("11:00"),10);
         InformacionTrayecto infoTrayecto2 = new InformacionTrayecto("sevilla",destino,new LocalTime("11:30"),new LocalTime("15:30"),30);
         InformacionTrayecto infoTrayecto3 = new InformacionTrayecto("sevilla",destino,new LocalTime("17:30"),new LocalTime("21:30"),30);
         InformacionTrayecto infoTrayecto4 = new InformacionTrayecto(origen,"sevilla",new LocalTime("13:00"),new LocalTime("15:00"),10);
 
-        Itinerario itineTransbordo = new ItinerarioImplementacionInterfaz();
+        List<InformacionTrayecto> itineTransbordo = new ArrayList<InformacionTrayecto>();
         itineTransbordo.add(infoTrayecto1);
         itineTransbordo.add(infoTrayecto2);
-        itineComprobar.add(itineTransbordo);
+        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo));
 
-        Itinerario itineTransbordo2 = new ItinerarioImplementacionInterfaz();
+        List<InformacionTrayecto> itineTransbordo2 = new ArrayList<InformacionTrayecto>();
         itineTransbordo2.add(infoTrayecto1);
         itineTransbordo2.add(infoTrayecto3);
-        itineComprobar.add(itineTransbordo2);
+        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo2));
 
-        Itinerario itineTransbordo3 = new ItinerarioImplementacionInterfaz();
+        List<InformacionTrayecto> itineTransbordo3 = new ArrayList<InformacionTrayecto>();
         itineTransbordo3.add(infoTrayecto4);
         itineTransbordo3.add(infoTrayecto3);
-        itineComprobar.add(itineTransbordo3);
+        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo3));
 
 
 
