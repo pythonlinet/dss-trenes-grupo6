@@ -6,6 +6,7 @@
 package org.uca.dss.curso1011.grupo6;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,20 +41,22 @@ public class ComprasTransbordo implements InterfazCompras{
      * @return lista de las reservas del trayecto recibido como parametro
      */
     
-     private List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
+     private List<ReservaTrayecto> obtenerReservasTrayecto(final InformacionTrayecto itrayectoArg, final LocalDate fecha){
 
         List<ReservaTrayecto> reservasValidas;
         reservasValidas = new ArrayList();
 
         ObjectContainer databases = DBUtils.getDb();
 
-        List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
-            public boolean match ( ReservaTrayecto reserva) {
-                return true;
+            ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
+            @Override
+            public boolean match(ReservaTrayecto et) {
+                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(itrayectoArg);
             }
+
+
         }) ;
-
-
+/*
         Iterator<ReservaTrayecto> iReservas = reservas.iterator();
         while (iReservas.hasNext())
         {
@@ -63,7 +66,7 @@ public class ComprasTransbordo implements InterfazCompras{
             {
                 reservasValidas .add(reserva);
             }
-        }
+        }*/
             return reservasValidas;
     }
      
@@ -73,17 +76,13 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param fecha
      * @return numero de plazas disponibles del trayecto recibido como parametro
      */
-     private int getPlazasDisponibles(InformacionTrayecto iTrayectoArg,LocalDate fecha) {
+     private int getPlazasDisponibles(InformacionTrayecto itrayecto,LocalDate fecha) {
+        
+         List<ReservaTrayecto> reservasValidas = obtenerReservasTrayecto(itrayecto,fecha);
+         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
 
-        int plazas = 0;
-       
-        List<ReservaTrayecto> reservasValidas;
-        reservasValidas = new ArrayList();
-
-        reservasValidas = obtenerReservasTrayecto(iTrayectoArg,fecha);
-        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(iTrayectoArg.getOrigen(), iTrayectoArg.getDestino(), iTrayectoArg.getHoraSalida());
-
-        plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
+         int plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
+ 
 
         return plazas;
     }
