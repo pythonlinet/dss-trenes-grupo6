@@ -156,13 +156,9 @@ public class Transbordo implements InterfazListados {
      */
     public List<Itinerario> getItinerariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
-        List<Itinerario> itinerariosDisponibles = new ArrayList();
         List<Itinerario> infoTrayectos = new ArrayList();
-        List<Itinerario> trayectosDirectos = new ArrayList();
-        List<Itinerario> infoTrayectoTransbordos = new ArrayList();
-                          
-        trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
-        infoTrayectoTransbordos = buscarInformacionTrayectos(origen,destino,fechaSalida);
+        List<Itinerario> trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
+        List<Itinerario> infoTrayectoTransbordos = buscarInformacionTrayectos(origen,destino,fechaSalida);
 
         Iterator<Itinerario> iTraDirectos = trayectosDirectos.iterator();
 
@@ -170,8 +166,8 @@ public class Transbordo implements InterfazListados {
          {
              Itinerario itinerarioi = iTraDirectos.next();
 
-             if(itinerarioi.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
-                   itinerarioi.get(1).getHoraLlegada().compareTo(horaLlegada) <= 0)
+             if(itinerarioi.get(0).getHoraSalida().compareTo(horaSalida) >= 0 &&
+                   itinerarioi.get(0).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
                     infoTrayectos.add(itinerarioi);
              }
@@ -183,14 +179,14 @@ public class Transbordo implements InterfazListados {
          {
              Itinerario itinerario = (Itinerario)iInfoTransbordos.next();
 
-             if(itinerario.get(1).getHoraSalida().compareTo(horaSalida) >= 0 &&
-                   itinerario.get(2).getHoraLlegada().compareTo(horaLlegada) <= 0)
+             if(itinerario.get(0).getHoraSalida().compareTo(horaSalida) >= 0 &&
+                   itinerario.get(1).getHoraLlegada().compareTo(horaLlegada) <= 0)
              {
                     infoTrayectos.add(itinerario);
              }
          }
 
-        return itinerariosDisponibles;
+        return infoTrayectos;
     }
 
     /**
