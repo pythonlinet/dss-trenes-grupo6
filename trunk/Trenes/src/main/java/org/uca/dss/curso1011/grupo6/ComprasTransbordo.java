@@ -67,12 +67,12 @@ public class ComprasTransbordo implements InterfazCompras{
             return reservasValidas;
     }
      
-     /**
-      * 
-      * @param itrayectoArg
-      * @param fecha
-      * @return 
-      */
+   /**Metodo privado que obtiene el numero de plazas disponibles  
+     * de un trayecto, dado la informacion del trayecto y la fecha
+     * @param itrayectoArg
+     * @param fecha
+     * @return numero de plazas disponibles del trayecto recibido como parametro
+     */
      private int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
         Iterator iter = itrayectos.iterator();
         int plazas = 0;
