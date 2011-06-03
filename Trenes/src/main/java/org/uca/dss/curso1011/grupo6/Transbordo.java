@@ -212,20 +212,46 @@ public class Transbordo implements InterfazListados {
         List<Itinerario> itinerarios = null;     
         List<Itinerario> trayectosDirectos = new ArrayList();
         List<Itinerario> informacionTrayectos= new ArrayList();
+        List<Itinerario> trayectosTotales = new ArrayList();
         
         trayectosDirectos = buscarTrayectosDirectos(origen,destino,fechaSalida);
 //        System.out.println("PASA************************"+ trayectosDirectos.size());
         informacionTrayectos = buscarInformacionTrayectos(origen,destino,fechaSalida);
 //        System.out.println("PASA-2-************************"+ informacionTrayectos.size());
 
-        Iterator iter = trayectosDirectos.iterator();
-        while (iter.hasNext())
+        Iterator iterDirectos = trayectosDirectos.iterator();
+        while (iterDirectos.hasNext())
         {
-            Itinerario itinerario = (Itinerario)iter.next();
-            informacionTrayectos.add(itinerario);
-        }        
+            Itinerario itinerario = (Itinerario)iterDirectos.next();
+            trayectosTotales.add(itinerario);
+        }
 
-        return itinerarios;
+        Iterator iterTransbordo = informacionTrayectos.iterator();
+        while (iterTransbordo.hasNext())
+        {
+            Itinerario itinerario = (Itinerario)iterTransbordo.next();
+            trayectosTotales.add(itinerario);
+        }
+
+        Iterator iter2 = trayectosTotales.iterator();
+        while (iter2.hasNext())
+        {
+            Itinerario itinerario = (Itinerario)iter2.next();
+            informacionTrayectos.add(itinerario);
+            System.out.println("Itinerario: ");
+            Iterator <InformacionTrayecto> i =  itinerario.iterator();
+            while (i.hasNext())
+            {
+                InformacionTrayecto j = i.next();
+                System.out.println("TrayectosDisponibles: ");
+                System.out.println("ORIGEN: "+j.getOrigen());
+                System.out.println("DESTINO: "+j.getDestino());
+                System.out.println("Hora Salida:"+j.getHoraSalida());
+                System.out.println("Hora Llegada:"+j.getHoraLlegada());
+            }
+        }
+
+        return trayectosTotales;
     }
 
     /**
