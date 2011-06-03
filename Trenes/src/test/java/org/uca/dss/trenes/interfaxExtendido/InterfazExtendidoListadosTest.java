@@ -9,10 +9,10 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
+import java.util.ArrayList;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.joda.time.LocalTime;
 import java.util.List;
-import java.util.Random;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -53,15 +53,52 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
     }
 
     /**
+     * 
+     */
+    @Test
+    public void testItinerariosEntreHoras() {
+        
+        LocalTime Salida = new LocalTime("9:00");
+        LocalTime Llegada = new LocalTime("15:10");
+
+        List<Itinerario> compItinerarios = new ArrayList<Itinerario>();
+        List<Itinerario> itineTodos = listado.getItinerarios(origen, destino, new LocalDate());
+        List<Itinerario> itineEntre = listado.getItinerariosEntre(origen, destino, hoy, Salida, Llegada);
+
+        for(Itinerario itinerario : itineTodos)
+        {
+            if(itinerario.size()>1)
+            {
+                    if(itinerario.get(0).getHoraSalida().isAfter(Salida) && itinerario.get(1).getHoraLlegada().isBefore(Llegada))
+                    {
+                        compItinerarios.add(itinerario);
+                    }
+            }
+            else
+            {
+                if(itinerario.get(0).getHoraSalida().isAfter(Salida) && itinerario.get(0).getHoraLlegada().isBefore(Llegada))
+                    {
+                        compItinerarios.add(itinerario);
+                    }
+
+            }
+        }
+
+
+        assertEquals(itineEntre.size(),compItinerarios.size());
+
+
+    }
+    /**
      * Compruebo
      */
     @Test
     public void testListadosConHorariosLlenos() {
         List<LocalTime> horasACompobar = getHorasPosibles();
         // Reservo una hora
-        Random random = new Random();
-        int pos = random.nextInt(horasACompobar.size());
-        LocalTime horaReservada = horasACompobar.get(pos);
+        //Random random = new Random();
+        //int pos = random.nextInt(horasACompobar.size());
+        //LocalTime horaReservada = horasACompobar.get(pos);
         // Reservo hasta que puedo puedo más
         //while (compras.asientosLibres(origen, destino, hoy, horaReservada)>0) {
             //compras.reservaAsiento(origen, destino, hoy, horaReservada);
