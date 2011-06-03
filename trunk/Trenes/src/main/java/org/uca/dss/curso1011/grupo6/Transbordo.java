@@ -207,30 +207,6 @@ public class Transbordo implements InterfazListados {
 
         Iterator <Itinerario> iter = itinerarios.iterator();
 
-        while(iter.hasNext())
-        {
-            Itinerario info = iter.next();
-            Iterator <InformacionTrayecto> infoTra = info.iterator();
-
-            System.out.println("Itinerario----------------------------");
-
-            while (infoTra.hasNext())
-            {
-                InformacionTrayecto trayecto = infoTra.next();
-
-                System.out.println("Trayecto--------------");
-                System.out.println("Origen"+trayecto.getOrigen());
-                System.out.println("Destino"+trayecto.getDestino());
-                System.out.println("Llegada"+trayecto.getHoraLlegada());
-                System.out.println("Salida"+trayecto.getHoraSalida());
-                System.out.println("Precio"+trayecto.getPrecio());
-                System.out.println("=============================");
-            }
-
-            System.out.println("+++++++++++++++++++++++++++++++++++");
-
-        }
-        
         return itinerarios;
     }
 
