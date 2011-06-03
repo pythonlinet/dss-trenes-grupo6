@@ -33,12 +33,13 @@ public class ComprasTransbordo implements InterfazCompras{
     {
     }
 
-     /**
+     /**Metodo que obtiene las Reservas de un Trayecto, dado la informacion del trayecto y la fecha
      * 
      * @param itrayectoArg
      * @param fecha
-     * @return 
+     * @return lista de las reservas del trayecto recibido como parametro
      */
+    
      private List<ReservaTrayecto> obtenerReservasTrayecto(InformacionTrayecto itrayectoArg, LocalDate fecha){
 
         List<ReservaTrayecto> reservasValidas;
