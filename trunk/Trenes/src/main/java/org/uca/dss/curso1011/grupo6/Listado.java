@@ -14,8 +14,14 @@ import org.uca.dss.trenes.interfaz.InterfazListados;
 
 
 /**
- *
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos R�os Legup�n
+ */
+
+/**Clase que implementa los listados de todos los trayectos
+ * 
+ * 
  */
 public class Listado implements InterfazListados{
 
@@ -46,8 +52,8 @@ public class Listado implements InterfazListados{
     }
 
 
-    /**
-     *
+    /**Metodo que obtiene los horarios disponibles de un trayecto
+    ** dado ciudad origen, ciudad destino y la fecha
      * @param origen
      * @param destino
      * @param fecha
@@ -79,28 +85,28 @@ public class Listado implements InterfazListados{
         return horariosDisponibles;
     }
 
-    /**
+    /**Metodo que devuelve los viajes
      * @return the viajes
      */
     public Viajes getViajes() {
         return viajes;
     }
 
-    /**
+    /**Metodo que inserta un viaje
      * @param viajes the viajes to set
      */
     public void setViajes(Viajes viajes) {
         this.viajes = viajes;
     }
 
-    /**
+    /**Metodo que obtiene una compra
      * @return the compras
      */
     public Compras getCompras() {
         return compras;
     }
 
-    /**
+    /**Metodo que introduce una compra
      * @param compras the compras to set
      */
     public void setCompras(Compras compras) {
