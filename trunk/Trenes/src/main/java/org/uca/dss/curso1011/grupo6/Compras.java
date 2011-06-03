@@ -175,7 +175,6 @@ public class Compras implements InterfazCompras{
 
      /**
      * Metodo que se encarga de obtener reservas dado un trayecto y una fecha.
-     * usando la primera letra de la ciudad origen y de destino y los trenes.
      * @param trayecto
      * @param fecha del trayecto
      * @return listado de las reservas
