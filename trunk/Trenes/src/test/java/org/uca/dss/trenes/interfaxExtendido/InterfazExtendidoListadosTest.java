@@ -31,30 +31,9 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      * Comprueba que para fechas iguales (sin reservas) los horarios coinciden
      */
     @Test
-    public void testListadoSinReservasPorDias() {
-        System.out.println("Antes: ");
+    public void testListadoSinReservasPorDias() {        
         List<Itinerario> itinerariosRef = listado.getItinerarios(origen, destino, new LocalDate());
-        System.out.println("Despues: ");
-/*
-        Iterator<Itinerario> itinerarios = itinerariosRef.iterator();
-
-         while (itinerarios.hasNext())
-         {
-             Itinerario itinerario = itinerarios.next();
-
-             Iterator<InformacionTrayecto> infoTrayectos = itinerario.iterator();
-
-             while (infoTrayectos.hasNext())
-             {
-                 InformacionTrayecto infoTrayecto = infoTrayectos.next();
-
-                 System.out.println("Origen: "+infoTrayecto.getOrigen());
-                 System.out.println("Destino: "+infoTrayecto.getDestino());
-                 System.out.println("HoraSalida: "+infoTrayecto.getHoraSalida());
-             }
-             
-         }
-*/
+        
         for (int day = 1; day <= 10; day++) {
             List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
             List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
