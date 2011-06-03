@@ -14,13 +14,13 @@ import org.joda.time.LocalTime;
  * Clase encargada de realizar los listados de los viajes
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Ríos Legupín
+ * @author Juan Carlos Rï¿½os Legupï¿½n
  */
 public class Viajes{
     private List<Trayecto> trayectos;
     
     /**
-     * Constructos de la clase Viajes con el parámetro trayectos
+     * Constructor de la clase Viajes con el parï¿½metro trayectos
      * @param trayectos
      */
     public Viajes(List<Trayecto> trayectos){
@@ -28,8 +28,8 @@ public class Viajes{
         trayectos = new ArrayList();
     }
     
-    /**
-     * @return the trayectos
+    /**Metodo que obtiene los trayectos
+     * @return lista trayectos
      */
     public List<Trayecto> getTrayectos() {
         return trayectos;
@@ -75,12 +75,13 @@ public class Viajes{
             return reservasValidas;
     }
 */
-/**
- *
+
+ /** Metodo que busca los trayectos entre ciudad origen y ciuadad dstino
+ * a la hora indicada por el parametro de entrada
  * @param origen
  * @param destino
  * @param hora
- * @return trayecto que coincida con los paramátros
+ * @return trayecto que coincida con los paramï¿½tros
  */
     public Trayecto buscarTrayecto (String origen, String destino, LocalTime hora)
     {
