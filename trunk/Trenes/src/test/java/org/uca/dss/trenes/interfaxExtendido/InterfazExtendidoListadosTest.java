@@ -23,12 +23,14 @@ import static org.junit.Assert.*;
 
 /**
  * Casos de Tests de listados
- * @author dmolina
+ * @author Jose Luis, Juan Carlos y Dani
+ * 
  */
 public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
 
     /**
      * Comprueba que para fechas iguales (sin reservas) los horarios coinciden
+     * Terminada BORRAR ESTE COMENTARIO
      */
     @Test
     public void testListadoSinReservasPorDias() {        
@@ -47,7 +49,7 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadosSinReservas() {
-/*        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, new LocalDate());
+/*      List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, new LocalDate());
         Set<Itinerario> itineACompobar = new HashSet<Itinerario>(getItinerariosPosibles());
         assertSame(itinerarios.size(), itineACompobar.size());
 
