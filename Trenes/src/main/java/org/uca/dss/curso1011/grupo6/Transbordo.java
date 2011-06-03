@@ -16,7 +16,9 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
  * Clase que se encarga de realizar los listados de los transbordos disponibles
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos R�os Legup�n
  */
 public class Transbordo implements InterfazListados {
 
@@ -30,12 +32,12 @@ public class Transbordo implements InterfazListados {
 
     }
 
-    /**
-     * 
+    /**Metodo que devuelve toda la informacion de los trayectos dado
+     * una ciudad origen, ciudad destino y una fecha 
      * @param origen
      * @param destino
      * @param fechaSalida
-     * @return 
+     * @return lista de itinerarios
      */
     private List<Itinerario> buscarInformacionTrayectos(String origen, String destino, LocalDate fechaSalida)
     {
@@ -100,12 +102,13 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
-    /**
-     * 
+    /**Metodo que devuelve la lista de los trayectos directos entre
+     * ciudad origen y ciudad destino dadasn en la fecha pasada como
+     * parametro
      * @param origen
      * @param destino
      * @param fechaSalida
-     * @return 
+     * @return lista de itinerarios
      */
     private List<Itinerario> buscarTrayectosDirectos(String origen, String destino, LocalDate fechaSalida)
     {
@@ -145,14 +148,16 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
-    /**
+    /**Metodo que devuelve los itinerarios comprendidos entre la 
+     * ciudad origen y ciudad destino, hora salida y hora llegada
+     * y en la fecha indicada en el parametro de entrada
      * 
      * @param origen
      * @param destino
      * @param fechaSalida
      * @param horaSalida
      * @param horaLlegada
-     * @return 
+     * @return lista de itinerarios comprendidos entre dos ciudades
      */
     public List<Itinerario> getItinerariosEntre(String origen, String destino, LocalDate fechaSalida, LocalTime horaSalida, LocalTime horaLlegada) {
 
@@ -189,12 +194,13 @@ public class Transbordo implements InterfazListados {
         return infoTrayectos;
     }
 
-    /**
+    /**Metodo que devuelve el listado de itinerarios entre ciudad origen
+     * y ciudad destino y en la fecha indicada como parametro de entrada
      * 
      * @param origen
      * @param destino
      * @param fechaSalida
-     * @return 
+     * @return lista de itinerarios
      */
     public List<Itinerario> getItinerarios(String origen, String destino, LocalDate fechaSalida) {
 
@@ -206,14 +212,14 @@ public class Transbordo implements InterfazListados {
         return itinerarios;
     }
 
-    /**
+    /**Metodo de obtiene un listado
      * @return the listado
      */
     public Listado getListado() {
         return listado;
     }
 
-    /**
+    /**Metodo que inserta un listado
      * @param listado the listado to set
      */
     public void setListado(Listado listado) {
