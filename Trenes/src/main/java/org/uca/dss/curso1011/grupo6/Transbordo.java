@@ -137,7 +137,7 @@ public class Transbordo implements InterfazListados {
                    trayecto.getCiudadDestino().equals(destino) &&
                    getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida())>0)
                 {
-//                    System.out.println("*********************Cumpleeee y entraaaa");
+                    System.out.println("mensajito cualquiera"+getListado().getCompras().asientosLibres(trayecto.getCiudadOrigen(), trayecto.getCiudadDestino(), fechaSalida,trayecto.getHorario().getSalida()));
                    InformacionTrayecto itrayecto = new  InformacionTrayecto(origen,destino,trayecto.getHorario().getSalida(),trayecto.getHorario().getLlegada(),trayecto.getTren().getPrecio());
                    List<InformacionTrayecto> itinerario = new ArrayList<InformacionTrayecto>();
                    itinerario.add(itrayecto);

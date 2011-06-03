@@ -73,32 +73,17 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param fecha
      * @return numero de plazas disponibles del trayecto recibido como parametro
      */
-     private int getPlazasDisponibles(InformacionTrayecto itrayectoArg,LocalDate fecha) {
-        Iterator iter = itrayectos.iterator();
-        int plazas = 0;
-        boolean encontrado = false;
+     private int getPlazasDisponibles(InformacionTrayecto iTrayectoArg,LocalDate fecha) {
 
+        int plazas = 0;
+       
         List<ReservaTrayecto> reservasValidas;
         reservasValidas = new ArrayList();
 
-         while (iter.hasNext() && encontrado != true)
-         {
-            InformacionTrayecto itrayecto = (InformacionTrayecto)iter.next();
-            if(itrayecto.getOrigen().equals(itrayectoArg.getOrigen()) &&
-                    itrayecto.getDestino().equals(itrayectoArg.getDestino()) &&
-                    itrayecto.getHoraSalida().equals(itrayectoArg.getHoraSalida()))
-                    {
-                        encontrado = true;
-                        reservasValidas = obtenerReservasTrayecto(itrayecto,fecha);
-                        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
+        reservasValidas = obtenerReservasTrayecto(iTrayectoArg,fecha);
+        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(iTrayectoArg.getOrigen(), iTrayectoArg.getDestino(), iTrayectoArg.getHoraSalida());
 
-                        plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
-                    }
-        }
-        if(!encontrado)
-        {
-            throw new RuntimeException("No existen trayectos en esa fecha");
-        }
+        plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
 
         return plazas;
     }
@@ -207,8 +192,21 @@ public class ComprasTransbordo implements InterfazCompras{
      * @return devuelve el menor numero de asientos libres
      */
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
-        //Falta por completar. Preguntar a Dani
-        return -1;
+
+        int minimo = 1000000;
+        int cantidad;
+
+        for(InformacionTrayecto infoTrayecto : itinerario)
+        {
+            cantidad = getPlazasDisponibles(infoTrayecto,fecha);
+            if(minimo > cantidad )
+            {
+                 minimo = cantidad;
+            }
+            
+        }
+
+        return minimo;
     }
 
     /**Metodo que cancela la reserva pasada como parametro
