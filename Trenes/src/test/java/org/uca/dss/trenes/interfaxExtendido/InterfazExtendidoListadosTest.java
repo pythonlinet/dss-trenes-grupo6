@@ -9,13 +9,9 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
-import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
-import java.util.Iterator;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.joda.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.Random;
 import org.joda.time.LocalDate;
 import org.junit.Test;
