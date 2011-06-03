@@ -53,9 +53,7 @@ public class ComprasTransbordo implements InterfazCompras{
             public boolean match(ReservaTrayecto et) {
                 return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(itrayectoArg);
             }
-
-
-        }) ;
+            }) ;
 /*
         Iterator<ReservaTrayecto> iReservas = reservas.iterator();
         while (iReservas.hasNext())
@@ -67,7 +65,7 @@ public class ComprasTransbordo implements InterfazCompras{
                 reservasValidas .add(reserva);
             }
         }*/
-            return reservasValidas;
+            return reservas;
     }
      
    /**Metodo privado que obtiene el numero de plazas disponibles  
@@ -76,15 +74,23 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param fecha
      * @return numero de plazas disponibles del trayecto recibido como parametro
      */
-     private int getPlazasDisponibles(InformacionTrayecto itrayecto,LocalDate fecha) {
+     public int getPlazasDisponibles(final InformacionTrayecto itrayecto,final LocalDate fecha) {
         
-         List<ReservaTrayecto> reservasValidas = obtenerReservasTrayecto(itrayecto,fecha);
          Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
 
-         int plazas =  trayecto. getTren().getPlazas() - reservasValidas.size();
- 
 
-        return plazas;
+            ObjectContainer databases = DBUtils.getDb();
+
+            ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
+            @Override
+            public boolean match(ReservaTrayecto et) {
+                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(itrayecto);
+            }
+            }) ;
+ 
+            int plazas =  trayecto.getTren().getPlazas() - reservas.size();
+            return plazas;
+
     }
     
     /** Metodo que devuelve la lista de los asientos reservados dado un itinerario
@@ -95,27 +101,33 @@ public class ComprasTransbordo implements InterfazCompras{
       */
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
-
-         Iterator<InformacionTrayecto> iItinerario = itinerario.iterator();
-
-         while (iItinerario.hasNext())
+         System.out.println("ENTRA");
+         //Iterator<InformacionTrayecto> iItinerario = itinerario.iterator();
+         System.out.println("SALE");
+         if(asientosLibres(fecha,itinerario)>0)
          {
-             InformacionTrayecto iTrayecto = iItinerario.next();
 
-             if(getPlazasDisponibles(iTrayecto,fecha)>0)
-             {
-                ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), generarCodigo(iTrayecto));
+            //while (iItinerario.hasNext())
+            for( InformacionTrayecto iTrayecto: itinerario)
+            {
+                //InformacionTrayecto iTrayecto = iItinerario.next();
 
-                ObjectContainer database = DBUtils.getDb();
+                    ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), generarCodigo(iTrayecto));
 
-                database.store(reserva);
-                database.commit();
+                    ObjectContainer databases = DBUtils.getDb();
 
-             }else
-             {
-                throw new RuntimeException("No hay plazas disponibles");
+                    databases.store(reserva);
+                    databases.commit();
+
+                    reservasTrayecto.add(reserva);
+
              }
          }
+            else
+                {
+                    throw new RuntimeException("No hay plazas disponibles");
+                }
+
 
          return reservasTrayecto;
     }
@@ -181,7 +193,7 @@ public class ComprasTransbordo implements InterfazCompras{
             }
         }
 
-        return numAsiento;
+        return -1;
     }
     
     /**Metodo que devuelve el menor numero de asientos libres entre
@@ -190,21 +202,35 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param itinerario
      * @return devuelve el menor numero de asientos libres
      */
-    public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
+    public int asientosLibres(final LocalDate fecha, Itinerario itinerario) {
 
         int minimo = 1000000;
-        int cantidad;
 
-        for(InformacionTrayecto infoTrayecto : itinerario)
+        for(final InformacionTrayecto infoTrayecto : itinerario)
         {
-            cantidad = getPlazasDisponibles(infoTrayecto,fecha);
-            if(minimo > cantidad )
+            //cantidad = getPlazasDisponibles(infoTrayecto,fecha);
+
+            Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
+
+            ObjectContainer databases = DBUtils.getDb();
+
+            ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
+            @Override
+            public boolean match(ReservaTrayecto et) {
+                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(infoTrayecto);
+            }
+            }) ;
+
+            int plazas =  trayecto.getTren().getPlazas() - reservas.size();
+
+
+            if(minimo > plazas )
             {
-                 minimo = cantidad;
+                 minimo = plazas;
             }
             
         }
-
+        System.out.println("MINIMo"+minimo);
         return minimo;
     }
 

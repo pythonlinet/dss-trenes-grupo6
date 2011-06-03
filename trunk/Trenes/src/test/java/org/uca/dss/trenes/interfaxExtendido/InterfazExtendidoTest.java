@@ -20,6 +20,7 @@ import org.uca.dss.curso1011.grupo6.Compras;
 import org.uca.dss.curso1011.grupo6.ComprasTransbordo;
 import org.uca.dss.curso1011.grupo6.ItinerarioImplementacionInterfaz;
 import org.uca.dss.curso1011.grupo6.Listado;
+import org.uca.dss.curso1011.grupo6.ListadoTransbordo;
 import org.uca.dss.curso1011.grupo6.Transbordo;
 import org.uca.dss.curso1011.grupo6.Trayecto;
 import org.uca.dss.curso1011.grupo6.Tren;
@@ -142,8 +143,13 @@ public abstract class InterfazExtendidoTest {
 
         ComprasTransbordo comprasTransbordo = new ComprasTransbordo();
         comprasTransbordo.setTransbordo(transbordo);        
-        
-        listado = transbordo;
+
+        ListadoTransbordo listTransbordo = new ListadoTransbordo();
+
+        listTransbordo.setTransbordo(transbordo);
+        listTransbordo.setCompras(comprasTransbordo);
+ 
+        listado = listTransbordo;
         compras = comprasTransbordo;        
     }
 

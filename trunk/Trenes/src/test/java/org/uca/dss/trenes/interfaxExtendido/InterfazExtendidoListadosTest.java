@@ -38,7 +38,7 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
             List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
             List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().plusDays(day));
 
-           assertEquals(itineAntes.size(),itinerariosRef.size());
+           assertEquals(itineAntes.get(0),itinerariosRef.get(0));
            assertEquals(itineDespues.size(),itinerariosRef.size());
         }
     }
@@ -102,13 +102,16 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
         int pos = random.nextInt(itineAComprobar.size());
         Itinerario itinerarioReservado = itineAComprobar.get(pos);
         
-        
+        System.out.println("Asientos Libres"+compras.asientosLibres(hoy, itinerarioReservado));
        while (compras.asientosLibres(hoy, itinerarioReservado) > 0) {
             compras.reservaAsiento(itinerarioReservado, hoy);
+            System.out.println("ENTRA GUAY");
         }
 
         System.out.println("Asientos:"+compras.asientosLibres(hoy, itinerarioReservado));
 
+         itineAComprobar = listado.getItinerarios(origen, destino, hoy);
+        System.out.println("Comprobar"+itineAComprobar.size());
         itineAComprobar.remove(pos);
         
         
