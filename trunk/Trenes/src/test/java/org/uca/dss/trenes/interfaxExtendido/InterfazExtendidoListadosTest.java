@@ -9,6 +9,8 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
+import java.util.HashSet;
+import java.util.Random;
 import java.util.ArrayList;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.joda.time.LocalTime;
@@ -94,24 +96,28 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadosConHorariosLlenos() {
-        List<LocalTime> horasACompobar = getHorasPosibles();
-        // Reservo una hora
-        //Random random = new Random();
-        //int pos = random.nextInt(horasACompobar.size());
-        //LocalTime horaReservada = horasACompobar.get(pos);
-        // Reservo hasta que puedo puedo más
-        //while (compras.asientosLibres(origen, destino, hoy, horaReservada)>0) {
-            //compras.reservaAsiento(origen, destino, hoy, horaReservada);
-        //}
+        List<Itinerario> itineAComprobar = listado.getItinerarios(origen, destino, hoy);
 
-        //horasACompobar.remove(pos);
+        Random random = new Random();
+        int pos = random.nextInt(itineAComprobar.size());
+        Itinerario itinerarioReservado = itineAComprobar.get(pos);
         
-        // Compruebo qued haya que comprobar
-        //List<LocalTime> horas = listado.getHorarios(origen, destino, hoy);
+        
+       while (compras.asientosLibres(hoy, itinerarioReservado) > 0) {
+            compras.reservaAsiento(itinerarioReservado, hoy);
+        }
 
-        // Compruebo que ese horario ha desaparecido
-        //assertEquals("No coinciden los horarios", new HashSet<LocalTime>(horasACompobar),
-          //                                        new HashSet<LocalTime>(horas));
+        System.out.println("Asientos:"+compras.asientosLibres(hoy, itinerarioReservado));
+
+        itineAComprobar.remove(pos);
+        
+        
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+
+        System.out.println("Comprobar"+itineAComprobar.size());
+        System.out.println("Referencia"+itinerarios.size());
+        
+        assertEquals("No coinciden los itinerarios", new HashSet<Itinerario>(itineAComprobar),new HashSet<Itinerario>(itinerarios));
     }
    
 }
