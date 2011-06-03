@@ -22,7 +22,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  * Clase que se encarga de realizar las compras de los transbordos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Ríos Legupín
+ * @author Juan Carlos Rï¿½os Legupï¿½n
  */
 public class ComprasTransbordo implements InterfazCompras{
 
@@ -103,11 +103,11 @@ public class ComprasTransbordo implements InterfazCompras{
         return plazas;
     }
     
-    /**
-      * 
+    /** Metodo que devuelve la lista de los asientos reservados dado un itinerario
+      * y una fecha
       * @param itinerario
       * @param fecha
-      * @return 
+      * @return lista de asientos reservados
       */
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
@@ -139,8 +139,8 @@ public class ComprasTransbordo implements InterfazCompras{
      /**
      * Metodo que se encarga de generar un codigo unico para una reserva
      * usando la primera letra de la ciudad origen y de destino y los trenes.
-     * También usamos las horas y los minutos de la salida del trayecto.
-     * Además se usa el dia, mes, año, hora, minuto y segundo del momento en el
+     * Tambiï¿½n usamos las horas y los minutos de la salida del trayecto.
+     * Ademï¿½s se usa el dia, mes, aï¿½o, hora, minuto y segundo del momento en el
      * que se ha hecho la reserva
      * @param trayecto
      * @return codigo generado
