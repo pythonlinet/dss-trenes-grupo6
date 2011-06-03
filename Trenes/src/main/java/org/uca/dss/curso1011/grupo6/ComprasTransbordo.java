@@ -165,10 +165,9 @@ public class ComprasTransbordo implements InterfazCompras{
 
     }
     
-    /**
-     * 
+    /**Metodo que genera un numero de asiento del trayecto dado
      * @param infoTrayecto
-     * @return 
+     * @return numero asiento del proyecto
      */
     private int generarAsiento(InformacionTrayecto infoTrayecto)
     {
@@ -201,20 +200,19 @@ public class ComprasTransbordo implements InterfazCompras{
         return numAsiento;
     }
     
-    /**
-     * 
+    /**Metodo que devuelve el menor numero de asientos libres entre
+     * dos trayectos dados un itinerario y la fecha     * 
      * @param fecha
      * @param itinerario
-     * @return 
+     * @return devuelve el menor numero de asientos libres
      */
     public int asientosLibres(LocalDate fecha, Itinerario itinerario) {
         //Falta por completar. Preguntar a Dani
         return -1;
     }
 
-    /**
-     * 
-     * @param reserva 
+    /**Metodo que cancela la reserva pasada como parametro
+      * @param reserva 
      */
     public void cancelaReserva(ReservaTrayecto reserva) {
         boolean flag=false;
@@ -249,8 +247,8 @@ public class ComprasTransbordo implements InterfazCompras{
       }
     }
 
-    /**
-     * 
+    /**Metodo que cancela las reservas de la lista de reservas
+     * recibida como parametro 
      * @param reservas 
      */
     public void cancelaReserva(List<ReservaTrayecto> reservas) {
@@ -266,28 +264,29 @@ public class ComprasTransbordo implements InterfazCompras{
     }
 
 
-    /**
+    /**Metodo que devuelve la informacion de trayectos
      * @return the itrayectos
      */
     public List<InformacionTrayecto> getItrayectos() {
         return itrayectos;
     }
 
-    /**
+    /**Metodo que inserta la informacion de los trayectos en la lista
+     * informacion de trayectos
      * @param itrayectos the itrayectos to set
      */
     public void setItrayectos(List<InformacionTrayecto> itrayectos) {
         this.itrayectos = itrayectos;
     }
 
-    /**
+    /**Metodo que devuelve los transbordos
      * @return the transbordo
      */
     public Transbordo getTransbordo() {
         return transbordo;
     }
 
-    /**
+    /**Metodo que inserta un transbordo
      * @param transbordo the transbordo to set
      */
     public void setTransbordo(Transbordo transbordo) {
