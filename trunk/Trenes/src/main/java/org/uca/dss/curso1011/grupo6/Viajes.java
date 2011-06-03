@@ -23,6 +23,20 @@ public class Viajes{
      * Constructor de la clase Viajes con el par�metro trayectos
      * @param trayectos
      */
+    
+    
+ public boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
+  {
+    if(trayecto.getCiudadOrigen().equals(origen) &&
+                    trayecto.getCiudadDestino().equals(destino) &&
+                    trayecto.getHorario().getSalida().equals(hora))
+                               
+        return true;
+               else
+                   return false;
+                    }
+    
+    
     public Viajes(List<Trayecto> trayectos){
         this.trayectos = trayectos;
         trayectos = new ArrayList();
@@ -92,9 +106,7 @@ public class Viajes{
         while (iTrayectos.hasNext() && encontrado != true)
         {
             trayecto = iTrayectos.next();
-            if(trayecto.getCiudadOrigen().equals(origen) &&
-                    trayecto.getCiudadDestino().equals(destino) &&
-                    trayecto.getHorario().getSalida().equals(hora))
+            if(comprobarTrayecto(trayecto,origen,destino,hora))
                     {
                         encontrado = true;
                         trayectoEncontrado = trayecto;
