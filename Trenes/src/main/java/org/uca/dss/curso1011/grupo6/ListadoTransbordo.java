@@ -94,14 +94,18 @@ public class ListadoTransbordo implements InterfazListados {
 
         List<Itinerario> itinerarios = getTransbordo().buscarTrayectosDirectos(origen,destino,fechaSalida);
         itinerarios.addAll(getTransbordo().buscarInformacionTrayectos(origen,destino,fechaSalida));
-        List<Itinerario> itinerariosDisponibles = itinerarios;
+        List<Itinerario> itinerariosDisponibles = new ArrayList<Itinerario>();
 
         for(Itinerario iterItinerario : itinerarios )
         {
-            if(getCompras().asientosLibres(fechaSalida, iterItinerario)==0)
-            {
-                itinerariosDisponibles.remove(iterItinerario);
+            System.out.println("ASIENTOS LIBRES ITINERARIO: "+getCompras().asientosLibres(fechaSalida, iterItinerario));
+            if(getCompras().asientosLibres(fechaSalida, iterItinerario)>0)
+            {   
+                itinerariosDisponibles.add(iterItinerario);
+                System.out.println("ENTRA REMOVE");
             }
+            System.out.println("DESPUES SALE REMOVE");
+            System.out.println("Disponibles SIZE"+itinerariosDisponibles.size());
         }
         System.out.println("Disponibles SIZE"+itinerariosDisponibles.size());
         return itinerariosDisponibles;

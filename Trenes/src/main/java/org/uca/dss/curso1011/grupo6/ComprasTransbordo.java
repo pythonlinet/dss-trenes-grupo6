@@ -217,7 +217,11 @@ public class ComprasTransbordo implements InterfazCompras{
             ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
             @Override
             public boolean match(ReservaTrayecto et) {
-                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(infoTrayecto);
+                return et.getFechaSalida().equals(fecha) && 
+                       et.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       et.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       et.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       et.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
             }
             }) ;
 
