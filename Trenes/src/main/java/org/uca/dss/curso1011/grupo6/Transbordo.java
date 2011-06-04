@@ -6,16 +6,15 @@
 package org.uca.dss.curso1011.grupo6;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
-import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazListados;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
- * Clase que se encarga de realizar los listados de los transbordos disponibles
+ * Clase que se encarga de obtener informacion de trayectos con transbordo
+ * y de los trayectos directos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos R�os Legup�n
@@ -119,7 +118,7 @@ public class Transbordo{
     }
 
     /**Metodo que inserta un listado
-     * @param listado the listado to set
+     * @param listado 
      */
     public void setListado(Listado listado) {
         this.listado = listado;

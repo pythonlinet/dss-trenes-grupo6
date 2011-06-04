@@ -20,8 +20,6 @@ import org.uca.dss.trenes.interfaz.InterfazListados;
  */
 
 /**Clase que implementa los listados de todos los trayectos
- * 
- * 
  */
 public class Listado implements InterfazListados{
 
@@ -51,6 +49,12 @@ public class Listado implements InterfazListados{
         }
     }
 
+   /**
+    * Metodo privado que comprueba si dos trayectos son iguales
+    * @param trayecto1
+    * @param trayecto2
+    * @return verdad o falso dependiendo de la comprobacion
+    */
     private boolean comprobarTrayecto(Trayecto trayecto,String origen,String destino,LocalDate fecha)
     {
          if(trayecto.getCiudadOrigen().equals(origen) &&
