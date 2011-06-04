@@ -64,6 +64,14 @@ public class Compras implements InterfazCompras{
         }
     }
 
+    
+        /**
+    * Metodo privado que comprueba si dos trayectos son iguales
+    * @param trayecto1
+    * @param trayecto2
+    * @return verdad o falso dependiendo de la comprobacion
+    */
+    
     private boolean comprobarTrayecto(Trayecto trayecto,Trayecto trayectoArg)
     {
         if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
