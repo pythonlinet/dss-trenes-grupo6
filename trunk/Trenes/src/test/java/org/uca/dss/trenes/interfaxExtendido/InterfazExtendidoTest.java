@@ -41,7 +41,6 @@ public abstract class InterfazExtendidoTest {
     /** Referencia a la clase compras */
     protected InterfazCompras compras;
     protected LocalDate hoy;
-//    protected GestionReservas gestion;
     protected String origen;
     protected String destino;
     protected char tipoAsiento;
