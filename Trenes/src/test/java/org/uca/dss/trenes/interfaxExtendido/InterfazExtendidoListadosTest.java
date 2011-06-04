@@ -31,14 +31,21 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
      */
     @Test
     public void testListadoSinReservasPorDias() {
-        
+
+
+
         List<Itinerario> itinerariosRef = listado.getItinerarios(origen, destino, new LocalDate());
+        List<Itinerario> itinerariosRef2 = listado.getItinerarios(origen, destino, new LocalDate());
+
+
+
         for (int day = 1; day <= 10; day++) {
             
             List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
             List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().plusDays(day));
 
-           assertEquals(itineAntes.get(0),itinerariosRef.get(0));
+            assertSame(itinerariosRef2,itinerariosRef);
+           //assertEquals(itineAntes.get(0),itinerariosRef.get(0));
            assertEquals(itineDespues.size(),itinerariosRef.size());
         }
     }
