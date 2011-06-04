@@ -26,15 +26,18 @@ public class Viajes{
     
     
  public boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
-  {
+ {
     if(trayecto.getCiudadOrigen().equals(origen) &&
                     trayecto.getCiudadDestino().equals(destino) &&
                     trayecto.getHorario().getSalida().equals(hora))
-                               
-        return true;
-               else
-                   return false;
-                    }
+    {
+          return true;
+    }
+    else
+    {    
+          return false;
+    }
+ }
     
     
     public Viajes(List<Trayecto> trayectos){
