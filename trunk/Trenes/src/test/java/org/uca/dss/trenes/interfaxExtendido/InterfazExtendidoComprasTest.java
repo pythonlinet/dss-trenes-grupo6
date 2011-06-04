@@ -9,6 +9,8 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
+import java.util.Random;
+import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import org.uca.dss.trenes.interfaz.*;
 import java.util.LinkedList;
 import org.joda.time.LocalTime;
@@ -20,7 +22,7 @@ import static org.junit.Assert.*;
  *
  * @author dmolina
  */
-public class InterfazExtendidoComprasTest extends InterfazTest {
+public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
     /**
      * Comprueba que una reserva reduzca los asientos libres 
@@ -29,26 +31,18 @@ public class InterfazExtendidoComprasTest extends InterfazTest {
      */
     @Test
     public void testUnaReserva() {
-        List<LocalTime> horasPosibles = getHorasPosibles();
-        LocalTime hora, hora2;
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);        
 
-        hora = getHoraAleatoria(horasPosibles);
-
-        do {
-            hora2 = getHoraAleatoria(horasPosibles);
-        } while (hora2.equals(hora));
-
-        int libresAntes = compras.asientosLibres(origen, destino, hoy, hora);
-        int libresOtraHoraAntes = compras.asientosLibres(origen, destino, hoy, hora2);
-        compras.reservaAsiento(origen, destino, hoy, hora);
-        int libresDespues = compras.asientosLibres(origen, destino, hoy, hora);
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());        
+        Itinerario itinerarioReservado = itinerarios.get(pos);
+      
+        int libresAntes = compras.asientosLibres(hoy, itinerarioReservado);        
+        compras.reservaAsiento(itinerarioReservado, hoy);
+        int libresDespues = compras.asientosLibres(hoy, itinerarioReservado);
         assertSame(libresAntes, libresDespues+1);
-        int libresOtroDia = compras.asientosLibres(origen, destino,
-                hoy.plusDays(1), hora);
-        assertSame(libresAntes, libresOtroDia);
-        int libresOtraHoraDespues = compras.asientosLibres(origen, destino,
-                hoy, hora2);
-        assertSame(libresOtraHoraAntes, libresOtraHoraDespues);
+        int libresOtroDia = compras.asientosLibres(hoy.plusDays(1), itinerarioReservado);
+        assertSame(libresAntes, libresOtroDia);        
     }
 
     /**
@@ -56,14 +50,17 @@ public class InterfazExtendidoComprasTest extends InterfazTest {
      */
     @Test
     public void testReservarReduceAsientosLibres() {
-        List<LocalTime> horas = getHorasPosibles();
-        LocalTime hora = getHoraAleatoria(horas);
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
 
-        int libres = compras.asientosLibres(origen, destino, hoy, hora);
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+        Itinerario itinerarioReservado = itinerarios.get(pos);
+
+        int libres = compras.asientosLibres(hoy, itinerarioReservado);
         int reservados=0;
 
-        while (compras.asientosLibres(origen, destino, hoy, hora)>0) {
-            compras.reservaAsiento(origen, destino, hoy, hora);
+        while (compras.asientosLibres(hoy, itinerarioReservado)>0) {
+            compras.reservaAsiento(itinerarioReservado, hoy);
             reservados = reservados+1;
         }
 
@@ -73,6 +70,7 @@ public class InterfazExtendidoComprasTest extends InterfazTest {
     /**
      * Comprueba que se puede cancelar una reservada
      */
+    /*
      public void testReservaYCancela() {
         List<LocalTime> horas = getHorasPosibles();
         LocalTime hora = getHoraAleatoria(horas);
@@ -142,5 +140,5 @@ public class InterfazExtendidoComprasTest extends InterfazTest {
              assertSame(libresInicialmente, libresFinal);
          }
 
-    }
+    }*/
 }

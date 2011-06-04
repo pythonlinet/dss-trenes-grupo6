@@ -9,8 +9,6 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
-import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.ArrayList;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
