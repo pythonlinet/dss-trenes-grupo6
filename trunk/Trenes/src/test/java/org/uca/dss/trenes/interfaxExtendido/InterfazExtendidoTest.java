@@ -44,11 +44,12 @@ public abstract class InterfazExtendidoTest {
 //    protected GestionReservas gestion;
     protected String origen;
     protected String destino;
-
+    protected char tipoAsiento;
+    
     public InterfazExtendidoTest() {
         origen = "cadiz";
         destino = "madrid";
-        hoy = new LocalDate();
+        hoy = new LocalDate();        
     }
 
     public List<Itinerario> getItinerariosPosibles()
@@ -141,7 +142,8 @@ public abstract class InterfazExtendidoTest {
         Transbordo transbordo = new Transbordo();
         transbordo.setListado(listadoInt);
 
-        ComprasTransbordo comprasTransbordo = new ComprasTransbordo();
+        tipoAsiento = 'c';
+        ComprasTransbordo comprasTransbordo = new ComprasTransbordo(tipoAsiento);
         comprasTransbordo.setTransbordo(transbordo);        
 
         ListadoTransbordo listTransbordo = new ListadoTransbordo();

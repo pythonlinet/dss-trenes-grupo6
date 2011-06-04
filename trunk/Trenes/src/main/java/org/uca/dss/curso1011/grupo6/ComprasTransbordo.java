@@ -30,9 +30,11 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
 public class ComprasTransbordo implements InterfazCompras{
     
     private Transbordo transbordo;
+    private char modoAsiento;
 
-    public ComprasTransbordo()
+    public ComprasTransbordo(char modoAsiento)
     {
+        this.modoAsiento=modoAsiento;
     }
 
      /**Metodo que obtiene las Reservas de un Trayecto, dado la informacion del trayecto y la fecha
@@ -105,14 +107,26 @@ public class ComprasTransbordo implements InterfazCompras{
       */
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
+         ReservaTrayecto reserva = null;
 
          if(asientosLibres(fecha,itinerario)>0)
          {
 
             for( InformacionTrayecto iTrayecto: itinerario)
             {
-                    ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(iTrayecto), generarCodigo(iTrayecto));
-
+                    switch (getModoAsiento())
+                    {
+                        case 'c':
+                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoConsecutivos(iTrayecto), generarCodigo(iTrayecto));
+                            break;
+                        case 'm':
+                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(iTrayecto), generarCodigo(iTrayecto));
+                            break;
+                        case 'a':
+                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoAleatorio(iTrayecto), generarCodigo(iTrayecto));
+                            break;
+                    
+                    }
                     ObjectContainer databases = DBUtils.getDb();
 
                     databases.store(reserva);
@@ -214,6 +228,7 @@ public class ComprasTransbordo implements InterfazCompras{
     private int generarAsientoConsecutivos(final InformacionTrayecto infoTrayecto)
     {
         int numAsiento=1;
+        boolean flag = false;
         ArrayList asientos = new ArrayList();
 
         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
@@ -237,11 +252,22 @@ public class ComprasTransbordo implements InterfazCompras{
 
          for(int num=0; num < asientos.size(); num++)
          {
-             
+             if(!asientos.get(num).equals(num+1) && !flag)
+             {
+                 System.out.println("num: "+num);
+                 numAsiento=num+1;
+                 System.out.println("ENTRAAAA"+numAsiento);
+                 flag = true;
+             }
          }
 
+         if(!flag && reservas.size()>0)
+         {
+             numAsiento=reservas.size()+1;
+         }
 
-        return -1;
+         System.out.println("NUMERO ASIENTO: "+numAsiento);
+        return numAsiento;
     }
     
     /**Metodo que devuelve el menor numero de asientos libres entre
@@ -348,6 +374,13 @@ public class ComprasTransbordo implements InterfazCompras{
      */
     public void setTransbordo(Transbordo transbordo) {
         this.transbordo = transbordo;
+    }
+
+    /**
+     * @return the modoAsiento
+     */
+    public char getModoAsiento() {
+        return modoAsiento;
     }
 
 }
