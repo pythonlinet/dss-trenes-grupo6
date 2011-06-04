@@ -57,47 +57,6 @@ public class Viajes{
         return trayectos;
     }
 
-/**
- * 
- * @param trayectoArg
- * @param fecha
- * @return Lista de reservas del trayecto en la fecha indicada
- * Preguntar a Dani el viernes. Importante NO OLVIDAR!!!!!
- */
-/*    public List<Reserva> obtenerReservas(Trayecto trayectoArg, LocalDate fecha){
-        
-        List<Reserva> reservasValidas;
-        reservasValidas = new ArrayList();
-
-        String origen = trayectoArg.getCiudadOrigen();
-        String destino = trayectoArg.getCiudadDestino();
-        LocalTime hora = trayectoArg.getHorario().getSalida();
-
-        Trayecto trayectoComprueba = buscarTrayecto(origen, destino, hora);
-
-        ObjectContainer databases = DBUtils.getDb();
-
-        List <Reserva> reservas = databases.query(new Predicate <Reserva>() {
-            public boolean match ( Reserva reserva) {
-                return true;
-            }
-        }) ;
-        
-
-        Iterator<Reserva> iReservas = reservas.iterator();
-        while (iReservas.hasNext())
-        {
-            Reserva reserva = iReservas.next();
-            
-            if(reserva.getFecha().equals(fecha) && reserva.getTrayecto().equals(trayectoComprueba))
-            {
-                reservasValidas.add(reserva);
-            }
-        }                    
-            return reservasValidas;
-    }
-*/
-
  /** Metodo que busca los trayectos entre ciudad origen y ciuadad dstino
  * a la hora indicada por el parametro de entrada
  * @param origen

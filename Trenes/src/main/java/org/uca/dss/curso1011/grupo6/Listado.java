@@ -83,9 +83,6 @@ public class Listado implements InterfazListados{
         List<LocalTime> horasDisponibles;
         horasDisponibles = new ArrayList();
 
-//        List<Reserva> reservasValidas;
-//        reservasValidas = new ArrayList();
-
         comprobarExcepcion(fecha,origen,destino);
 
          while (iTrayectos.hasNext())

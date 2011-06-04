@@ -37,68 +37,6 @@ public class ComprasTransbordo implements InterfazCompras{
         this.modoAsiento=modoAsiento;
     }
 
-     /**Metodo que obtiene las Reservas de un Trayecto, dado la informacion del trayecto y la fecha
-     * 
-     * @param itrayectoArg
-     * @param fecha
-     * @return lista de las reservas del trayecto recibido como parametro
-     */
-    /*
-     private List<ReservaTrayecto> obtenerReservasTrayecto(final InformacionTrayecto itrayectoArg, final LocalDate fecha){
-
-        List<ReservaTrayecto> reservasValidas;
-        reservasValidas = new ArrayList();
-
-        ObjectContainer databases = DBUtils.getDb();
-
-            ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
-            @Override
-            public boolean match(ReservaTrayecto et) {
-                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(itrayectoArg);
-            }
-            }) ;
-     * 
-     */
-/*
-        Iterator<ReservaTrayecto> iReservas = reservas.iterator();
-        while (iReservas.hasNext())
-        {
-            ReservaTrayecto reserva = iReservas.next();
-
-            if(reserva.getFechaSalida().equals(fecha) && reserva.getTrayecto().equals(itrayectoArg))
-            {
-                reservasValidas .add(reserva);
-            }        
-            return reservas;
-    }
-     */
-    
-   /**Metodo privado que obtiene el numero de plazas disponibles  
-     * de un trayecto, dado la informacion del trayecto y la fecha
-     * @param itrayectoArg
-     * @param fecha
-     * @return numero de plazas disponibles del trayecto recibido como parametro
-     */
-/*
-     public int getPlazasDisponibles(final InformacionTrayecto itrayecto,final LocalDate fecha) {
-        
-         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(itrayecto.getOrigen(), itrayecto.getDestino(), itrayecto.getHoraSalida());
-
-
-            ObjectContainer databases = DBUtils.getDb();
-
-            ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
-            @Override
-            public boolean match(ReservaTrayecto et) {
-                return et.getFechaSalida().equals(fecha) && et.getTrayecto().equals(itrayecto);
-            }
-            }) ;
- 
-            int plazas =  trayecto.getTren().getPlazas() - reservas.size();
-            return plazas;
-
-    }
-    */
     /** Metodo que devuelve la lista de los asientos reservados dado un itinerario
       * y una fecha
       * @param itinerario
@@ -249,12 +187,9 @@ public class ComprasTransbordo implements InterfazCompras{
 
          for(int num=0; num < asientos.size(); num++)
          {
-             System.out.println("orden: "+(num+1)+"asiento: "+asientos.get(num));
              if(!asientos.get(num).equals(num+1) && !flag)
              {
-                 System.out.println("num: "+num);
                  numAsiento=num+1;
-                 System.out.println("ENTRAAAA"+numAsiento);
                  flag = true;
              }
          }
@@ -264,7 +199,6 @@ public class ComprasTransbordo implements InterfazCompras{
              numAsiento=reservas.size()+1;
          }
 
-         System.out.println("NUMERO ASIENTO: "+numAsiento);
         return numAsiento;
     }
     
