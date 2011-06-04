@@ -21,7 +21,7 @@ import org.uca.dss.trenes.interfaz.InterfazCompras;
  * Clase que gestiona las reservas realizadas por lo clientes
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Ríos Legupín
+ * @author Juan Carlos Rï¿½os Legupï¿½n
  */
 public class Compras implements InterfazCompras{
     
@@ -64,6 +64,20 @@ public class Compras implements InterfazCompras{
         }
     }
 
+    private boolean comprobarTrayecto(Trayecto trayecto,Trayecto trayectoArg)
+    {
+        if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
+                    trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
+                    trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
+        {
+          return true;
+        }
+        else
+        {    
+          return false;
+        }
+    }
+    
     /**
      * Metodo que se encarga de realizar la reserva con la fecha de salida, ciudad origen
      * y destino y la hora de salida
@@ -105,7 +119,7 @@ public class Compras implements InterfazCompras{
 
 
     /**
-     * Metodo que se encarga de cancelar una reserva recibiendo como parámetro 
+     * Metodo que se encarga de cancelar una reserva recibiendo como parï¿½metro 
      * el codigo de la reserva. Este metodo no tiene que devolver nada
      * @param codigoReserva para realizar la cancelacion
      */
@@ -147,8 +161,8 @@ public class Compras implements InterfazCompras{
     /**
      * Metodo que se encarga de generar un codigo unico para una reserva
      * usando la primera letra de la ciudad origen y de destino y los trenes.
-     * También usamos las horas y los minutos de la salida del trayecto.
-     * Además se usa el dia, mes, año, hora, minuto y segundo del momento en el 
+     * Tambiï¿½n usamos las horas y los minutos de la salida del trayecto.
+     * Ademï¿½s se usa el dia, mes, aï¿½o, hora, minuto y segundo del momento en el 
      * que se ha hecho la reserva
      * @param trayecto
      * @return codigo generado
@@ -217,9 +231,9 @@ public class Compras implements InterfazCompras{
     /**
      * Metodo que se utiliza para calcular el numero de plazas disponibles que
      * existe de un trayecto a una fecha indicada.
-     * Los parámetros de entrada de la función son el trayecto del que se quiere
-     * realizar la comprobación y la fecha a la cual se quiere realizar la
-     * comprobación
+     * Los parï¿½metros de entrada de la funciï¿½n son el trayecto del que se quiere
+     * realizar la comprobaciï¿½n y la fecha a la cual se quiere realizar la
+     * comprobaciï¿½n
      * @param trayectoArg
      * @param fecha
      * @return 
@@ -236,9 +250,7 @@ public class Compras implements InterfazCompras{
          while (iTrayectos.hasNext() && encontrado != true)
          {
             Trayecto trayecto = iTrayectos.next();
-            if(trayecto.getCiudadOrigen().equals(trayectoArg.getCiudadOrigen()) &&
-                    trayecto.getCiudadDestino().equals(trayectoArg.getCiudadDestino()) &&
-                    trayecto.getHorario().getSalida().equals(trayectoArg.getHorario().getSalida()))
+            if(comprobarTrayecto(trayecto,trayectoArg))
                     {
                         encontrado = true;
                         reservasValidas = obtenerReservas(trayecto,fecha);

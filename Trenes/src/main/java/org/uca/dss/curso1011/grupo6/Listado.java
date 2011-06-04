@@ -51,6 +51,19 @@ public class Listado implements InterfazListados{
         }
     }
 
+    private boolean comprobarTrayecto(Trayecto trayecto,String origen,String destino,LocalDate fecha)
+    {
+         if(trayecto.getCiudadOrigen().equals(origen) &&
+                   trayecto.getCiudadDestino().equals(destino) &&
+                   (compras.asientosLibres(origen, destino, fecha, trayecto.getHorario().getSalida()))> 0)
+           {
+          return true;
+        }
+        else
+        {    
+          return false;
+        }
+    }
 
     /**Metodo que obtiene los horarios disponibles de un trayecto
     ** dado ciudad origen, ciudad destino y la fecha
@@ -74,9 +87,7 @@ public class Listado implements InterfazListados{
          while (iTrayectos.hasNext())
          {
            Trayecto trayecto = iTrayectos.next();
-           if(trayecto.getCiudadOrigen().equals(origen) &&
-                   trayecto.getCiudadDestino().equals(destino) &&
-                   (compras.asientosLibres(origen, destino, fecha, trayecto.getHorario().getSalida()))> 0)
+           if(comprobarTrayecto(trayecto,origen,destino,fecha))
            {
                    LocalTime hora = trayecto.getHorario().getSalida();
                    horariosDisponibles.add(hora);

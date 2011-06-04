@@ -25,7 +25,7 @@ public class Viajes{
      */
     
     
- public boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
+ private boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
  {
     if(trayecto.getCiudadOrigen().equals(origen) &&
                     trayecto.getCiudadDestino().equals(destino) &&
