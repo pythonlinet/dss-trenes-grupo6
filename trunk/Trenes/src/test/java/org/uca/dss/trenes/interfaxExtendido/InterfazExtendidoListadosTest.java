@@ -32,7 +32,6 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
     public void testListadoSinReservasPorDias() {
 
         LocalDate fecha = new LocalDate();
-        int tamano = 0;
 
         List<Itinerario> itinerariosRef = listado.getItinerarios(origen, destino, fecha);
 

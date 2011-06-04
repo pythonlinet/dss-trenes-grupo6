@@ -126,11 +126,8 @@ public class InterfazComprasTest extends InterfazTest {
                  codigos.add(codigo);
              }
 
-             int cancelado = 0;
-
              for (String codigo : codigos) {
                  compras.cancelaReserva(codigo);
-                 cancelado++;
              }
 
              int libresFinal = compras.asientosLibres(origen, destino, hoy, hora);
