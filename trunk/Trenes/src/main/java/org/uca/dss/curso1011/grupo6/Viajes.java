@@ -23,28 +23,33 @@ public class Viajes{
      * Constructor de la clase Viajes con el par�metro trayectos
      * @param trayectos
      */
-    
-    
- private boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
- {
-    if(trayecto.getCiudadOrigen().equals(origen) &&
-                    trayecto.getCiudadDestino().equals(destino) &&
-                    trayecto.getHorario().getSalida().equals(hora))
-    {
-          return true;
-    }
-    else
-    {    
-          return false;
-    }
- }
-    
-    
-    public Viajes(List<Trayecto> trayectos){
+   
+        public Viajes(List<Trayecto> trayectos)
+        {
         this.trayectos = trayectos;
         trayectos = new ArrayList();
-    }
-    
+         }
+        
+  /**
+    * Metodo privado que comprueba si dos trayectos son iguales
+    * @param trayecto1
+    * @param trayecto2
+    * @return verdad o falso dependiendo de la comprobacion
+    */  
+    private boolean comprobarTrayecto(Trayecto trayecto, String origen, String destino, LocalTime hora)
+    {
+     if(trayecto.getCiudadOrigen().equals(origen) &&
+                    trayecto.getCiudadDestino().equals(destino) &&
+                    trayecto.getHorario().getSalida().equals(hora))
+        {
+              return true;
+        }
+        else
+        {    
+              return false;
+        }
+    }  
+
     /**Metodo que obtiene los trayectos
      * @return lista trayectos
      */

@@ -65,7 +65,7 @@ public class Compras implements InterfazCompras{
     }
 
     
-        /**
+    /**
     * Metodo privado que comprueba si dos trayectos son iguales
     * @param trayecto1
     * @param trayecto2

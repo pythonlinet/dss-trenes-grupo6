@@ -14,8 +14,12 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InterfazListados;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 
 /**
- *
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos R�os Legup�n
+ */
+
+/** Clase que implementa los listados de los transbordos realizados
  */
 public class ListadoTransbordo implements InterfazListados {
 
@@ -111,29 +115,29 @@ public class ListadoTransbordo implements InterfazListados {
         return itinerariosDisponibles;
     }
 
-    /**
-     * @return the transbordo
+    /**Metodo que obtiene los transbordos 
+     * @return transbordo
      */
     public Transbordo getTransbordo() {
         return transbordo;
     }
 
-    /**
-     * @param transbordo the transbordo to set
+    /**Metodo que inserta un transbordo
+     * @param transbordo
      */
     public void setTransbordo(Transbordo transbordo) {
         this.transbordo = transbordo;
     }
 
-    /**
-     * @return the compras
+    /**Metodo que obtiene la compra de un trayecto con transbordo
+     * @return compras
      */
     public ComprasTransbordo getCompras() {
         return compras;
     }
 
-    /**
-     * @param compras the compras to set
+    /**Metdo que inserta una compra de un trayecto con transbordo
+     * @param compras
      */
     public void setCompras(ComprasTransbordo compras) {
         this.compras = compras;
