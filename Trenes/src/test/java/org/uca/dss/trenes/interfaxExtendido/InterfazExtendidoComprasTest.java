@@ -9,6 +9,7 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import org.joda.time.LocalTime;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
@@ -164,5 +165,49 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
              assertSame(libresInicialmente, libresFinal);
          }
 
+    }
+
+ @Test
+    public void testNumeroAsientos() {
+        List<ReservaTrayecto> reservasTotales = new ArrayList<ReservaTrayecto>();
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+        char tipo = tipoAsiento;
+        Random random = new Random();
+
+        Itinerario itinerarioDirecto = itinerarios.get(0);
+
+        switch (tipo)
+        {
+            case 'c':
+                for(int i= 0; i<10; i++)
+                {
+                    List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerarioDirecto, hoy);
+                    int numAsiento = reservas.get(0).getNumeroAsiento();
+                    reservasTotales.addAll(reservas);
+                    assertEquals(numAsiento,i+1);
+                }
+                int pos = random.nextInt(reservasTotales.size());
+                compras.cancelaReserva(reservasTotales.get(pos));
+                System.out.println("ResrevaCancelada: "+(pos+1));
+                List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerarioDirecto, hoy);
+                
+                int comprobar = reservas.get(0).getNumeroAsiento();
+                
+                assertEquals(comprobar,pos+1);
+
+
+              break;
+            case 'a':
+               break;
+            case 'm':
+               break;
+        }
+
+        /*int libresAntes = compras.asientosLibres(hoy, itinerarioReservado);
+        compras.reservaAsiento(itinerarioReservado, hoy);
+        int libresDespues = compras.asientosLibres(hoy, itinerarioReservado);
+        assertSame(libresAntes, libresDespues+1);
+        int libresOtroDia = compras.asientosLibres(hoy.plusDays(1), itinerarioReservado);
+        assertSame(libresAntes, libresOtroDia);*/
     }
 }
