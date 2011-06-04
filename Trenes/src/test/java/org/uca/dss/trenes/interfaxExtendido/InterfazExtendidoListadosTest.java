@@ -103,40 +103,27 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
     public void testListadosConHorariosLlenos() {
         
         List<Itinerario> itineAComprobar = listado.getItinerarios(origen, destino, hoy);
-        List<Itinerario> itineTodos = listado.getItinerarios(origen, destino, hoy);
+        List<Itinerario> itineFiltrado = new ArrayList<Itinerario>();
 
         Random random = new Random();
         int pos = random.nextInt(itineAComprobar.size());
         Itinerario itinerarioReservado = itineAComprobar.get(pos);
-
-        System.out.println("ItinerarioReservado Org: "+itinerarioReservado.get(0).getOrigen());
-        System.out.println("ItinerarioReservado Des: "+itinerarioReservado.get(0).getDestino());
-        System.out.println("ItinerarioReservado Hor: "+itinerarioReservado.get(0).getHoraSalida());
-
-        System.out.println("Asientos Libres"+compras.asientosLibres(hoy, itinerarioReservado));
+        
        while (compras.asientosLibres(hoy, itinerarioReservado) > 0) {
             compras.reservaAsiento(itinerarioReservado, hoy);
         }
 
-        System.out.println("Asientos:"+compras.asientosLibres(hoy, itinerarioReservado));
+       int tamano = itineAComprobar.size();
 
-//        itineAComprobar = listado.getItinerarios(origen, destino, hoy);
-
-                int tamano = itineAComprobar.size();
-
-                for (int i = 0 ; i < tamano;i++){
-                    System.out.println("");
-                if(compras.asientosLibres(hoy, itineTodos.get(i)) == 0){
-                    itineAComprobar.remove(i);
-                    }
-              }        
+       for (int i = 0 ; i < tamano;i++){                    
+            if(compras.asientosLibres(hoy, itineAComprobar.get(i)) > 0){
+                    itineFiltrado.add(itineAComprobar.get(i));
+            }
+       }        
    
-        //itineAComprobar.remove(pos);
-        
-        
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
         
-        assertEquals("No coinciden los itinerarios", itineAComprobar.size(),itinerarios.size());
+        assertEquals("No coinciden los itinerarios", itineFiltrado.size(),itinerarios.size());
     }
    
 }
