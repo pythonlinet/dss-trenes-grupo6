@@ -10,8 +10,10 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Predicate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import org.joda.time.LocalDate;
 import org.uca.dss.curso1011.grupo6.basededatos.DBUtils;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
@@ -109,7 +111,7 @@ public class ComprasTransbordo implements InterfazCompras{
 
             for( InformacionTrayecto iTrayecto: itinerario)
             {
-                    ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsiento(iTrayecto), generarCodigo(iTrayecto));
+                    ReservaTrayecto reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(iTrayecto), generarCodigo(iTrayecto));
 
                     ObjectContainer databases = DBUtils.getDb();
 
@@ -160,33 +162,84 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param infoTrayecto
      * @return numero asiento del proyecto
      */
-    private int generarAsiento(InformacionTrayecto infoTrayecto)
+    private int generarAsientoAleatorio(final InformacionTrayecto infoTrayecto)
     {
         int numAsiento=-1;
         boolean flag=true;
 
         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
 
-        int plazas = trayecto.getTren().getPlazas();
 
+        int plazas = trayecto.getTren().getPlazas();       
         ObjectContainer databases = DBUtils.getDb();
         while(flag)
         {
-            numAsiento = (int) Math.random()*plazas+1;
+            Random random = new Random();
+            numAsiento = random.nextInt(plazas);
 
             final int comprobacionAsiento=numAsiento;
 
             List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
             public boolean match ( ReservaTrayecto reserva) {
-                return reserva.getNumeroAsiento()==comprobacionAsiento;
+                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()) &&
+                       reserva.getNumeroAsiento()==comprobacionAsiento;
             }
             }) ;
-            
+
             if(reservas.isEmpty())
             {
                 flag=false;
             }
         }
+
+        return numAsiento;
+    }
+
+     /**Metodo que genera un numero de asiento del trayecto dado
+     * @param infoTrayecto
+     * @return numero asiento del proyecto
+     */
+    private int generarAsientoMenosUno(InformacionTrayecto infoTrayecto)
+    {
+        return -1;
+    }
+
+     /**Metodo que genera un numero de asiento del trayecto dado
+     * @param infoTrayecto
+     * @return numero asiento del proyecto
+     */
+    private int generarAsientoConsecutivos(final InformacionTrayecto infoTrayecto)
+    {
+        int numAsiento=1;
+        ArrayList asientos = new ArrayList();
+
+        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
+        int plazas = trayecto.getTren().getPlazas();
+
+        ObjectContainer databases = DBUtils.getDb();
+        List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+        public boolean match ( ReservaTrayecto reserva) {
+                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
+                }
+         });
+
+         for(ReservaTrayecto resTrayecto : reservas)
+         {
+             asientos.add(resTrayecto.getNumeroAsiento());
+         }
+         Collections.sort(asientos);
+
+         for(int num=0; num < asientos.size(); num++)
+         {
+             
+         }
+
 
         return -1;
     }
@@ -203,8 +256,6 @@ public class ComprasTransbordo implements InterfazCompras{
 
         for(final InformacionTrayecto infoTrayecto : itinerario)
         {
-            //cantidad = getPlazasDisponibles(infoTrayecto,fecha);
-
             Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
 
             ObjectContainer databases = DBUtils.getDb();
