@@ -26,8 +26,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  * @author Juan Carlos R�os Legup�n
  */
 public class ComprasTransbordo implements InterfazCompras{
-
-    private List<InformacionTrayecto> itrayectos;
+    
     private Transbordo transbordo;
 
     public ComprasTransbordo()
@@ -290,21 +289,6 @@ public class ComprasTransbordo implements InterfazCompras{
 
     }
 
-
-    /**Metodo que devuelve la informacion de trayectos
-     * @return the itrayectos
-     */
-    public List<InformacionTrayecto> getItrayectos() {
-        return itrayectos;
-    }
-
-    /**Metodo que inserta la informacion de los trayectos en la lista
-     * informacion de trayectos
-     * @param itrayectos the itrayectos to set
-     */
-    public void setItrayectos(List<InformacionTrayecto> itrayectos) {
-        this.itrayectos = itrayectos;
-    }
 
     /**Metodo que devuelve los transbordos
      * @return the transbordo
