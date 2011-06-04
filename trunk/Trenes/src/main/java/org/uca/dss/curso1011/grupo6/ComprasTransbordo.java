@@ -160,7 +160,7 @@ public class ComprasTransbordo implements InterfazCompras{
     
     /**Metodo que genera un numero de asiento del trayecto dado
      * @param infoTrayecto
-     * @return numero asiento del proyecto
+     * @return numero asiento del trayecto
      */
     private int generarAsientoAleatorio(final InformacionTrayecto infoTrayecto)
     {
@@ -198,18 +198,18 @@ public class ComprasTransbordo implements InterfazCompras{
         return numAsiento;
     }
 
-     /**Metodo que genera un numero de asiento del trayecto dado
+     /**Metodo que devuelve -1 como numero de asiento
      * @param infoTrayecto
-     * @return numero asiento del proyecto
+     * @return numero asiento del trayecto
      */
     private int generarAsientoMenosUno(InformacionTrayecto infoTrayecto)
     {
         return -1;
     }
 
-     /**Metodo que genera un numero de asiento del trayecto dado
+     /**Metodo que genera un numero de asiento consecutivo
      * @param infoTrayecto
-     * @return numero asiento del proyecto
+     * @return numero asiento del trayecto
      */
     private int generarAsientoConsecutivos(final InformacionTrayecto infoTrayecto)
     {
@@ -245,7 +245,7 @@ public class ComprasTransbordo implements InterfazCompras{
     }
     
     /**Metodo que devuelve el menor numero de asientos libres entre
-     * dos trayectos dados un itinerario y la fecha     * 
+     * dos trayectos dados un itinerario y la fecha    
      * @param fecha
      * @param itinerario
      * @return devuelve el menor numero de asientos libres
