@@ -23,12 +23,34 @@ public class Transbordo{
 
     private Listado listado;   
     /**
-     * 
+     * Constructor de la clase Transbordo
      */
     public Transbordo ()
     {
 
     }
+    
+    /**
+    * Metodo privado que comprueba si dos trayectos son iguales
+    * @param trayecto1
+    * @param trayecto2
+    * @return verdad o falso dependiendo de la comprobacion
+    */
+    
+    private boolean comprobarTrayecto(Trayecto jTrayecto,String destino, String destino1, LocalTime llegada1)
+    {
+       if(jTrayecto.getCiudadOrigen().equals(destino1) &&
+                            jTrayecto.getCiudadDestino().equals(destino) &&
+                            jTrayecto.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0)
+        {
+          return true;
+        }
+        else
+        {    
+          return false;
+        }
+    }
+    
 
     /**Metodo que devuelve toda la informacion de los trayectos dado
      * una ciudad origen, ciudad destino y una fecha 
@@ -56,9 +78,7 @@ public class Transbordo{
 
                     for(Trayecto jTrayecto : trayectos)
                     {
-                        if(jTrayecto.getCiudadOrigen().equals(destino1) &&
-                            jTrayecto.getCiudadDestino().equals(destino) &&
-                            jTrayecto.getHorario().getSalida().compareTo(llegada1.plusMinutes(10)) >= 0)
+                        if (comprobarTrayecto(jTrayecto,destino,destino1,llegada1))
                         {
 
                                 InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
