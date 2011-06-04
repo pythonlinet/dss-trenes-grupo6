@@ -48,7 +48,7 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
     }
 
     /**
-     * Compruebo las horas disponibles
+     * Comprueba los listados de itinerarios que no tengan reservas 
      */
     @Test
     public void testListadosSinReservas() {
@@ -59,7 +59,8 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
     }
 
     /**
-     * 
+     * Comprueba los itinerarios comprendidos entre un intervalo
+     * de horas
      */
     @Test
     public void testItinerariosEntreHoras() {
@@ -95,7 +96,7 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
 
     }
     /**
-     * Compruebo
+     * Comprueba los listados de itinerarios llenos
      */
     @Test
     public void testListadosConHorariosLlenos() {
