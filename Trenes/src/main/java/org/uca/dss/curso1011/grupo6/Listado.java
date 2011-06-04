@@ -80,8 +80,8 @@ public class Listado implements InterfazListados{
 
         Iterator<Trayecto> iTrayectos = viajes.getTrayectos().iterator();
 
-        List<LocalTime> horariosDisponibles;
-        horariosDisponibles = new ArrayList();
+        List<LocalTime> horasDisponibles;
+        horasDisponibles = new ArrayList();
 
 //        List<Reserva> reservasValidas;
 //        reservasValidas = new ArrayList();
@@ -94,10 +94,10 @@ public class Listado implements InterfazListados{
            if(comprobarTrayecto(trayecto,origen,destino,fecha))
            {
                    LocalTime hora = trayecto.getHorario().getSalida();
-                   horariosDisponibles.add(hora);
+                   horasDisponibles.add(hora);
            }
         }
-        return horariosDisponibles;
+        return horasDisponibles;
     }
 
     /**Metodo que devuelve los viajes

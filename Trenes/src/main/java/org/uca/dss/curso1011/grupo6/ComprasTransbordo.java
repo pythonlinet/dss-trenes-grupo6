@@ -120,7 +120,7 @@ public class ComprasTransbordo implements InterfazCompras{
                             reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoConsecutivos(iTrayecto), generarCodigo(iTrayecto));
                             break;
                         case 'm':
-                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(iTrayecto), generarCodigo(iTrayecto));
+                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(), generarCodigo(iTrayecto));
                             break;
                         case 'a':
                             reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoAleatorio(iTrayecto), generarCodigo(iTrayecto));
@@ -216,7 +216,7 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
-    private int generarAsientoMenosUno(InformacionTrayecto infoTrayecto)
+    private int generarAsientoMenosUno()
     {
         return -1;
     }
@@ -230,9 +230,6 @@ public class ComprasTransbordo implements InterfazCompras{
         int numAsiento=1;
         boolean flag = false;
         ArrayList asientos = new ArrayList();
-
-        Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
-        int plazas = trayecto.getTren().getPlazas();
 
         ObjectContainer databases = DBUtils.getDb();
         List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
@@ -252,6 +249,7 @@ public class ComprasTransbordo implements InterfazCompras{
 
          for(int num=0; num < asientos.size(); num++)
          {
+             System.out.println("orden: "+(num+1)+"asiento: "+asientos.get(num));
              if(!asientos.get(num).equals(num+1) && !flag)
              {
                  System.out.println("num: "+num);
@@ -288,12 +286,12 @@ public class ComprasTransbordo implements InterfazCompras{
 
             ObjectSet<ReservaTrayecto> reservas = databases.query(new Predicate<ReservaTrayecto>() {
             @Override
-            public boolean match(ReservaTrayecto et) {
-                return et.getFechaSalida().equals(fecha) && 
-                       et.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
-                       et.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
-                       et.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
-                       et.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
+            public boolean match(ReservaTrayecto reserva) {
+                return reserva.getFechaSalida().equals(fecha) &&
+                       reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
             }
             }) ;
 
@@ -314,8 +312,7 @@ public class ComprasTransbordo implements InterfazCompras{
      */
     public void cancelaReserva(ReservaTrayecto reserva) {
         boolean flag=false;
-        ObjectContainer database = DBUtils.getDb();
-
+        ObjectContainer database = DBUtils.getDb();        
        if (reserva.getCodigoReserva().isEmpty() ) {
         throw new IllegalArgumentException("Codigo Reserva no especificada");
        }
@@ -332,11 +329,12 @@ public class ComprasTransbordo implements InterfazCompras{
       {
               ReservaTrayecto reservaTrayecto = iReservas.next();
 
-              if(reservaTrayecto.getCodigoReserva().equals(reserva.getCodigoReserva()))
+              if(reservaTrayecto.getCodigoReserva().equals(reserva.getCodigoReserva())&&
+                      reservaTrayecto.getNumeroAsiento() == reserva.getNumeroAsiento())
               {
                         database.delete(reservaTrayecto);
                         database.commit();
-                        flag = true;
+                        flag = true;                       
               }
       }
       if (!flag)

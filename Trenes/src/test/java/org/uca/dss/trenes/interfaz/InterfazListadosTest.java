@@ -25,7 +25,6 @@ public class InterfazListadosTest extends InterfazTest {
      */
     @Test
     public void testListadoSinReservasPorDias() {
-        int days = 10;
         List<LocalTime> horasRef = listado.getHorarios(origen, destino, new LocalDate());
 
         for (int day = 1; day <= 10; day++) {

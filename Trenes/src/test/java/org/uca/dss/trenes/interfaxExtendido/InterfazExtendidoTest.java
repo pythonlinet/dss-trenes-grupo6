@@ -81,28 +81,6 @@ public abstract class InterfazExtendidoTest {
         itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo3));
 
 
-        System.out.println("TRAYECTOS POSIBLES");
-
-        Iterator<Itinerario> i = itineComprobar.iterator();
-
-         while (i.hasNext())
-         {
-             Itinerario itinerario = i.next();
-
-             Iterator<InformacionTrayecto> infoTrayectos = itinerario.iterator();
-
-             while (infoTrayectos.hasNext())
-             {
-                 InformacionTrayecto infoTrayectoB = infoTrayectos.next();
-
-                 System.out.println("Origen: "+infoTrayectoB.getOrigen());
-                 System.out.println("Destino: "+infoTrayectoB.getDestino());
-                 System.out.println("HoraSalida: "+infoTrayectoB.getHoraSalida());
-             }
-         }
-
-        System.out.println("FIN__________________------------------_____________");
-
         return itineComprobar;
     }
 
