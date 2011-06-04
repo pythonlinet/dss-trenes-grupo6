@@ -9,11 +9,13 @@
 
 package org.uca.dss.trenes.interfaxExtendido;
 
-import java.util.Random;
-import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
-import org.uca.dss.trenes.interfaz.*;
 import java.util.LinkedList;
 import org.joda.time.LocalTime;
+import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
+import org.uca.dss.curso1011.grupo6.Trayecto;
+import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
+import java.util.Random;
+import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -69,76 +71,98 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
     /**
      * Comprueba que se puede cancelar una reservada
-     */
-    /*
+     */    
      public void testReservaYCancela() {
-        List<LocalTime> horas = getHorasPosibles();
-        LocalTime hora = getHoraAleatoria(horas);
-        int libresAntes = compras.asientosLibres(origen, destino, hoy, hora);
-        String codigoReserva = compras.reservaAsiento(origen, destino, hoy, hora);
-        int libresDespues = compras.asientosLibres(origen, destino, hoy, hora);
-        compras.cancelaReserva(codigoReserva);
-        int libresTrasCancelar = compras.asientosLibres(origen, destino, hoy, hora);
+         
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+        Itinerario itinerarioReservado = itinerarios.get(pos);
+
+//        List<LocalTime> horas = getHorasPosibles();
+//        LocalTime hora = getHoraAleatoria(horas);
+        int libresAntes = compras.asientosLibres(hoy, itinerarioReservado);
+        List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerarioReservado, hoy);
+        int libresDespues = compras.asientosLibres(hoy, itinerarioReservado);
+        compras.cancelaReserva(reservas);
+        int libresTrasCancelar = compras.asientosLibres(hoy, itinerarioReservado);
 
         assertSame(libresAntes, libresDespues+1);
         assertSame(libresAntes, libresTrasCancelar);
      }
 
      @Test(expected=RuntimeException.class)
-     public void testCancelaSinReservar() {
-         compras.cancelaReserva("cadena");
+     public void testCancelaSinReservar() {         
+         InformacionTrayecto infoTrayecto = new InformacionTrayecto("Malaga","Badajoz",new LocalTime("10:00"),new LocalTime("13:00"),10);
+         ReservaTrayecto reserva = new ReservaTrayecto(infoTrayecto,hoy, -1, "cadena");
+         compras.cancelaReserva(reserva);
      }
 
      @Test
      public void testReservaYCancelaOtra() {
-         List<LocalTime> horas = getHorasPosibles();
-         LocalTime hora = getHoraAleatoria(horas);
-         String codigo = compras.reservaAsiento(origen, destino, hoy, hora);
-         codigo = codigo+"NULO";
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+        Itinerario itinerarioReservado = itinerarios.get(pos);
+
+        InformacionTrayecto infoTrayecto = itinerarioReservado.get(0);
+        ReservaTrayecto reserva = new ReservaTrayecto(infoTrayecto,hoy, -1, "NULO");
+
+        List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerarioReservado, hoy);
+        
          try {
-            compras.cancelaReserva(codigo);
-            fail("Canceló una reserva con falso código");
+            compras.cancelaReserva(reserva);
+            fail("Cancela una reserva con falso codigo");
          } catch (RuntimeException e) { }
          
      }
 
+
+
      @Test(expected=RuntimeException.class)
      public void testReservaDeMas() {
-         List<LocalTime> horas = getHorasPosibles();
-         LocalTime hora = getHoraAleatoria(horas);
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
 
-         while (compras.asientosLibres(origen, destino, hoy, hora) > 0) {
-                 compras.reservaAsiento(origen, destino, hoy, hora);
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+        Itinerario itinerarioReservado = itinerarios.get(pos);
+
+         while (compras.asientosLibres(hoy, itinerarioReservado) > 0) {
+                 compras.reservaAsiento(itinerarioReservado, hoy);
          }
 
-         assertTrue(compras.asientosLibres(origen, destino, hoy, hora)==0);
-         compras.reservaAsiento(origen, destino, hoy, hora);
+         assertTrue(compras.asientosLibres(hoy, itinerarioReservado)==0);
+         compras.reservaAsiento(itinerarioReservado, hoy);
      }
 
      @Test
      public void testLLenaYCancela() {
-        List<LocalTime> horas = getHorasPosibles();
-        List<String> codigos = new LinkedList<String>();
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+        //List<LocalTime> horas = getHorasPosibles();
+//        List<String> codigos = new LinkedList<String>();
+        List<ReservaTrayecto> reservas = new LinkedList<ReservaTrayecto>();
 
-        for (LocalTime hora : horas) {
-             int libresInicialmente = compras.asientosLibres(origen, destino, hoy, hora);
-             codigos.clear();
+        for (Itinerario itinerario : itinerarios) {
+             int libresInicialmente = compras.asientosLibres(hoy, itinerario);
+             reservas.clear();
 
-             while (compras.asientosLibres(origen, destino, hoy, hora) > 0) {
-                 String codigo = compras.reservaAsiento(origen, destino, hoy, hora);
-                 codigos.add(codigo);
+             while (compras.asientosLibres(hoy, itinerario) > 0) {
+                    List<ReservaTrayecto> reservasItinerario = compras.reservaAsiento(itinerario, hoy);
+                    reservas.addAll(reservasItinerario);
              }
 
              int cancelado = 0;
 
-             for (String codigo : codigos) {
-                 compras.cancelaReserva(codigo);
+             for (ReservaTrayecto reserva : reservas) {
+                 compras.cancelaReserva(reserva);
                  cancelado++;
              }
 
-             int libresFinal = compras.asientosLibres(origen, destino, hoy, hora);
+             int libresFinal = compras.asientosLibres(hoy, itinerario);
              assertSame(libresInicialmente, libresFinal);
          }
 
-    }*/
+    }
 }
