@@ -91,6 +91,10 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
         assertSame(libresAntes, libresTrasCancelar);
      }
 
+     /**
+     * Comprueba que no se puede cancelar una reserva si no está reservada
+     */ 
+     
      @Test(expected=RuntimeException.class)
      public void testCancelaSinReservar() {         
          InformacionTrayecto infoTrayecto = new InformacionTrayecto("Malaga","Badajoz",new LocalTime("10:00"),new LocalTime("13:00"),10);
