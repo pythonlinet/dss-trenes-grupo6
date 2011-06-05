@@ -143,7 +143,10 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
          assertTrue(compras.asientosLibres(hoy, itinerarioReservado)==0);
          compras.reservaAsiento(itinerarioReservado, hoy);
      }
-
+     
+     /**
+     * Comprueba que las reservas estan completas y cancela
+     */     
      @Test
      public void testLLenaYCancela() {
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
@@ -168,6 +171,7 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
     }
 
+     
  @Test
     public void testNumeroAsientos() {
         List<ReservaTrayecto> reservasTotales = new ArrayList<ReservaTrayecto>();
