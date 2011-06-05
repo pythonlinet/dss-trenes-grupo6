@@ -71,7 +71,7 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
     }
 
     /**
-     * Comprueba que se puede cancelar una reservada
+     * Comprueba que se puede realizar una reserva y cancelar despues
      */    
      public void testReservaYCancela() {
          
