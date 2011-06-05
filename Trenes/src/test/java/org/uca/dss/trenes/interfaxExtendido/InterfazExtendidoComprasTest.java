@@ -30,8 +30,7 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
     /**
      * Comprueba que una reserva reduzca los asientos libres 
-     * para ese día y fecha, y
-     * no modifica ni otro día ni otra hora cualquiera
+     * para ese dia y fecha, y no modifica ni otro dia ni otra hora cualquiera
      */
     @Test
     public void testUnaReserva() {
