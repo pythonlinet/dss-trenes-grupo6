@@ -125,7 +125,9 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
      }
 
 
-
+    /**
+     * Comprueba que no realice reserva de mas
+     */ 
      @Test(expected=RuntimeException.class)
      public void testReservaDeMas() {
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
