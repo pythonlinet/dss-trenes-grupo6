@@ -171,7 +171,10 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
     }
 
-     
+   /**
+     * Comprueba los numeros de asiento de un trayecto dependiendo de cada tipo de generacion 
+     * del numero de asiento
+     */      
  @Test
     public void testNumeroAsientos() {
         List<ReservaTrayecto> reservasTotales = new ArrayList<ReservaTrayecto>();
