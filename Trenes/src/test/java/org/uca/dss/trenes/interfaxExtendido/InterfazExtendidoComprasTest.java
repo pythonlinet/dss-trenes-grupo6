@@ -102,6 +102,10 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
          compras.cancelaReserva(reserva);
      }
 
+     /**
+     * Comprueba que realiza una reserva y cancela otra reserva
+     */ 
+     
      @Test
      public void testReservaYCancelaOtra() {
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
