@@ -4,7 +4,7 @@
  */
 
 /**
- * Implementar todas las pruebas para los transbordos Esta es para realizar las compras
+ * Implementar todas las pruebas para los transbordos. Esta es para realizar las compras
  */
 
 package org.uca.dss.trenes.interfaxExtendido;
@@ -22,8 +22,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
- * @author dmolina
+ * Casos de Tests de compras
+ * @author Jose Luis, Juan Carlos y Dani
+ * 
  */
 public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
