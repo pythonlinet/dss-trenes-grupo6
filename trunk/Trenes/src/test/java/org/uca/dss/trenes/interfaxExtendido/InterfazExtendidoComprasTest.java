@@ -49,7 +49,7 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
     }
 
     /**
-     * Comprueba que asientos libres se reduzca al reservar cada vez
+     * Comprueba qu al realizar una reserva, entonces se reducen los asientos libres
      */
     @Test
     public void testReservarReduceAsientosLibres() {
