@@ -43,9 +43,8 @@ public class AsientoAleatorio implements ReservaAsiento {
 
         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
 
-
         int plazas = trayecto.getVehiculo().getPlazas();
-        ObjectContainer databases = DBUtils.getDb();
+
         while(flag)
         {
             Random random = new Random();
