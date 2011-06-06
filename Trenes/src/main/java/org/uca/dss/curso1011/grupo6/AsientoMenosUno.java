@@ -28,13 +28,20 @@ public class AsientoMenosUno implements ReservaAsiento{
     }
 
 
+    /**Interfaz generarAsiento
+     * @param infoTrayecto 
+     * @return generarAsientoAleatorio
+     */
     public int generarAsiento(InformacionTrayecto infoTrayecto) {
         return generarAsientoMenosUno();
     }
 
+    /**Metodo que asigna el numero de asiento -1
+     * @param infoTrayecto asiento
+     * @return numero asiento del trayecto
+     */
     public int asignarAsiento(InformacionTrayecto infoTrayecto, int asiento) {
         return generarAsientoMenosUno();
     }
-
 
 }

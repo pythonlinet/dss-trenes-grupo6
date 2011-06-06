@@ -25,11 +25,14 @@ public class AsientoAleatorio implements ReservaAsiento {
 
     Transbordo transbordo;
 
+   
+    /**Constructor de la clase AsientoAleatorio
+     */
     public AsientoAleatorio(Transbordo transbordo){
         this.transbordo = transbordo;
     }
 
-/**Metodo que genera un numero de asiento del trayecto dado
+    /**Metodo que genera un numero de asiento del trayecto dado
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
@@ -61,10 +64,19 @@ public class AsientoAleatorio implements ReservaAsiento {
         return numAsiento;
     }
 
+     /**Interfaz generarAsiento
+     * @param infoTrayecto 
+     * @return generarAsientoAleatorio
+     */
     public int generarAsiento(InformacionTrayecto infoTrayecto) {
         return generarAsientoAleatorio(infoTrayecto);
     }
 
+    
+     /**Metodo que asigna el numero de asiento pasado como parametro del trayecto dado
+     * @param infoTrayecto asiento
+     * @return numero asiento del trayecto
+     */
     public int asignarAsiento(final InformacionTrayecto infoTrayecto, int asiento) {
            final int comprobacionAsiento=asiento;
 
@@ -80,6 +92,11 @@ public class AsientoAleatorio implements ReservaAsiento {
             }
        }
 
+    /**Metodo que devuelve los asientos que coincida con el trayecto y numero de asiento dado como parametro
+     * @param infoTrayecto 
+     * @return lista de reservas del trayecto
+     */
+    
     private List<ReservaTrayecto> buscaAsiento(final InformacionTrayecto infoTrayecto, final int comprobacionAsiento)
     {
          ObjectContainer databases = DBUtils.getDb();

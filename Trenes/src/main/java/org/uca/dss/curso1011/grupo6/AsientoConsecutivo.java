@@ -61,10 +61,18 @@ public class AsientoConsecutivo implements ReservaAsiento{
         return numAsiento;
     }
 
+    /**Interfaz generarAsiento
+     * @param infoTrayecto 
+     * @return generarAsientoAleatorio
+     */
     public int generarAsiento(InformacionTrayecto infoTrayecto) {
         return generarAsientoConsecutivos(infoTrayecto);
     }
 
+    /**Metodo que asigna el numero de asiento pasado como parametro del trayecto dado
+     * @param infoTrayecto asiento
+     * @return numero asiento del trayecto
+     */
     public int asignarAsiento(InformacionTrayecto infoTrayecto, int asiento) {
          final int comprobacionAsiento=asiento;
 
@@ -103,6 +111,10 @@ public class AsientoConsecutivo implements ReservaAsiento{
         }
     }
     
+     /**Metodo que devuelve los asientos que coincida con el trayecto y numero de asiento dado como parametro
+     * @param infoTrayecto 
+     * @return lista de reservas del trayecto
+     */
     private List<ReservaTrayecto> buscaAsientoComprobacion(final InformacionTrayecto infoTrayecto, final int comprobacionAsiento)
     {
         ObjectContainer databases = DBUtils.getDb();

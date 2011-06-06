@@ -175,7 +175,8 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
     }
 
      /**
-     * Comprueba que realiza las reservas con la estrategia de asientos aleatorios
+     * Comprueba que realiza las reservas con la estrategia de asientos aleatorios no manteniendo
+     * el mismo numero de asiento
      */ 
    @Test
     public void testNumeroAsientosAleatorioNoMantenido() {
@@ -206,8 +207,9 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
                     }
     }
 
-/**
-     * Comprueba que realiza las reservas con la estrategia de asientos aleatorios
+    /**
+     * Comprueba que realiza las reservas con la estrategia de asientos aleatorios manteniendo
+     * el mismo numero de asiento
      */
    @Test
     public void testNumeroAsientosAleatorioMantenido() {
@@ -252,7 +254,8 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
     }
 
     /**
-     * Comprueba que realiza las reservas con la estrategia de asientos consecutivos
+     * Comprueba que realiza las reservas con la estrategia de asientos consecutivos no manteniendo
+     * el mismo numero de asiento
      */ 
    
     @Test
@@ -294,7 +297,8 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
     }
 
      /**
-     * Comprueba que realiza las reservas con la estrategia de asientos consecutivos
+     * Comprueba que realiza las reservas con la estrategia de asientos consecutivos manteniendo
+     * el mismo numero de asiento
      */
 
     @Test
