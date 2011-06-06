@@ -14,8 +14,6 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
  */
 
     /**Clase que genera un numero de asiento como -1
-     * @param infoTrayecto
-     * @return numero asiento del trayecto
      */
 
 public class AsientoMenosUno implements ReservaAsiento{

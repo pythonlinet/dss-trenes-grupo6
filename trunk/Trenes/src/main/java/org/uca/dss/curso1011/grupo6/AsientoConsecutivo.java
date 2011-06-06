@@ -21,9 +21,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  */
 
    /**Clase que genera un numero de asiento consecutivo
-     * @param infoTrayecto
-     * @return numero asiento del trayecto
-     */
+    */
 
 public class AsientoConsecutivo implements ReservaAsiento{
 
