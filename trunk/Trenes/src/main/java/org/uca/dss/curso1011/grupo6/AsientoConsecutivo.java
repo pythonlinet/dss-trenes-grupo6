@@ -19,10 +19,16 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
  */
+
+   /**Clase que genera un numero de asiento consecutivo
+     * @param infoTrayecto
+     * @return numero asiento del trayecto
+     */
+
 public class AsientoConsecutivo implements ReservaAsiento{
 
 
-    /**Metodo que genera un numero de asiento consecutivo
+    /**Metodo que genera un numero de asiento consecutivo dado un trayecto
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
