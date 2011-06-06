@@ -52,15 +52,7 @@ public class AsientoAleatorio implements ReservaAsiento {
 
             final int comprobacionAsiento=numAsiento;
 
-            List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
-            public boolean match ( ReservaTrayecto reserva) {
-                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
-                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
-                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
-                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()) &&
-                       reserva.getNumeroAsiento()==comprobacionAsiento;
-            }
-            }) ;
+            List <ReservaTrayecto> reservas = buscaAsiento(infoTrayecto,comprobacionAsiento);
 
             if(reservas.isEmpty())
             {
@@ -73,5 +65,35 @@ public class AsientoAleatorio implements ReservaAsiento {
 
     public int generarAsiento(InformacionTrayecto infoTrayecto) {
         return generarAsientoAleatorio(infoTrayecto);
+    }
+
+    public int asignarAsiento(final InformacionTrayecto infoTrayecto, int asiento) {
+           final int comprobacionAsiento=asiento;
+
+           List <ReservaTrayecto> reservas = buscaAsiento(infoTrayecto,comprobacionAsiento);
+
+            if(reservas.isEmpty())
+            {
+                return comprobacionAsiento;
+            }
+            else
+            {
+                return generarAsientoAleatorio(infoTrayecto);
+            }
+       }
+
+    private List<ReservaTrayecto> buscaAsiento(final InformacionTrayecto infoTrayecto, final int comprobacionAsiento)
+    {
+         ObjectContainer databases = DBUtils.getDb();
+            List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+            public boolean match ( ReservaTrayecto reserva) {
+                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()) &&
+                       reserva.getNumeroAsiento()==comprobacionAsiento;
+            }
+            }) ;
+            return reservas;
     }
 }

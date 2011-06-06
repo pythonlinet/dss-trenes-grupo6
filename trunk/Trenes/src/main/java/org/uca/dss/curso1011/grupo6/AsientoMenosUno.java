@@ -34,4 +34,9 @@ public class AsientoMenosUno implements ReservaAsiento{
         return generarAsientoMenosUno();
     }
 
+    public int asignarAsiento(InformacionTrayecto infoTrayecto, int asiento) {
+        return generarAsientoMenosUno();
+    }
+
+
 }

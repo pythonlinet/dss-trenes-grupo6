@@ -38,15 +38,7 @@ public class AsientoConsecutivo implements ReservaAsiento{
         boolean flag = false;
         ArrayList asientos = new ArrayList();
 
-        ObjectContainer databases = DBUtils.getDb();
-        List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
-        public boolean match ( ReservaTrayecto reserva) {
-                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
-                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
-                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
-                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
-                }
-         });
+       List <ReservaTrayecto> reservas = buscaAsientoComprobacion(infoTrayecto,0);
 
          for(ReservaTrayecto resTrayecto : reservas)
          {
@@ -73,6 +65,52 @@ public class AsientoConsecutivo implements ReservaAsiento{
 
     public int generarAsiento(InformacionTrayecto infoTrayecto) {
         return generarAsientoConsecutivos(infoTrayecto);
+    }
+
+    public int asignarAsiento(InformacionTrayecto infoTrayecto, int asiento) {
+         final int comprobacionAsiento=asiento;
+
+           List <ReservaTrayecto> reservas = buscaAsientoComprobacion(infoTrayecto,comprobacionAsiento);
+
+            if(reservas.isEmpty())
+            {
+                return comprobacionAsiento;
+            }
+            else
+            {
+                return generarAsientoConsecutivos(infoTrayecto);
+            }
+    }
+
+    private List<ReservaTrayecto> buscaAsientoComprobacion(final InformacionTrayecto infoTrayecto, final int comprobacionAsiento)
+    {
+        ObjectContainer databases = DBUtils.getDb();
+        if(comprobacionAsiento>0)
+        {
+         
+            List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+            public boolean match ( ReservaTrayecto reserva) {
+                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()) &&
+                       reserva.getNumeroAsiento()==comprobacionAsiento;
+            }
+            }) ;
+            return reservas;
+        }
+        else
+        {
+             List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
+                public boolean match ( ReservaTrayecto reserva) {
+                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
+                }
+                });
+             return reservas;
+        }
     }
 
 
