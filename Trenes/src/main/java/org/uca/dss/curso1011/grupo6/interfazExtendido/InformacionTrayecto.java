@@ -89,5 +89,61 @@ public class InformacionTrayecto {
     public double getPrecio() {
         return precio;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (this.origen != null ? this.origen.hashCode() : 0);
+        hash = 31 * hash + (this.destino != null ? this.destino.hashCode() : 0);
+        hash = 31 * hash + (this.horaSalida != null ? this.horaSalida.hashCode() : 0);
+        hash = 31 * hash + (this.horaLlegada != null ? this.horaLlegada.hashCode() : 0);
+        hash = 31 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
+        return hash;
+    }
+
+    
+    @Override
+    public boolean equals (Object obj)
+    {
+        if (this == obj)
+        {
+            return true;
+        }
+        if (obj == null)
+        {
+            return false;
+        }
+        if (this.getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final InformacionTrayecto other = (InformacionTrayecto)obj;
+
+        if(!(this.origen.equals(other.origen)))
+        {
+            return false;
+        }
+        if(!(this.destino.equals(other.destino)))
+        {
+            return false;
+        }
+        if(!(this.horaSalida.isEqual(other.horaSalida)))
+        {
+            return false;
+        }
+        if(!(this.horaLlegada.isEqual(other.horaLlegada)))
+        {
+            return false;
+        }
+        if(this.precio != other.precio)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }
+
+
+
 
