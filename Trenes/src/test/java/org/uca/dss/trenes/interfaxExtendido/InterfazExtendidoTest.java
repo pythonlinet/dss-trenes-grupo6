@@ -14,12 +14,14 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.junit.After;
 import org.junit.Before;
+import org.uca.dss.curso1011.grupo6.AsientoAleatorio;
 import org.uca.dss.curso1011.grupo6.CargarDatos;
 import org.uca.dss.curso1011.grupo6.Compras;
 import org.uca.dss.curso1011.grupo6.ComprasTransbordo;
-import org.uca.dss.curso1011.grupo6.ItinerarioImplementacionInterfaz;
+import org.uca.dss.curso1011.grupo6.ItinerarioReal;
 import org.uca.dss.curso1011.grupo6.Listado;
 import org.uca.dss.curso1011.grupo6.ListadoTransbordo;
+import org.uca.dss.curso1011.grupo6.ReservaAsiento;
 import org.uca.dss.curso1011.grupo6.Transbordo;
 import org.uca.dss.curso1011.grupo6.Trayecto;
 import org.uca.dss.curso1011.grupo6.Tren;
@@ -39,10 +41,13 @@ public abstract class InterfazExtendidoTest {
     protected InterfazListados listado;
     /** Referencia a la clase compras */
     protected InterfazCompras compras;
+    protected ComprasTransbordo comprasTransbordo;
+    protected ListadoTransbordo listTransbordo;
     protected LocalDate hoy;
     protected String origen;
     protected String destino;
     protected char tipoAsiento;
+    protected ReservaAsiento asiento;
     
     public InterfazExtendidoTest() {
         origen = "cadiz";
@@ -56,7 +61,7 @@ public abstract class InterfazExtendidoTest {
         InformacionTrayecto infoTrayecto = new InformacionTrayecto(origen,destino,new LocalTime("9:15"),new LocalTime("13:15"),30);
         List<InformacionTrayecto> itinerarioDirecto = new ArrayList<InformacionTrayecto>();
         itinerarioDirecto.add(infoTrayecto);
-        itineComprobar.add(new ItinerarioImplementacionInterfaz(itinerarioDirecto));
+        itineComprobar.add(new ItinerarioReal(itinerarioDirecto));
 
         InformacionTrayecto infoTrayecto1 = new InformacionTrayecto(origen,"sevilla",new LocalTime("9:00"),new LocalTime("11:00"),10);
         InformacionTrayecto infoTrayecto2 = new InformacionTrayecto("sevilla",destino,new LocalTime("11:30"),new LocalTime("15:30"),30);
@@ -66,17 +71,17 @@ public abstract class InterfazExtendidoTest {
         List<InformacionTrayecto> itineTransbordo = new ArrayList<InformacionTrayecto>();
         itineTransbordo.add(infoTrayecto1);
         itineTransbordo.add(infoTrayecto2);
-        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo));
+        itineComprobar.add(new ItinerarioReal(itineTransbordo));
 
         List<InformacionTrayecto> itineTransbordo2 = new ArrayList<InformacionTrayecto>();
         itineTransbordo2.add(infoTrayecto1);
         itineTransbordo2.add(infoTrayecto3);
-        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo2));
+        itineComprobar.add(new ItinerarioReal(itineTransbordo2));
 
         List<InformacionTrayecto> itineTransbordo3 = new ArrayList<InformacionTrayecto>();
         itineTransbordo3.add(infoTrayecto4);
         itineTransbordo3.add(infoTrayecto3);
-        itineComprobar.add(new ItinerarioImplementacionInterfaz(itineTransbordo3));
+        itineComprobar.add(new ItinerarioReal(itineTransbordo3));
 
 
         return itineComprobar;
@@ -118,11 +123,14 @@ public abstract class InterfazExtendidoTest {
         Transbordo transbordo = new Transbordo();
         transbordo.setListado(listadoInt);
 
-        tipoAsiento = 'c';
-        ComprasTransbordo comprasTransbordo = new ComprasTransbordo(tipoAsiento);
+        asiento = new AsientoAleatorio(transbordo);
+
+        comprasTransbordo = new ComprasTransbordo();
+        comprasTransbordo.setAsiento(asiento);
+        
         comprasTransbordo.setTransbordo(transbordo);        
 
-        ListadoTransbordo listTransbordo = new ListadoTransbordo();
+        listTransbordo = new ListadoTransbordo();
 
         listTransbordo.setTransbordo(transbordo);
         listTransbordo.setCompras(comprasTransbordo);
