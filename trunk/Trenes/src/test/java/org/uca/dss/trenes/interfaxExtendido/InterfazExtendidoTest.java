@@ -127,7 +127,16 @@ public abstract class InterfazExtendidoTest {
 
         comprasTransbordo = new ComprasTransbordo();
         comprasTransbordo.setAsiento(asiento);
-        
+        Random random = new Random();
+        int pos = random.nextInt(1);
+        if(pos==0)
+        {
+            comprasTransbordo.setMantenerAsiento(false);
+        }
+        else
+        {
+            comprasTransbordo.setMantenerAsiento(true);
+        }
         comprasTransbordo.setTransbordo(transbordo);        
 
         listTransbordo = new ListadoTransbordo();

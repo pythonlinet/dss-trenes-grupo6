@@ -29,7 +29,7 @@ public class ComprasTransbordo implements InterfazCompras{
     
     private Transbordo transbordo;    
     private ReservaAsiento reservaAsiento;
-
+    private boolean mantenerAsiento;
     /*
     public ComprasTransbordo(char modoAsiento)
     {
@@ -52,20 +52,31 @@ public class ComprasTransbordo implements InterfazCompras{
     public List<ReservaTrayecto> reservaAsiento(Itinerario itinerario, LocalDate fecha) {
          List<ReservaTrayecto> reservasTrayecto = new ArrayList();
          ReservaTrayecto reserva = null;
+         int cont=1,asiento = 0;
 
          if(asientosLibres(fecha,itinerario)>0)
          {
 
             for( InformacionTrayecto iTrayecto: itinerario)
             {
-                reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.generarAsiento(iTrayecto), generarCodigo(iTrayecto));
-                
+                    if(cont==1)
+                    {
+                        reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.generarAsiento(iTrayecto), generarCodigo(iTrayecto));
+                        cont++;
+                        asiento=reserva.getNumeroAsiento();
+                    }
+                    else
+                    {
+                        reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.asignarAsiento(iTrayecto, asiento), generarCodigo(iTrayecto));
+                    }
+
                     ObjectContainer databases = DBUtils.getDb();
 
                     databases.store(reserva);
                     databases.commit();
 
                     reservasTrayecto.add(reserva);
+
              }
          }
             else
@@ -220,6 +231,20 @@ public class ComprasTransbordo implements InterfazCompras{
 
     public void setAsiento(ReservaAsiento asiento) {
        this.reservaAsiento = asiento;
+    }
+
+    /**
+     * @return the mantenerAsiento
+     */
+    public boolean isMantenerAsiento() {
+        return mantenerAsiento;
+    }
+
+    /**
+     * @param mantenerAsiento the mantenerAsiento to set
+     */
+    public void setMantenerAsiento(boolean mantenerAsiento) {
+        this.mantenerAsiento = mantenerAsiento;
     }
 
 }
