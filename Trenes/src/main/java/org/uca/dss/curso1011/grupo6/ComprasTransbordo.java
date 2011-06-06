@@ -59,22 +59,7 @@ public class ComprasTransbordo implements InterfazCompras{
             for( InformacionTrayecto iTrayecto: itinerario)
             {
                 reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.generarAsiento(iTrayecto), generarCodigo(iTrayecto));
-                /*
-                    switch (getModoAsiento())
-                    {
-                        case 'c':
-                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoConsecutivos(iTrayecto), generarCodigo(iTrayecto));
-                            break;
-                        case 'm':
-                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoMenosUno(), generarCodigo(iTrayecto));
-                            break;
-                        case 'a':
-                            reserva = new ReservaTrayecto(iTrayecto,fecha, generarAsientoAleatorio(iTrayecto), generarCodigo(iTrayecto));
-                            break;
-                    
-                    }
-                 * 
-                 */
+                
                     ObjectContainer databases = DBUtils.getDb();
 
                     databases.store(reserva);
