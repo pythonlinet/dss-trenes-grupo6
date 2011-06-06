@@ -262,7 +262,7 @@ public class Compras implements InterfazCompras{
                     {
                         encontrado = true;
                         reservasValidas = obtenerReservas(trayecto,fecha);
-                        plazas =  trayecto.getTren().getPlazas() - reservasValidas.size();
+                        plazas =  trayecto.getVehiculo().getPlazas() - reservasValidas.size();
                     }
         }
         if(!encontrado)
@@ -290,7 +290,7 @@ public class Compras implements InterfazCompras{
         comprobarExcepcion(fecha,origen,destino,hora);
         Trayecto trayecto = viajes.buscarTrayecto(origen, destino, hora);
 
-        return trayecto.calcularPrecio(trayecto.getTren());
+        return trayecto.calcularPrecio(trayecto.getVehiculo());
 
          } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());

@@ -74,7 +74,7 @@ public class Transbordo{
                     String destino1 = iTrayecto.getCiudadDestino();
                     LocalTime salida1 = iTrayecto.getHorario().getSalida();
                     LocalTime llegada1 =  iTrayecto.getHorario().getLlegada();
-                    double precio1 = iTrayecto.getTren().getPrecio();
+                    double precio1 = iTrayecto.getVehiculo().getPrecio();
 
                     for(Trayecto jTrayecto : trayectos)
                     {
@@ -82,13 +82,13 @@ public class Transbordo{
                         {
 
                                 InformacionTrayecto itrayecto1 = new InformacionTrayecto(origen1,destino1,salida1,llegada1,precio1);
-                                InformacionTrayecto itrayecto2 = new InformacionTrayecto(jTrayecto.getCiudadOrigen(),jTrayecto.getCiudadDestino(),jTrayecto.getHorario().getSalida(),jTrayecto.getHorario().getLlegada(),jTrayecto.getTren().getPrecio());
+                                InformacionTrayecto itrayecto2 = new InformacionTrayecto(jTrayecto.getCiudadOrigen(),jTrayecto.getCiudadDestino(),jTrayecto.getHorario().getSalida(),jTrayecto.getHorario().getLlegada(),jTrayecto.getVehiculo().getPrecio());
 
                                 List<InformacionTrayecto> itinerario = new ArrayList<InformacionTrayecto>();
                                 itinerario.add(itrayecto1);
                                 itinerario.add(itrayecto2);
 
-                                itinerarios.add(new ItinerarioImplementacionInterfaz(itinerario));
+                                itinerarios.add(new ItinerarioReal(itinerario));
 
                             }
                         }
@@ -119,12 +119,12 @@ public class Transbordo{
             {
                 LocalTime salidaTrayecto = iteTrayecto.getHorario().getSalida();
                 LocalTime llegadaTrayecto = iteTrayecto.getHorario().getLlegada();
-                double precioTrayecto = iteTrayecto.calcularPrecio(iteTrayecto.getTren());
+                double precioTrayecto = iteTrayecto.calcularPrecio(iteTrayecto.getVehiculo());
                 InformacionTrayecto infoTrayecto = new InformacionTrayecto(origenTrayecto, destinoTrayecto, salidaTrayecto, llegadaTrayecto, precioTrayecto);                
 
                 List<InformacionTrayecto> itinerario = new ArrayList<InformacionTrayecto>();
                 itinerario.add(infoTrayecto);
-                listItinerarios.add(new ItinerarioImplementacionInterfaz(itinerario));
+                listItinerarios.add(new ItinerarioReal(itinerario));
             }
         }
         return listItinerarios;

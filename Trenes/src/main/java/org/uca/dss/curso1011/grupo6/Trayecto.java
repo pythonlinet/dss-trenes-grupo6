@@ -19,7 +19,8 @@ public class Trayecto {
     private String ciudadOrigen;
     private String ciudadDestino;
     private int numeroTramos;
-    private Tren tren;
+    //private Tren tren;
+    private Vehiculo vehiculo;
     private Horario horario;    
 
     /**
@@ -40,8 +41,8 @@ public class Trayecto {
      * @return precio del trayecto con el tren con el que lo realizamos
      */
 
-    public double calcularPrecio(Tren trenTrayecto){
-        return trenTrayecto.getPrecio() * getNumeroTramos();
+    public double calcularPrecio(Vehiculo vehiculoTrayecto){
+        return vehiculoTrayecto.getPrecio() * getNumeroTramos();
     }
 
     /**
@@ -96,16 +97,16 @@ public class Trayecto {
      * Metodo que obtiene el tren en el que se realiza el trayecto
      * @return tren del trayecto
      */
-    public Tren getTren() {
-        return tren;
+    public Vehiculo getVehiculo() {
+        return vehiculo;
     }
 
     /**
      * Metodo que se encarga de insertar el metodo en el trayecto
      * @param tren del trayecto
      */
-    public void setTren(Tren tren) {
-        this.tren = tren;
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 
     /**

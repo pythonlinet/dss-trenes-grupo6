@@ -17,16 +17,16 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos R�os Legup�n
  */
-public class ItinerarioImplementacionInterfaz extends ArrayList<InformacionTrayecto> implements Itinerario{
+public class ItinerarioReal extends ArrayList<InformacionTrayecto> implements Itinerario{
 
     private List<InformacionTrayecto> itrayectos;
 
     
-     /**Constructor de la clase ItinerarioImplementacionInterfaz
+     /**Constructor de la clase ItinerarioReal
      * @return precio
      */
     
-    public ItinerarioImplementacionInterfaz(List<InformacionTrayecto> itinerario)
+    public ItinerarioReal(List<InformacionTrayecto> itinerario)
     {
         super(itinerario);
     }
