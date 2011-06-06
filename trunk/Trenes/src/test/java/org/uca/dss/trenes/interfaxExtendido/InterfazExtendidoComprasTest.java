@@ -178,14 +178,15 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
      * Comprueba que realiza las reservas con la estrategia de asientos aleatorios
      */ 
    @Test
-    public void testNumeroAsientosAleatorio() {        
+    public void testNumeroAsientosAleatorioNoMantenido() {
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
         Random random = new Random();
         int pos = random.nextInt(itinerarios.size());
 
 
         asiento = new AsientoAleatorio(listTransbordo.getTransbordo());
-        comprasTransbordo.setAsiento(asiento);     
+        comprasTransbordo.setAsiento(asiento);
+        comprasTransbordo.setMantenerAsiento(false);
 
          pos = random.nextInt(itinerarios.size());
                     Itinerario itinerarioReservado = itinerarios.get(pos);
@@ -205,12 +206,57 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
                     }
     }
 
+/**
+     * Comprueba que realiza las reservas con la estrategia de asientos aleatorios
+     */
+   @Test
+    public void testNumeroAsientosAleatorioMantenido() {
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+
+
+        asiento = new AsientoAleatorio(listTransbordo.getTransbordo());
+        comprasTransbordo.setAsiento(asiento);
+        comprasTransbordo.setMantenerAsiento(true);
+
+        pos = random.nextInt(itinerarios.size());
+                    Itinerario itinerarioReservado = itinerarios.get(pos);
+                    ArrayList reservasAsientos = new ArrayList();
+                    int reservados = 0;
+
+
+                     while (compras.asientosLibres(hoy, itinerarioReservado)>0) {
+                        List<ReservaTrayecto> reservasAleatorio = compras.reservaAsiento(itinerarioReservado, hoy);
+                        if(reservasAleatorio.size()==1)
+                        {
+                            int asientos = reservasAleatorio.get(0).getNumeroAsiento();
+                            reservasAsientos.add(asientos);
+                            reservados = reservados+1;
+                        }
+                        else
+                        {
+                            int asientoPrimerTramo = reservasAleatorio.get(0).getNumeroAsiento();
+                            int asientoSegundoTramo = reservasAleatorio.get(1).getNumeroAsiento();
+                            assertEquals(asientoPrimerTramo,asientoSegundoTramo);
+
+                            reservasAsientos.add(asientoPrimerTramo);
+                            reservados = reservados+1;
+                        }
+                    }
+                    Collections.sort(reservasAsientos);
+                    for(int i =1; i<reservados; i++)
+                    {
+                        assertEquals(reservasAsientos.get(i),i);
+                    }
+    }
+
     /**
      * Comprueba que realiza las reservas con la estrategia de asientos consecutivos
      */ 
    
     @Test
-    public void testNumeroAsientosConsecutivo() {
+    public void testNumeroAsientosConsecutivoNoMantenido() {
         List<ReservaTrayecto> reservasTotales = new ArrayList<ReservaTrayecto>();
         List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
         Random random = new Random();
@@ -219,14 +265,57 @@ public class InterfazExtendidoComprasTest extends InterfazExtendidoTest {
 
         asiento = new AsientoConsecutivo();
         comprasTransbordo.setAsiento(asiento);
+        comprasTransbordo.setMantenerAsiento(false);
 
-        Itinerario itinerario = itinerarios.get(0);
+        Itinerario itinerario = itinerarios.get(pos);
 
         for(int i= 0; i<10; i++)
                 {
                     List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerario, hoy);
                     int numAsiento = reservas.get(0).getNumeroAsiento();
-                    reservasTotales.addAll(reservas);
+                    reservasTotales.add(reservas.get(0));
+                    assertEquals(numAsiento,i+1);
+                    if(reservas.size()>1)
+                    {
+                        int asientoPrimerTramo = reservas.get(0).getNumeroAsiento();
+                        assertEquals(asientoPrimerTramo,reservas.get(1).getNumeroAsiento());
+                    }
+                }
+                pos = random.nextInt(reservasTotales.size());
+
+                int asientoCancelado = reservasTotales.get(pos).getNumeroAsiento();
+
+                compras.cancelaReserva(reservasTotales.get(pos));
+                List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerario, hoy);
+
+                int comprobar = reservas.get(0).getNumeroAsiento();
+
+                assertEquals(comprobar,asientoCancelado);
+    }
+
+     /**
+     * Comprueba que realiza las reservas con la estrategia de asientos consecutivos
+     */
+
+    @Test
+    public void testNumeroAsientosConsecutivoMantenido() {
+        List<ReservaTrayecto> reservasTotales = new ArrayList<ReservaTrayecto>();
+        List<Itinerario> itinerarios = listado.getItinerarios(origen, destino, hoy);
+        Random random = new Random();
+        int pos = random.nextInt(itinerarios.size());
+
+
+        asiento = new AsientoConsecutivo();
+        comprasTransbordo.setAsiento(asiento);
+        comprasTransbordo.setMantenerAsiento(true);
+
+        Itinerario itinerario = itinerarios.get(pos);
+
+        for(int i= 0; i<10; i++)
+                {
+                    List<ReservaTrayecto> reservas = compras.reservaAsiento(itinerario, hoy);
+                    int numAsiento = reservas.get(0).getNumeroAsiento();
+                    reservasTotales.add(reservas.get(0));
                     assertEquals(numAsiento,i+1);
                 }
                 pos = random.nextInt(reservasTotales.size());
