@@ -100,7 +100,6 @@ public class InformacionTrayecto {
         hash = 31 * hash + (int) (Double.doubleToLongBits(this.precio) ^ (Double.doubleToLongBits(this.precio) >>> 32));
         return hash;
     }
-
     
     @Override
     public boolean equals (Object obj)
@@ -143,7 +142,3 @@ public class InformacionTrayecto {
         return true;
     }
 }
-
-
-
-

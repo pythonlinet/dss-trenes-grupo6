@@ -16,7 +16,7 @@ import org.uca.dss.trenes.interfaz.InterfazListados;
 /**
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Rï¿½os Legupï¿½n
+ * @author Juan Carlos Ríos Legupín
  */
 
 /**Clase que implementa los listados de todos los trayectos

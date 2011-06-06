@@ -8,8 +8,9 @@ package org.uca.dss.curso1011.grupo6;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 
 /**
- *
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos Ríos Legupín
  */
 public interface ReservaAsiento {
 

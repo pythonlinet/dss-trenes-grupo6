@@ -16,7 +16,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
 /**
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Rï¿½os Legupï¿½n
+ * @author Juan Carlos Ríos Legupín
  */
 
 /** Clase que implementa los listados de los transbordos realizados

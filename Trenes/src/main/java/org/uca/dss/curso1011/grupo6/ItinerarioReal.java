@@ -15,7 +15,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
  * Clase para implementar el interfaz itinerario
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Rï¿½os Legupï¿½n
+ * @author @author Juan Carlos Ríos Legupín
  */
 public class ItinerarioReal extends ArrayList<InformacionTrayecto> implements Itinerario{
 
