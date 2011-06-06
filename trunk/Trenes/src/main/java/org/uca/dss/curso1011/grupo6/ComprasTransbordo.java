@@ -59,7 +59,7 @@ public class ComprasTransbordo implements InterfazCompras{
 
             for( InformacionTrayecto iTrayecto: itinerario)
             {
-                    if(cont==1)
+                    if(cont==1 || !isMantenerAsiento())
                     {
                         reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.generarAsiento(iTrayecto), generarCodigo(iTrayecto));
                         cont++;
