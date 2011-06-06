@@ -15,4 +15,6 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 public interface ReservaAsiento {
 
     public int generarAsiento(final InformacionTrayecto infoTrayecto);
+
+    public int asignarAsiento(final InformacionTrayecto infoTrayecto, int asiento);
 }
