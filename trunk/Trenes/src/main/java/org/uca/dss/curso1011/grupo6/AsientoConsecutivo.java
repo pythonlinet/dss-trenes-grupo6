@@ -82,6 +82,29 @@ public class AsientoConsecutivo implements ReservaAsiento{
             }
     }
 
+    
+      /**
+    * Metodo privado que comprueba si dos trayectos son iguales
+    * @param trayecto1
+    * @param trayecto2
+    * @return verdad o falso dependiendo de la comprobacion
+    */
+    
+    private boolean comprobarTrayecto(ReservaTrayecto reserva,InformacionTrayecto infoTrayecto)
+    {
+        if (reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
+                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
+                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
+                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()))
+        {
+          return true;
+        }
+        else
+        {    
+          return false;
+        }
+    }
+    
     private List<ReservaTrayecto> buscaAsientoComprobacion(final InformacionTrayecto infoTrayecto, final int comprobacionAsiento)
     {
         ObjectContainer databases = DBUtils.getDb();
@@ -90,10 +113,7 @@ public class AsientoConsecutivo implements ReservaAsiento{
          
             List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
             public boolean match ( ReservaTrayecto reserva) {
-                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
-                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
-                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
-                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada()) &&
+                return comprobarTrayecto(reserva,infoTrayecto) &&
                        reserva.getNumeroAsiento()==comprobacionAsiento;
             }
             }) ;
@@ -103,10 +123,7 @@ public class AsientoConsecutivo implements ReservaAsiento{
         {
              List <ReservaTrayecto> reservas = databases.query(new Predicate <ReservaTrayecto>() {
                 public boolean match ( ReservaTrayecto reserva) {
-                return reserva.getTrayecto().getOrigen().equals(infoTrayecto.getOrigen()) &&
-                       reserva.getTrayecto().getDestino().equals(infoTrayecto.getDestino()) &&
-                       reserva.getTrayecto().getHoraSalida().equals(infoTrayecto.getHoraSalida()) &&
-                       reserva.getTrayecto().getHoraLlegada().equals(infoTrayecto.getHoraLlegada());
+                return comprobarTrayecto(reserva,infoTrayecto);
                 }
                 });
              return reservas;
