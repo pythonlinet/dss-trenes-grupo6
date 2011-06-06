@@ -17,7 +17,7 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.Itinerario;
  * y de los trayectos directos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
- * @author Juan Carlos Rï¿½os Legupï¿½n
+ * @author Juan Carlos Ríos Legupín
  */
 public class Transbordo{
 

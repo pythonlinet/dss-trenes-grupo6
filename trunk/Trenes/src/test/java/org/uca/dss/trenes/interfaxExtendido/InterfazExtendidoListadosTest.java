@@ -42,8 +42,6 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
             assertEquals(itineAntes,itinerariosRef);
             assertEquals(itineDespues,itinerariosRef);
         }
-
-
     }
 
     /**

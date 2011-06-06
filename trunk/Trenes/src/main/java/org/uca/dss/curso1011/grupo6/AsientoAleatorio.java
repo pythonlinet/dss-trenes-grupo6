@@ -14,8 +14,9 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.InformacionTrayecto;
 import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
 
 /**
- *
- * @author Jose Luis
+ * @author Jose Luis Aparicio Rodriguez
+ * @author Daniel Ruiz Camacho
+ * @author Juan Carlos Ríos Legupín
  */
 public class AsientoAleatorio implements ReservaAsiento {
 
