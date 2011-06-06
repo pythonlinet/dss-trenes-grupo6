@@ -18,6 +18,11 @@ import org.uca.dss.curso1011.grupo6.interfazExtendido.ReservaTrayecto;
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
  */
+
+/**Clase que genera un numero de asiento aleatorio
+     * @param infoTrayecto
+     * @return numero asiento del trayecto
+     */
 public class AsientoAleatorio implements ReservaAsiento {
 
     Transbordo transbordo;
