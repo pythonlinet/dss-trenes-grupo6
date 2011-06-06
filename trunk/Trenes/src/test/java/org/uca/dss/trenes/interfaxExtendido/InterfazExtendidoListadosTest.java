@@ -39,8 +39,8 @@ public class InterfazExtendidoListadosTest extends InterfazExtendidoTest {
             
             List<Itinerario> itineAntes = listado.getItinerarios(origen, destino, new LocalDate().minusDays(day));
             List<Itinerario> itineDespues = listado.getItinerarios(origen, destino, new LocalDate().plusDays(day));
-            assertEquals(itineAntes.size(),itinerariosRef.size());
-            assertEquals(itineDespues.size(),itinerariosRef.size());
+            assertEquals(itineAntes,itinerariosRef);
+            assertEquals(itineDespues,itinerariosRef);
         }
 
 
