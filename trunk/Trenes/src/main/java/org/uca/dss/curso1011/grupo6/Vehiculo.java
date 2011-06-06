@@ -14,19 +14,19 @@ public interface Vehiculo {
     
      /**
      * Metodo que se encarga de obtener el nombre del vehiculo
-     * @return nombre del tren
+     * @return nombre del vehiculo
      */
     public String getNombre();
 
     /**
      * Metodo que se encarga de insertar el nombre del vehiculo
-     * @param nombre del tren
+     * @param nombre del vehiculo
      */
     public void setNombre(String nombre);
 
     /**
      * Metodo que se encarga de obtener las plazas del vehiculo
-     * @return plazas del tren
+     * @return plazas del vehiculo
      */
     public int getPlazas();
 
