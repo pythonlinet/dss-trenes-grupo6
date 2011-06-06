@@ -31,11 +31,20 @@ public class ComprasTransbordo implements InterfazCompras{
     
     private Transbordo transbordo;
     private char modoAsiento;
+    private ReservaAsiento reservaAsiento;
 
+    /*
     public ComprasTransbordo(char modoAsiento)
     {
         this.modoAsiento=modoAsiento;
     }
+*/
+
+    public ComprasTransbordo(ReservaAsiento reservaAsiento)
+    {
+        this.reservaAsiento = reservaAsiento;
+    }
+
 
     /** Metodo que devuelve la lista de los asientos reservados dado un itinerario
       * y una fecha
@@ -52,6 +61,8 @@ public class ComprasTransbordo implements InterfazCompras{
 
             for( InformacionTrayecto iTrayecto: itinerario)
             {
+                reserva = new ReservaTrayecto(iTrayecto,fecha, reservaAsiento.generarAsiento(iTrayecto), generarCodigo(iTrayecto));
+                /*
                     switch (getModoAsiento())
                     {
                         case 'c':
@@ -65,6 +76,8 @@ public class ComprasTransbordo implements InterfazCompras{
                             break;
                     
                     }
+                 * 
+                 */
                     ObjectContainer databases = DBUtils.getDb();
 
                     databases.store(reserva);
@@ -114,7 +127,7 @@ public class ComprasTransbordo implements InterfazCompras{
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
-    private int generarAsientoAleatorio(final InformacionTrayecto infoTrayecto)
+/*    private int generarAsientoAleatorio(final InformacionTrayecto infoTrayecto)
     {
         int numAsiento=-1;
         boolean flag=true;
@@ -122,7 +135,7 @@ public class ComprasTransbordo implements InterfazCompras{
         Trayecto trayecto = transbordo.getListado().getViajes().buscarTrayecto(infoTrayecto.getOrigen(), infoTrayecto.getDestino(), infoTrayecto.getHoraSalida());
 
 
-        int plazas = trayecto.getTren().getPlazas();       
+        int plazas = trayecto.getVehiculo().getPlazas();
         ObjectContainer databases = DBUtils.getDb();
         while(flag)
         {
@@ -149,21 +162,21 @@ public class ComprasTransbordo implements InterfazCompras{
 
         return numAsiento;
     }
-
+*/
      /**Metodo que devuelve -1 como numero de asiento
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
-    private int generarAsientoMenosUno()
+/*    private int generarAsientoMenosUno()
     {
         return -1;
     }
-
+*/
      /**Metodo que genera un numero de asiento consecutivo
      * @param infoTrayecto
      * @return numero asiento del trayecto
      */
-    private int generarAsientoConsecutivos(final InformacionTrayecto infoTrayecto)
+/*    private int generarAsientoConsecutivos(final InformacionTrayecto infoTrayecto)
     {
         int numAsiento=1;
         boolean flag = false;
@@ -201,7 +214,7 @@ public class ComprasTransbordo implements InterfazCompras{
 
         return numAsiento;
     }
-    
+    */
     /**Metodo que devuelve el menor numero de asientos libres entre
      * dos trayectos dados un itinerario y la fecha    
      * @param fecha
@@ -229,7 +242,7 @@ public class ComprasTransbordo implements InterfazCompras{
             }
             }) ;
 
-            int plazas =  trayecto.getTren().getPlazas() - reservas.size();
+            int plazas =  trayecto.getVehiculo().getPlazas() - reservas.size();
 
 
             if(minimo > plazas )

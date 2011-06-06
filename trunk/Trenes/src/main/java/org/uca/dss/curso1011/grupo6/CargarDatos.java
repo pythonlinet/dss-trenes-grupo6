@@ -78,7 +78,7 @@ public class CargarDatos {
                         while (itrenes.hasNext()) {
                             tren = (Tren) itrenes.next();
                             if (tren.getNombre().equals(nomTren)) {
-                                trayecto.setTren(tren);
+                                trayecto.setVehiculo(tren);
                             }
                         }
                         itrenes = null;

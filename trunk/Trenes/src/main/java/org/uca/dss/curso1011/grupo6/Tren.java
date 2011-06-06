@@ -5,14 +5,13 @@
 
 package org.uca.dss.curso1011.grupo6;
 
-
 /**
  * Clase que guarda los diferentes datos de los trenes que usamos en los trayectos
  * @author Jose Luis Aparicio Rodriguez
  * @author Daniel Ruiz Camacho
  * @author Juan Carlos Ríos Legupín
  */
-public class Tren {
+public class Tren implements Vehiculo{
     private String nombre;
     private int plazas;
     private double precio;
