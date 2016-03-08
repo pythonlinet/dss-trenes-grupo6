@@ -1,0 +1,1 @@
+Proyecto para gestionar la reserva de trenes utilizando como lenguaje de programación java. Como entorno hemos utilizado NetBeans y la herramienta Maven.
